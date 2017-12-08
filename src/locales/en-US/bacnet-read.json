@@ -1,10 +1,12 @@
 {
   "bacnet-contrib": {
     "label": {
-      "requestType": "Type",
-      "requestInstance": "Instance",
-      "requestPropertyIdentifier": "Identifier",
       "deviceIPAddress": "IP-Address",
+      "objectType": "Type",
+      "objectInstance": "Instance",
+      "propertyId": "Property Id",
+      "arrayIndex": "Array Index",
+      "multipleRead": "Multiple Read",
       "server": "Client",
       "showActivities": "Show Activities",
       "showErrors": "Show Errors"

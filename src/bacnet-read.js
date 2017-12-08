@@ -15,10 +15,12 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config)
 
     this.name = config.name
-    this.requestType = config.requestType || 8
-    this.requestInstance = config.requestInstance || 4194303
-    this.requestPropertyIdentifier = config.requestPropertyIdentifier || 8
+    this.objectType = config.objectType || 8
+    this.objectInstance = config.objectInstance || 4194303
+    this.propertyId = config.propertyId || 8
+    this.arrayIndex = config.arrayIndex || null
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
+    this.multipleRead = config.multipleRead
 
     this.connector = RED.nodes.getNode(config.server)
 
@@ -32,21 +34,44 @@ module.exports = function (RED) {
         return
       }
 
-      let requestArray = [{
-        objectIdentifier: {type: msg.payload.requestType || node.requestType, instance: msg.payload.requestInstance || node.requestInstance},
-        propertyReferences: [{propertyIdentifier: msg.payload.requestPropertyIdentifier || node.requestPropertyIdentifier}]
-      }]
+      if (node.multipleRead) {
+        let requestArray = [{
+          objectIdentifier: {
+            type: msg.payload.objectType || node.objectType,
+            instance: msg.payload.objectInstance || node.objectInstance
+          },
+          propertyReferences: [{
+            propertyIdentifier: msg.payload.propertyId || node.propertyId
+          }]
+        }]
 
-      bacnetCore.internalDebugLog(requestArray)
-
-      node.connector.client.readPropertyMultiple(msg.payload.deviceIPAddress || node.deviceIPAddress, requestArray, function (err, value) {
-        if (err) {
-          node.error(err, msg)
-        } else {
-          msg.payload = value
-          node.send(msg)
-        }
-      })
+        node.connector.client.readPropertyMultiple(
+          msg.payload.deviceIPAddress || node.deviceIPAddress,
+          msg.payload.requestArray || requestArray,
+          function (err, value) {
+            if (err) {
+              node.error(err, msg)
+            } else {
+              msg.payload.bacnetValue = value
+              node.send(msg)
+            }
+          })
+      } else {
+        node.connector.client.readProperty(
+          msg.payload.deviceIPAddress || node.deviceIPAddress,
+          msg.payload.objectType || node.objectType,
+          msg.payload.objectInstance || node.objectInstance,
+          msg.payload.propertyId || node.propertyId,
+          null,
+          function (err, value) {
+            if (err) {
+              node.error(err, msg)
+            } else {
+              msg.payload.bacnetValue = value
+              node.send(msg)
+            }
+          })
+      }
     })
   }
 

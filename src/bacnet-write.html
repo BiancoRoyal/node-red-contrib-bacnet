@@ -12,12 +12,13 @@
     color: "#16BAC4",
     defaults: {
       name: {value: ""},
-      requestType: {value: ""},
-      requestInstance: {value: ""},
-      requestPropertyIdentifier: {value: ""},
-      requestPropertyArrayIndex: {value: ""},
       deviceIPAddress: {value: ""},
-      server: {type: "BACnet-Client", required:true}
+      objectType: {value: 0},
+      objectInstance: {value: 0},
+      propertyId: {value: 0},
+      priority: {value: 0},
+      server: {type: "BACnet-Client", required:true},
+      multipleWrite: {value: false}
     },
     inputs: 1,
     outputs: 1,
@@ -28,6 +29,82 @@
     },
     labelStyle: function () {
       return this.name ? "node_label_italic" : "";
+    },
+    oneditprepare: function () {
+      let node = this
+      let multipleWriteCheckbox = $("#node-input-multipleWrite")
+
+      let propertyRow = $("#priority-row")
+
+      multipleWriteCheckbox.change(function () {
+        if ($(this).is(":checked")) {
+          propertyRow.hide();
+        } else {
+          propertyRow.show();
+        }
+      });
+
+      let objectTypeLookupField = $("#node-lookup-objectType")
+      let objectTypeField = $("#node-input-objectType")
+
+      objectTypeLookupField.click(function () {
+        objectTypeLookupField.addClass('disabled')
+        $.getJSON('/bacnet/ObjectTypes', function (data) {
+          objectTypeLookupField.removeClass('disabled')
+          node.lookupItems = []
+
+          $.each(data, function (i, entry) {
+            node.lookupItems.push({value: entry.typeValue, label: entry.label})
+          })
+
+          objectTypeField.autocomplete({
+            source: node.lookupItems,
+            minLength: 0,
+            focus: function (event, ui) {
+              objectTypeField.val(ui.item.value);
+              return false;
+            },
+            select: function (event, ui) {
+              objectTypeField.val(ui.item.value)
+              return false;
+            },
+            close: function (event, ui) {
+              objectTypeField.autocomplete("destroy")
+            }
+          }).autocomplete("search", "")
+        })
+      })
+
+      let datatypeLookupField = $("#node-lookup-propertyId")
+      let datatypeField = $("#node-input-propertyId")
+
+      datatypeLookupField.click(function () {
+        datatypeLookupField.addClass('disabled')
+        $.getJSON('/bacnet/PropertyIds', function (data) {
+          datatypeLookupField.removeClass('disabled')
+          node.lookupItems = []
+
+          $.each(data, function (i, entry) {
+            node.lookupItems.push({value: entry.typeValue, label: entry.label})
+          })
+
+          datatypeField.autocomplete({
+            source: node.lookupItems,
+            minLength: 0,
+            focus: function (event, ui) {
+              datatypeField.val(ui.item.value);
+              return false;
+            },
+            select: function (event, ui) {
+              datatypeField.val(ui.item.value)
+              return false;
+            },
+            close: function (event, ui) {
+              datatypeField.autocomplete("destroy")
+            }
+          }).autocomplete("search", "")
+        })
+      })
     }
   });
 </script>
@@ -38,27 +115,29 @@
         <input type="text" id="node-input-name" placeholder="">
     </div>
     <div class="form-row">
-        <label for="node-input-requestType"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestType"></span></label>
-        <input type="text" id="node-input-requestType" placeholder="8">
+        <label for="node-input-objectType"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.objectType"></span></label>
+        <input type="text" id="node-input-objectType" style="width:60%;" placeholder="8">
+        <a id="node-lookup-objectType" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
-        <label for="node-input-requestInstance"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestInstance"></span></label>
-        <input type="text" id="node-input-requestInstance" placeholder="4194303">
+        <label for="node-input-objectInstance"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.objectInstance"></span></label>
+        <input type="text" id="node-input-objectInstance" placeholder="4194303">
     </div>
-   <div class="form-row">
-        <h3>Properties</h3>
+    <div class="form-row">
+        <h4>Properties</h4>
         <hr>
     </div>
     <div class="form-row">
-        <label for="node-input-requestPropertyIdentifier"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestPropertyIdentifier"></span></label>
-        <input type="text" id="node-input-requestPropertyIdentifier" placeholder="8">
+        <label for="node-input-propertyId"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.propertyId"></span></label>
+        <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="8">
+        <a id="node-lookup-propertyId" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
+    </div>
+    <div class="form-row" id="priority-row">
+        <label for="node-input-priority"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.priority"></span></label>
+        <input type="text" id="node-input-priority" placeholder="12">
     </div>
     <div class="form-row">
-        <label for="node-input-requestPropertyArrayIndex"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestPropertyArrayIndex"></span></label>
-        <input type="text" id="node-input-requestPropertyArrayIndex" placeholder="12">
-    </div>
-    <div class="form-row">
-        <h3>Device</h3>
+        <h4>Device</h4>
         <hr>
     </div>
     <div class="form-row">
@@ -69,10 +148,22 @@
         <label for="node-input-server"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.server"></span></label>
         <input type="text" id="node-input-server">
     </div>
+    <hr>
+    <div class="form-row">
+        <label style="min-width:160px" for="node-input-multipleWrite"><i class="fa fa-th"></i>
+        <span data-i18n="bacnet-contrib.label.multipleWrite"></span></label>
+        <input type="checkbox" id="node-input-multipleWrite" style="max-width:30px">
+    </div>
 </script>
 
 <script type="text/x-red" data-help-name="BACnet-Write">
     <h2>BACnet Write node</h2>
-
+    <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
     <p>!!! NOT READY TO USE - UNDER DEVELOPMENT !!!</p>
+
+
+
+    <h4>Output</h4>
+    <p>msg.payload.bacnetValueType (see API <a href="https://fh1ch.github.io/node-bacstack/global.html#BacnetApplicationTags" target="_blank">Enum</a>)</p>
+    <p>msg.payload.bacnetValue</p>
 </script>
