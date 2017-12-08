@@ -12,6 +12,10 @@
     color: "#16BAC4",
     defaults: {
       name: {value: ""},
+      requestType: {value: ""},
+      requestInstance: {value: ""},
+      requestPropertyIdentifier: {value: ""},
+      deviceIPAddress: {value: ""},
       server: {type: "BACnet-Client", required:true}
     },
     inputs: 1,
@@ -31,6 +35,30 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
         <input type="text" id="node-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-requestType"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestType"></span></label>
+        <input type="text" id="node-input-requestType" placeholder="8">
+    </div>
+    <div class="form-row">
+        <label for="node-input-requestInstance"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestInstance"></span></label>
+        <input type="text" id="node-input-requestInstance" placeholder="4194303">
+    </div>
+    <div class="form-row">
+        <h3>Properties</h3>
+        <hr>
+    </div>
+    <div class="form-row">
+        <label for="node-input-requestPropertyIdentifier"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.requestPropertyIdentifier"></span></label>
+        <input type="text" id="node-input-requestPropertyIdentifier" placeholder="8">
+    </div>
+    <div class="form-row">
+        <h3>Device</h3>
+        <hr>
+    </div>
+    <div class="form-row">
+        <label for="node-input-deviceIPAddress"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.deviceIPAddress"></span></label>
+        <input type="text" id="node-input-deviceIPAddress" placeholder="127.0.0.1">
     </div>
     <div class="form-row">
         <label for="node-input-server"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.server"></span></label>

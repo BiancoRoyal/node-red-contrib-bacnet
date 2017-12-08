@@ -12,9 +12,9 @@ const gulp = require('gulp')
 const htmlmin = require('gulp-htmlmin')
 const jsdoc = require('gulp-jsdoc3')
 const clean = require('gulp-clean')
-const uglify = require('gulp-uglify')
 const babel = require('gulp-babel')
 const sequence = require('gulp-sequence')
+const uglify = require('gulp-uglify')
 const sourcemaps = require('gulp-sourcemaps')
 const pump = require('pump')
 
@@ -86,9 +86,7 @@ gulp.task('nodejs', function (cb) {
                 .pipe(sourcemaps.init({loadMaps: true}))
                 .pipe(babel({presets: ['es2015']}))
                 .pipe(uglify())
-                .pipe(sourcemaps.write('maps')), gulp.dest('bacnet')],
-        cb
-    )
+                .pipe(sourcemaps.write('maps')), gulp.dest('bacnet')],cb)
 })
 
 gulp.task('doc', function (cb) {

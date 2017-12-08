@@ -10,7 +10,8 @@
   RED.nodes.registerType('BACnet-Client', {
     category: 'config',
     defaults: {
-      name: {value: ""}
+      name: {value: ""},
+      adpuTimeout: {value: 0}
     },
     label: function () {
       return this.name || "BACnet Client";
@@ -22,6 +23,10 @@
     <div class="form-row">
         <label for="node-config-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
         <input type="text" id="node-config-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-adpuTimeout"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.adpuTimeout"></span></label>
+        <input type="text" id="node-config-input-adpuTimeout" placeholder="6000">
     </div>
 </script>
 

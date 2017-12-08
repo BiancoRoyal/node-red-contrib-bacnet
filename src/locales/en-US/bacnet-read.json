@@ -1,6 +1,10 @@
 {
   "bacnet-contrib": {
     "label": {
+      "requestType": "Type",
+      "requestInstance": "Instance",
+      "requestPropertyIdentifier": "Identifier",
+      "deviceIPAddress": "IP-Address",
       "server": "Client",
       "showActivities": "Show Activities",
       "showErrors": "Show Errors"
