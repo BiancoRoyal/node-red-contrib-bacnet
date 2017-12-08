@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
@@ -20,7 +20,6 @@
     "IIoT",
     "biancode",
     "modbus"
-
   ],
   "author": "Klaus Landsdorf <klaus.landsdorf@bianco-royal.de>",
   "license": "MIT",
