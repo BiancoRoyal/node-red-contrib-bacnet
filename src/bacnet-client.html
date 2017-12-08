@@ -11,6 +11,7 @@
     category: 'config',
     defaults: {
       name: {value: ""},
+      port: {value: 0},
       adpuTimeout: {value: 0}
     },
     label: function () {
@@ -23,6 +24,10 @@
     <div class="form-row">
         <label for="node-config-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
         <input type="text" id="node-config-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.port"></span></label>
+        <input type="text" id="node-config-input-port" placeholder="47808">
     </div>
     <div class="form-row">
         <label for="node-config-input-adpuTimeout"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.adpuTimeout"></span></label>

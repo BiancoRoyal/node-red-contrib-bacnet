@@ -34,7 +34,7 @@
         "server": "Server",
         "timeout": "Timeout",
         "name": "Name",
-        "endpoint": "Endpoint",
+        "port": "Port",
         "connector": "Connector",
         "topic": "Topic",
         "user": "User",

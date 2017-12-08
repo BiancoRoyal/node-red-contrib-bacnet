@@ -9,6 +9,7 @@
 
 module.exports = function (RED) {
   let bacnetCore = require('./core/bacnet-core')
+
   // let BACnet = require('bacstack')
 
   function BACnetRead (config) {
@@ -35,6 +36,8 @@ module.exports = function (RED) {
       }
 
       if (node.multipleRead) {
+        bacnetCore.internalDebugLog('Multiple Read')
+
         let requestArray = [{
           objectIdentifier: {
             type: msg.payload.objectType || node.objectType,
@@ -57,6 +60,8 @@ module.exports = function (RED) {
             }
           })
       } else {
+        bacnetCore.internalDebugLog('Read')
+
         node.connector.client.readProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.objectType || node.objectType,

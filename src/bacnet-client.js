@@ -14,6 +14,12 @@ module.exports = function (RED) {
   function BACnetClient (config) {
     RED.nodes.createNode(this, config)
     this.name = config.name
+    this.port = config.port || 47808
+    /*
+    interface
+    transport
+    broadcastAddress
+    */
     this.adpuTimeout = config.adpuTimeout || 6000
 
     let node = this
@@ -24,7 +30,7 @@ module.exports = function (RED) {
       node.send(msg)
     })
 
-    node.client = new BACnet({adpuTimeout: node.adpuTimeout})
+    node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port})
 
     node.client.on('iAm', function (device) {
       node.devices.add(device)

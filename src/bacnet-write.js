@@ -39,6 +39,8 @@ module.exports = function (RED) {
           return
         }
 
+        bacnetCore.internalDebugLog('Multiple Write')
+
         let valueList = [
           {objectIdentifier: {
             type: msg.payload.objectType || node.objectType,
@@ -68,6 +70,8 @@ module.exports = function (RED) {
           node.error(new Error('No bacnetValue Or valueList In Payload found!'))
           return
         }
+
+        bacnetCore.internalDebugLog('Write')
 
         let valueList = [
           {type: msg.payload.bacnetValueType, value: msg.payload.bacnetValue}

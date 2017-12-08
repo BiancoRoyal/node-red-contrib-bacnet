@@ -1,0 +1,9 @@
+{
+  "bacnet-contrib": {
+    "label": {
+      "port": "Port",
+      "adpuTimeout": "adpu Timeout",
+      "showErrors": "Show Errors"
+    }
+  }
+}
