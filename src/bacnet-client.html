@@ -1,0 +1,33 @@
+<!--
+ The MIT License
+
+ Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ All rights reserved.
+ node-red-contrib-bacnet
+-->
+
+<script type="text/javascript">
+  RED.nodes.registerType('BACnet-Client', {
+    category: 'config',
+    defaults: {
+      name: {value: ""}
+    },
+    label: function () {
+      return this.name || "BACnet Client";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="BACnet-Client">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-config-input-name" placeholder="">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="BACnet-Client">
+    <h2>BACnet Client node</h2>
+
+
+    <p>!!! NOT READY TO USE - UNDER DEVELOPMENT !!!</p>
+</script>
