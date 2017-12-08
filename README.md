@@ -12,7 +12,7 @@ Building Automation and Control Networks Protocol toolbox for Node-RED.
 !!! NOT READY TO USE - UNDER DEVELOPMENT - START YOUR CONTRIBUTION !!!
 ## [Support for the project straight away!][3]
 
-* based on backstack library v0.0.x
+* based on bacstack library v0.0.x
 
 ## Install
 
