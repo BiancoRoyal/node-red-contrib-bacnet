@@ -60,7 +60,7 @@ module.exports = function (RED) {
               node.error(err, msg)
             } else {
               bacnetCore.internalDebugLog('value: ', value)
-              msg.payload = value
+              msg.payload.bacnetValue = value
               node.send(msg)
             }
           })
@@ -91,7 +91,7 @@ module.exports = function (RED) {
               node.error(err, msg)
             } else {
               bacnetCore.internalDebugLog('value: ', value)
-              msg.payload = value
+              msg.payload.bacnetValue = value
               node.send(msg)
             }
           })

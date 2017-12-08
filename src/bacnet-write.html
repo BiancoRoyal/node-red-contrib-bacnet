@@ -162,8 +162,29 @@
     <p>!!! NOT READY TO USE - UNDER DEVELOPMENT !!!</p>
 
 
+    <h3>Multiple Read</h3>
+    <h4>Input</h4>
+    <p>msg.payload.deviceIPAddres</p>
+    <p>msg.payload.objectType</p>
+    <p>msg.payload.objectInstance</p>
+    <p>msg.payload.propertyId</p>
 
-    <h4>Output</h4>
-    <p>msg.payload.bacnetValueType (see API <a href="https://fh1ch.github.io/node-bacstack/global.html#BacnetApplicationTags" target="_blank">Enum</a>)</p>
+    <p>msg.payload.requestArray (<a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>)</p>
+
+
+    <h3>Simple Read</h3>
+    <h4>Input</h4>
+    <p>msg.payload.deviceIPAddres</p>
+    <p>msg.payload.objectType</p>
+    <p>msg.payload.objectInstance</p>
+    <p>msg.payload.propertyId</p>
+    <p>msg.payload.priority</p>
+
+    <p>msg.payload.bacnetValueType (<a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>)</p>
     <p>msg.payload.bacnetValue</p>
+
+    <h3>All Modes</h3>
+    <h4>Output</h4>
+    <p>msg.payload.bacnetValue</p>
+
 </script>
