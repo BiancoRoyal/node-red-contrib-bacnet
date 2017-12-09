@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
@@ -32,7 +32,8 @@
       "BACnet-Client": "bacnet/bacnet-client.js",
       "BACnet-Server": "bacnet/bacnet-server.js",
       "BACnet-Read": "bacnet/bacnet-read.js",
-      "BACnet-Write": "bacnet/bacnet-write.js"
+      "BACnet-Write": "bacnet/bacnet-write.js",
+      "BACnet-Command": "bacnet/bacnet-command.js"
     }
   },
   "engines": {
