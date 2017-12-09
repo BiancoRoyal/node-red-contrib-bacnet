@@ -10,9 +10,6 @@
 
 'use strict'
 
-var injectNode = require('node-red/nodes/core/core/20-inject.js')
-var clientNode = require('../src/bacnet-client.js')
-var serverNode = require('../src/bacnet-server.js')
 var writeNode = require('../src/bacnet-write.js')
 var helper = require('./helper.js')
 
@@ -27,67 +24,26 @@ describe('Write node Testing', function () {
 
   describe('Node', function () {
     it('simple write node should be loaded', function (done) {
-      helper.load([serverNode, writeNode, injectNode, clientNode], [
+      helper.load([writeNode], [
         {
-          "id": "1bf6dfe7.a8473",
-          "type": "BACnet-Server",
-          "z": "11c6703a.132f6",
-          "name": "dnpServer",
-          "x": 330,
-          "y": 190,
-          "wires": [
-            []
-          ]
-        },
-        {
-          "id": "a6e51b5e.a116d8",
+          "id": "5d5d0218.622fec",
           "type": "BACnet-Write",
-          "z": "11c6703a.132f6",
-          "name": "dnpWrite",
-          "server": "7576cb96.0fe7a4",
-          "x": 330,
-          "y": 250,
-          "wires": [
-            []
-          ]
-        },
-        {
-          "id": "4d910d12.b6bbf4",
-          "type": "inject",
-          "z": "11c6703a.132f6",
-          "name": "injectTrue",
-          "topic": "",
-          "payload": "true",
-          "payloadType": "bool",
-          "repeat": "",
-          "crontab": "",
-          "once": false,
-          "x": 180,
-          "y": 250,
+          "z": "a7ca7277.8f86b8",
+          "name": "bacnetWrite",
+          "deviceIPAddress": "",
+          "server": "ed8f6d87.1bcfe",
+          "multipleWrite": false,
+          "x": 640,
+          "y": 160,
           "wires": [
             [
-              "a6e51b5e.a116d8"
+              "b66823bb.af9bb8"
             ]
           ]
-        },
-        {
-          "id": "7576cb96.0fe7a4",
-          "type": "BACnet-Client",
-          "z": "",
-          "name": "dnpClient"
         }
       ], function () {
-        var inject = helper.getNode('4d910d12.b6bbf4')
-        inject.should.have.property('name', 'injectTrue')
-
-        var dnpServer = helper.getNode('1bf6dfe7.a8473')
-        dnpServer.should.have.property('name', 'dnpServer')
-
-        var dnpClient = helper.getNode('7576cb96.0fe7a4')
-        dnpClient.should.have.property('name', 'dnpClient')
-
-        var dnpWrite = helper.getNode('a6e51b5e.a116d8')
-        dnpWrite.should.have.property('name', 'dnpWrite')
+        var bacnetWrite = helper.getNode('5d5d0218.622fec')
+        bacnetWrite.should.have.property('name', 'bacnetWrite')
 
         done()
       }, function () {

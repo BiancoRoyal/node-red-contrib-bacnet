@@ -10,10 +10,10 @@
 
 'use strict'
 
-var readNode = require('../src/bacnet-read.js')
+var commandNode = require('../src/bacnet-command.js')
 var helper = require('./helper.js')
 
-describe('Read node Testing', function () {
+describe('Command node Testing', function () {
   before(function (done) {
     helper.startServer(done)
   })
@@ -24,28 +24,29 @@ describe('Read node Testing', function () {
 
   describe('Node', function () {
     it('simple read node should be loaded', function (done) {
-      helper.load([readNode], [
+      helper.load([commandNode], [
         {
-          "id": "5cd7de78.886478",
-          "type": "BACnet-Read",
+          "id": "ed7e0d79.6afce",
+          "type": "BACnet-Command",
           "z": "a7ca7277.8f86b8",
-          "name": "bacnetRead",
-          "objectType": "",
-          "requestInstance": "",
-          "propertyId": "",
-          "arrayIndex": "",
+          "name": "bacnetCommand",
+          "commandType": "whoIs",
+          "timeDuration": 0,
+          "enableDisable": 0,
+          "deviceState": 0,
+          "isUtc": true,
           "deviceIPAddress": "",
-          "server": "",
-          "multipleRead": false,
-          "x": 640,
-          "y": 100,
+          "server": "ed8f6d87.1bcfe",
+          "x": 660,
+          "y": 220,
           "wires": [
-            []
+            [
+            ]
           ]
         }
       ], function () {
-        var bacnetRead = helper.getNode('5cd7de78.886478')
-        bacnetRead.should.have.property('name', 'bacnetRead')
+        var bacnetCommand = helper.getNode('ed7e0d79.6afce')
+        bacnetCommand.should.have.property('name', 'bacnetCommand')
 
         done()
       }, function () {
@@ -56,7 +57,7 @@ describe('Read node Testing', function () {
 
   describe('post', function () {
     it('should fail for invalid node', function (done) {
-      helper.request().post('/BACnet-read/invalid').expect(404).end(done)
+      helper.request().post('/BACnet-command/invalid').expect(404).end(done)
     })
   })
 })
