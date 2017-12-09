@@ -28,6 +28,8 @@ try these options on npm install to build, if you have problems to install
 
     --unsafe-perm --build-from-source
     
+![Flow Example](images/BACnetFlowExamples.png)
+
 ## Contributing
 
 Let's work together! 

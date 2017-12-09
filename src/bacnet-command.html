@@ -1,0 +1,268 @@
+<!--
+ The MIT License
+
+ Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ All rights reserved.
+ node-red-contrib-bacnet
+-->
+
+<script type="text/javascript">
+  RED.nodes.registerType('BACnet-Command', {
+    category: 'BACnet',
+    color: "#16BAC4",
+    defaults: {
+      name: {value: ""},
+      commandType: {value: ""},
+      timeDuration: {value: 0},
+      enableDisable: {value: 0},
+      deviceState: {value: 0},
+      isUtc: {value: true},
+      deviceIPAddress: {value: ""},
+      server: {type: "BACnet-Client", required:true}
+    },
+    credentials: {
+        password: {type: "password"}
+    },
+    inputs: 1,
+    outputs: 1,
+    align: "right",
+    icon: "bacnet-icon.png",
+    label: function () {
+      return this.name || "BACnet Command";
+    },
+    labelStyle: function () {
+      return this.name ? "node_label_italic" : "";
+    },
+    oneditprepare: function () {
+      let node = this
+
+      /*
+      let multipleWriteCheckbox = $("#node-input-multipleRead")
+      let requestArrayRow = $("#requestArray-row")
+
+      multipleWriteCheckbox.change(function () {
+        if ($(this).is(":checked")) {
+          requestArrayRow.show();
+        } else {
+          requestArrayRow.hide();
+        }
+      });
+      */
+      let previous = null
+      let commandTypeSelector = $('#node-input-commandType')
+
+      let commandDeviceCommunicationControl = $('#commandDeviceCommunicationControl')
+      let commandReinitializeDevice = $('#commandReinitializeDevice')
+      let commandCredentials = $('#commandCredentials')
+      let commandTimeSync = $('#commandTimeSync')
+
+
+      let enableDisableLookupField = $("#node-lookup-enableDisable")
+      let enableDisableField = $("#node-input-enableDisable")
+
+      let deviceSateLookupField = $("#node-lookup-deviceState")
+      let deviceSateField = $("#node-input-deviceState")
+
+      commandTypeSelector.on('focus', function () {
+        previous = this.value
+      }).change(function () {
+
+        if (previous == null) {
+          previous = $("#node-input-commandType").val()
+        }
+
+        switch (commandTypeSelector.val()) {
+          case 'deviceCommunicationControl':
+            commandDeviceCommunicationControl.show()
+            commandReinitializeDevice.hide()
+            commandCredentials.show()
+            commandTimeSync.hide()
+            break
+          case 'reinitializeDevice':
+            commandDeviceCommunicationControl.hide()
+            commandReinitializeDevice.show()
+            commandCredentials.show()
+            commandTimeSync.hide()
+            break
+          case 'timeSync':
+            commandDeviceCommunicationControl.hide()
+            commandReinitializeDevice.hide()
+            commandCredentials.hide()
+            commandTimeSync.show()
+            break
+          case 'whoIs':
+            commandDeviceCommunicationControl.hide()
+            commandReinitializeDevice.hide()
+            commandCredentials.hide()
+            commandTimeSync.hide()
+            break
+          default:
+            commandDeviceCommunicationControl.hide()
+            commandReinitializeDevice.hide()
+            commandCredentials.hide()
+            commandTimeSync.hide()
+        }
+      })
+
+      enableDisableLookupField.click(function () {
+        enableDisableLookupField.addClass('disabled')
+        $.getJSON('/bacnet/BacnetEnableDisable', function (data) {
+          enableDisableLookupField.removeClass('disabled')
+          node.lookupItems = []
+
+          $.each(data, function (i, entry) {
+            node.lookupItems.push({value: entry.typeValue, label: entry.label})
+          })
+
+          enableDisableField.autocomplete({
+            source: node.lookupItems,
+            minLength: 0,
+            focus: function (event, ui) {
+              enableDisableField.val(ui.item.value);
+              return false;
+            },
+            select: function (event, ui) {
+              enableDisableField.val(ui.item.value)
+              return false;
+            },
+            close: function (event, ui) {
+              enableDisableField.autocomplete("destroy")
+            }
+          }).autocomplete("search", "")
+        })
+      })
+
+      deviceSateLookupField.click(function () {
+        deviceSateLookupField.addClass('disabled')
+        $.getJSON('/bacnet/BacnetReinitializedStates', function (data) {
+          deviceSateLookupField.removeClass('disabled')
+          node.lookupItems = []
+
+          $.each(data, function (i, entry) {
+            node.lookupItems.push({value: entry.typeValue, label: entry.label})
+          })
+
+          deviceSateField.autocomplete({
+            source: node.lookupItems,
+            minLength: 0,
+            focus: function (event, ui) {
+              deviceSateField.val(ui.item.value);
+              return false;
+            },
+            select: function (event, ui) {
+              deviceSateField.val(ui.item.value)
+              return false;
+            },
+            close: function (event, ui) {
+              deviceSateField.autocomplete("destroy")
+            }
+          }).autocomplete("search", "")
+        })
+      })
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="BACnet-Command">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-commandType" style="min-width:140px"><i class="fa fa-list"></i>
+        <span data-i18n="bacnet-contrib.label.commandType"></span></label>
+        <select type="text" id="node-input-commandType">
+            <option value="deviceCommunicationControl">Device Communication Control</option>
+            <option value="reinitializeDevice">Reinitialize Device</option>
+            <option value="timeSync">Time Sync</option>
+            <option value="whoIs">Who Is</option>
+        </select>
+    </div>
+    <div id="commandDeviceCommunicationControl">
+        <div class="form-row">
+            <label for="node-input-timeDuration"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.timeDuration"></span></label>
+            <input type="text" id="node-input-timeDuration" placeholder="0">
+        </div>
+        <div class="form-row">
+            <label for="node-input-enableDisable"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.enableDisable"></span></label>
+            <input type="text" id="node-input-enableDisable" style="width:60%;" placeholder="8">
+            <a id="node-lookup-enableDisable" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
+        </div>
+    </div>
+    <div id="commandReinitializeDevice">
+        <div class="form-row">
+            <label for="node-input-deviceState"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.deviceState"></span></label>
+            <input type="text" id="node-input-deviceState" style="width:60%;" placeholder="8">
+            <a id="node-lookup-deviceState" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
+        </div>
+    </div>
+    <div id="commandTimeSync">
+        <div class="form-row">
+            <label style="min-width:160px" for="node-input-isUtc"><i class="fa fa-clock-o"></i>
+            <span data-i18n="bacnet-contrib.label.isUtc"></span></label>
+            <input type="checkbox" id="node-input-isUtc" style="max-width:30px">
+        </div>
+    </div>
+    <div id="commandCredentials">
+        <div class="form-row">
+            <h4>Credentials</h4>
+            <hr>
+        </div>
+        <div class="form-row">
+            <label for="node-input-password"><i class="icon-asterisk"></i>
+            <span data-i18n="bacnet-contrib.label.password"></span></label>
+            <input type="password" id="node-input-password">
+        </div>
+    </div>
+    <div class="form-row">
+        <h4>Device</h4>
+        <hr>
+    </div>
+    <div class="form-row">
+        <label for="node-input-deviceIPAddress"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.deviceIPAddress"></span></label>
+        <input type="text" id="node-input-deviceIPAddress" placeholder="127.0.0.1">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.server"></span></label>
+        <input type="text" id="node-input-server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="BACnet-Command">
+    <h2>BACnet Command node</h2>
+    <p>!!! NOT READY TO USE - UNDER DEVELOPMENT - BUT TEST IT PLEASE !!!</p>
+
+    <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
+    <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
+
+    <h3>Command Types</h3>
+    <p>msg.payload.commandType</p>
+    <ul>
+        <li>deviceCommunicationControl
+        <li>reinitializeDevice
+        <li>timeSync
+        <li>whoIs
+    </ul>
+
+    <h3>Inputs</h3>
+    <p>msg.payload.deviceIPAddress</p>
+
+    <p>msg.payload.timeDuration</p>
+    <p>msg.payload.enableDisable</p>
+
+    <p>msg.payload.deviceState</p>
+
+    <p>msg.paylaod.password</p>
+
+    <p>msg.payload.syncDateTime</p>
+    <p>msg.payload.isUtc</p>
+
+    <p>msg.payload.lowLimit</p>
+    <p>msg.payload.highLimit</p>
+
+    <h3>All Modes</h3>
+    <h4>Output</h4>
+    <p>just on deviceCommunicationControl and reinitializeDevice</p>
+    <p>msg.payload.bacnetValue</p>
+
+</script>

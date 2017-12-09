@@ -1,0 +1,16 @@
+{
+  "bacnet-contrib": {
+    "label": {
+      "commandType": "Command",
+      "deviceIPAddress": "IP-Address",
+      "timeDuration": "Time Duration",
+      "enableDisable": "Enable/Disable",
+      "password": "Password",
+      "isUtc": "UTC Date",
+      "deviceState": "State",
+      "server": "Client",
+      "showActivities": "Show Activities",
+      "showErrors": "Show Errors"
+    }
+  }
+}
