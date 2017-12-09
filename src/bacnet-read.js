@@ -55,7 +55,9 @@ module.exports = function (RED) {
             if (err) {
               node.error(err, msg)
             } else {
-              msg.payload.bacnetValue = value
+              bacnetCore.internalDebugLog('value: ', value)
+              msg.input = msg.payload
+              msg.payload = value
               node.send(msg)
             }
           })
@@ -72,7 +74,9 @@ module.exports = function (RED) {
             if (err) {
               node.error(err, msg)
             } else {
-              msg.payload.bacnetValue = value
+              bacnetCore.internalDebugLog('value: ', value)
+              msg.input = msg.payload
+              msg.payload = value
               node.send(msg)
             }
           })

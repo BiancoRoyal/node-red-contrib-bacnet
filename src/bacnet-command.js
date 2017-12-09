@@ -21,6 +21,8 @@ module.exports = function (RED) {
     this.enableDisable = config.enableDisable || BACnet.enum.BacnetEnableDisable.ENABLE
     this.deviceState = config.deviceState || BACnet.enum.BacnetReinitializedStates.BACNET_REINIT_COLDSTART
     this.isUtc = config.isUtc || true
+    this.lowLimit = config.lowLimit || null
+    this.highLimit = config.highLimit || null
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
     this.credentials = config.credentials
 
@@ -55,7 +57,8 @@ module.exports = function (RED) {
                 node.error(err, msg)
               } else {
                 bacnetCore.internalDebugLog('value: ', value)
-                msg.payload.bacnetValue = value
+                msg.input = msg.payload
+                msg.payload = value
               }
             })
           break
@@ -70,7 +73,8 @@ module.exports = function (RED) {
                 node.error(err, msg)
               } else {
                 bacnetCore.internalDebugLog('value: ', value)
-                msg.payload.bacnetValue = value
+                msg.input = msg.payload
+                msg.payload = value
               }
             })
           break
@@ -84,8 +88,8 @@ module.exports = function (RED) {
 
         case 'whoIsExplicit':
           node.connector.whoIsExplicit(
-            msg.payload.lowLimit || null,
-            msg.payload.highLimit || null,
+            msg.payload.lowLimit || node.lowLimit,
+            msg.payload.highLimit || node.highLimit,
             msg.payload.deviceIPAddress || node.deviceIPAddress,
             function () {
               msg.devices = node.connector.devices

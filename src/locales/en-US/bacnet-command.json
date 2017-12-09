@@ -7,6 +7,8 @@
       "enableDisable": "Enable/Disable",
       "password": "Password",
       "isUtc": "UTC Date",
+      "lowLimit": "Low Limit",
+      "highLimit": "High Limit",
       "deviceState": "State",
       "server": "Client",
       "showActivities": "Show Activities",

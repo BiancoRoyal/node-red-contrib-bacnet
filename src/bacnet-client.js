@@ -30,6 +30,7 @@ module.exports = function (RED) {
     if (node.client) {
       node.client.on('iAm', function (device) {
         node.devices.push(device)
+        bacnetCore.internalDebugLog('iAm Event')
         bacnetCore.internalDebugLog('address: ', device.address)
         bacnetCore.internalDebugLog('deviceId: ', device.deviceId)
         bacnetCore.internalDebugLog('maxAdpu: ', device.maxAdpu)

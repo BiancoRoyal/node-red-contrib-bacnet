@@ -17,6 +17,8 @@
       enableDisable: {value: 0},
       deviceState: {value: 0},
       isUtc: {value: true},
+      lowLimit: {value: 0},
+      highLimit: {value: 0},
       deviceIPAddress: {value: ""},
       server: {type: "BACnet-Client", required:true}
     },
@@ -55,6 +57,8 @@
       let commandReinitializeDevice = $('#commandReinitializeDevice')
       let commandCredentials = $('#commandCredentials')
       let commandTimeSync = $('#commandTimeSync')
+      let commandWhoIsExplicit = $('#commandWhoIsExplicit')
+
 
 
       let enableDisableLookupField = $("#node-lookup-enableDisable")
@@ -77,30 +81,42 @@
             commandReinitializeDevice.hide()
             commandCredentials.show()
             commandTimeSync.hide()
+            commandWhoIsExplicit.hide()
             break
           case 'reinitializeDevice':
             commandDeviceCommunicationControl.hide()
             commandReinitializeDevice.show()
             commandCredentials.show()
             commandTimeSync.hide()
+            commandWhoIsExplicit.hide()
             break
           case 'timeSync':
             commandDeviceCommunicationControl.hide()
             commandReinitializeDevice.hide()
             commandCredentials.hide()
             commandTimeSync.show()
+            commandWhoIsExplicit.hide()
+            break
+          case 'whoIsExplicit':
+            commandDeviceCommunicationControl.hide()
+            commandReinitializeDevice.hide()
+            commandCredentials.hide()
+            commandTimeSync.hide()
+            commandWhoIsExplicit.show()
             break
           case 'whoIs':
             commandDeviceCommunicationControl.hide()
             commandReinitializeDevice.hide()
             commandCredentials.hide()
             commandTimeSync.hide()
+            commandWhoIsExplicit.hide()
             break
           default:
             commandDeviceCommunicationControl.hide()
             commandReinitializeDevice.hide()
             commandCredentials.hide()
             commandTimeSync.hide()
+            commandWhoIsExplicit.hide()
         }
       })
 
@@ -204,6 +220,16 @@
             <input type="checkbox" id="node-input-isUtc" style="max-width:30px">
         </div>
     </div>
+    <div id="commandWhoIsExplicit">
+        <div class="form-row">
+            <label for="node-input-lowLimit"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.lowLimit"></span></label>
+            <input type="text" id="node-input-lowLimit" placeholder="0">
+        </div>
+        <div class="form-row">
+            <label for="node-input-highLimit"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.highLimit"></span></label>
+            <input type="text" id="node-input-highLimit" placeholder="0">
+        </div>
+    </div>
     <div id="commandCredentials">
         <div class="form-row">
             <h4>Credentials</h4>
@@ -264,6 +290,6 @@
     <h3>All Modes</h3>
     <h4>Output</h4>
     <p>just on deviceCommunicationControl and reinitializeDevice</p>
-    <p>msg.payload.bacnetValue</p>
+    <p>msg.payload</p>
 
 </script>
