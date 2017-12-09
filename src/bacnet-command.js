@@ -92,7 +92,8 @@ module.exports = function (RED) {
             msg.payload.highLimit || node.highLimit,
             msg.payload.deviceIPAddress || node.deviceIPAddress,
             function () {
-              msg.devices = node.connector.devices
+              msg.input = msg.payload
+              msg.payload = node.connector.devices
               node.send(msg)
             })
           break
@@ -100,7 +101,8 @@ module.exports = function (RED) {
         case 'whoIs':
           node.connector.whoIs(
           function () {
-            msg.devices = node.connector.devices
+            msg.input = msg.payload
+            msg.payload = node.connector.devices
             node.send(msg)
           })
           break
