@@ -47,6 +47,7 @@ module.exports = function (RED) {
         node.error(err, {payload: 'BACnet Client Error'})
         node.client.close()
         node.client = null
+        node.devices = []
         node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port})
       })
     }
@@ -62,6 +63,18 @@ module.exports = function (RED) {
         node.client = null
       }
     })
+
+    node.whoIsExplicit = function (lowLimit, highLimit, deviceIPAddress, cb) {
+      node.devices = []
+      node.client.whoIs(lowLimit, highLimit, deviceIPAddress)
+      setTimeout(cb, 3000)
+    }
+
+    node.whoIs = function (cb) {
+      node.devices = []
+      node.client.whoIs()
+      setTimeout(cb, 3000)
+    }
   }
 
   RED.nodes.registerType('BACnet-Client', BACnetClient)

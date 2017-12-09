@@ -18,10 +18,10 @@ module.exports = function (RED) {
     this.name = config.name
 
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
-    this.objectType = config.objectType || 8
-    this.objectInstance = config.objectInstance || 4194303
-    this.propertyId = config.propertyId || 8
-    this.priority = config.priority || 8
+    this.objectType = config.objectType || 0
+    this.objectInstance = config.objectInstance || 0
+    this.propertyId = config.propertyId || 0
+    this.priority = config.priority || 12
 
     this.multipleWrite = config.multipleWrite
 

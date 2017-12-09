@@ -16,9 +16,9 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config)
 
     this.name = config.name
-    this.objectType = config.objectType || 8
-    this.objectInstance = config.objectInstance || 4194303
-    this.propertyId = config.propertyId || 8
+    this.objectType = config.objectType || 0
+    this.objectInstance = config.objectInstance || 0
+    this.propertyId = config.propertyId || 0
     this.arrayIndex = config.arrayIndex || null
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
     this.multipleRead = config.multipleRead

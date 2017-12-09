@@ -82,11 +82,23 @@ module.exports = function (RED) {
             msg.payload.isUtc || node.isUtc)
           break
 
-        case 'whoIs':
-          node.connector.client.whoIs(
+        case 'whoIsExplicit':
+          node.connector.whoIsExplicit(
             msg.payload.lowLimit || null,
             msg.payload.highLimit || null,
-            msg.payload.deviceIPAddress || node.deviceIPAddress)
+            msg.payload.deviceIPAddress || node.deviceIPAddress,
+            function () {
+              msg.devices = node.connector.devices
+              node.send(msg)
+            })
+          break
+
+        case 'whoIs':
+          node.connector.whoIs(
+          function () {
+            msg.devices = node.connector.devices
+            node.send(msg)
+          })
           break
 
         default:
