@@ -12,7 +12,7 @@ Building Automation and Control Networks Protocol toolbox for Node-RED.
 !!! NOT READY TO USE - UNDER DEVELOPMENT - START YOUR CONTRIBUTION !!!
 ## [Support for the project straight away!][3]
 
-* based on bacstack library v0.0.x
+* based on [bacstack library][4] v0.0.x
 
 ## Install
 
@@ -50,9 +50,10 @@ BACnet® is a registered trademark of American Society of Heating, Refrigerating
 
 ### Contribution BACnet
 
-I'd like to give special thanks to [Fabio Huser][2] for the BACnet node-bacstack packages! 
+I'd like to give special thanks to [Fabio Huser][2] for the BACnet [node-bacstack package][4]! 
 
 
 [1]:https://bianco-royal.cloud/
 [2]:https://github.com/fh1ch
 [3]:https://bianco-royal.cloud/supporter/
+[4]:https://www.npmjs.com/package/bacstack
