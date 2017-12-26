@@ -35,11 +35,7 @@ describe('Write node Testing', function () {
           "multipleWrite": false,
           "x": 640,
           "y": 160,
-          "wires": [
-            [
-              "b66823bb.af9bb8"
-            ]
-          ]
+          "wires": []
         }
       ], function () {
         var bacnetWrite = helper.getNode('5d5d0218.622fec')

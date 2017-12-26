@@ -39,9 +39,7 @@ describe('Read node Testing', function () {
           "multipleRead": false,
           "x": 640,
           "y": 100,
-          "wires": [
-            []
-          ]
+          "wires": []
         }
       ], function () {
         var bacnetRead = helper.getNode('5cd7de78.886478')
