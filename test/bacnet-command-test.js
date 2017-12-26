@@ -39,10 +39,7 @@ describe('Command node Testing', function () {
           "server": "ed8f6d87.1bcfe",
           "x": 660,
           "y": 220,
-          "wires": [
-            [
-            ]
-          ]
+          "wires": []
         }
       ], function () {
         var bacnetCommand = helper.getNode('ed7e0d79.6afce')

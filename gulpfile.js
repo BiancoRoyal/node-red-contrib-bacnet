@@ -86,7 +86,7 @@ gulp.task('nodejs', function (cb) {
                 .pipe(sourcemaps.init({loadMaps: true}))
                 .pipe(babel({presets: ['es2015']}))
                 .pipe(uglify())
-                .pipe(sourcemaps.write('maps')), gulp.dest('bacnet')],cb)
+                .pipe(sourcemaps.write('maps')), gulp.dest('bacnet')], cb)
 })
 
 gulp.task('doc', function (cb) {
