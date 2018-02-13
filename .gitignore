@@ -6,3 +6,4 @@ error*.txt
 .DS_Store
 maps/
 docs/gen/
+code/

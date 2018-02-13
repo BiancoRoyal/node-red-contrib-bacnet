@@ -63,6 +63,7 @@ module.exports = function (RED) {
         node.client.close()
         node.client = null
       }
+      done()
     })
 
     node.whoIsExplicit = function (lowLimit, highLimit, deviceIPAddress, cb) {

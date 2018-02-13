@@ -23,7 +23,7 @@ gulp.task('default', function () {
 })
 
 gulp.task('docs', sequence('doc', 'docIcons', 'docExamples', 'docImages'))
-gulp.task('build', sequence('clean', 'web', 'nodejs', 'locale'))
+gulp.task('build', sequence('clean', 'web', 'nodejs', 'locale', 'code'))
 gulp.task('publish', sequence('build', 'maps', 'public', 'icons', 'docs', 'releaseExamples'))
 
 gulp.task('icons', function () {
@@ -55,7 +55,7 @@ gulp.task('public', function () {
 })
 
 gulp.task('clean', function () {
-  return gulp.src(['bacnet', 'docs/gen', 'maps'])
+  return gulp.src(['bacnet', 'docs/gen', 'maps', 'code'])
         .pipe(clean({force: true}))
 })
 
@@ -92,4 +92,10 @@ gulp.task('nodejs', function (cb) {
 gulp.task('doc', function (cb) {
   gulp.src(['README.md', 'src/**/*.js'], {read: false})
         .pipe(jsdoc(cb))
+})
+
+gulp.task('code', function () {
+  gulp.src('src/**/*.js')
+    .pipe(babel({presets: ['es2015']}))
+    .pipe(gulp.dest('code'))
 })
