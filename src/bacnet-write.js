@@ -21,7 +21,12 @@ module.exports = function (RED) {
     this.objectType = config.objectType || 0
     this.objectInstance = config.objectInstance || 0
     this.propertyId = config.propertyId || 0
-    this.priority = config.priority || 12
+    this.priority = config.priority || 0
+    this.invokeId = config.invokeId || null
+    this.arrayIndex = config.arrayIndex || null
+    this.maxSegments = config.maxSegments
+    this.maxAdpu = config.maxAdpu
+    this.invokeId = config.invokeId
 
     this.multipleWrite = config.multipleWrite
 
@@ -32,29 +37,35 @@ module.exports = function (RED) {
     node.status({fill: 'green', shape: 'dot', text: 'active'})
 
     node.on('input', function (msg) {
-      if (node.multipleWrite) {
-        if (!msg.payload.hasOwnProperty('values') &&
-          !msg.payload.hasOwnProperty('valueList')) {
-          node.error(new Error('No values Or valueList In Payload found!'))
-          return
+      if (!node.connector) {
+        node.error(new Error('Client Not Ready To Read'), msg)
+        return
+      }
+
+      if (!msg.payload.hasOwnProperty('values')) {
+        node.error(new Error('Property values in payload not found for write operation!'))
+        return
+      }
+
+      let options = msg.payload.options || null
+
+      if (!options) {
+        options = {
+          maxSegments: BACnet.enum.MaxSegments.MAX_SEG65,
+          maxAdpu: BACnet.enum.MaxAdpu.MAX_APDU1476,
+          invokeId: node.invokeId,
+          arrayIndex: node.arrayIndex, /* all */
+          priority: node.priority
         }
+      }
 
+      if (node.multipleWrite) {
         bacnetCore.internalDebugLog('Multiple Write')
-
-        let valueList = [
-          {objectIdentifier: {
-            type: msg.payload.objectType || node.objectType,
-            instance: msg.payload.objectInstance || node.objectInstance
-          },
-            values: msg.payload.values
-          }
-        ]
-
-        bacnetCore.internalDebugLog(valueList)
 
         node.connector.client.writePropertyMultiple(
           node.deviceIPAddress,
-          msg.payload.valueList || valueList,
+          msg.payload.values,
+          options,
           function (err, value) {
             if (err) {
               node.error(err, msg)
@@ -66,27 +77,19 @@ module.exports = function (RED) {
             }
           })
       } else {
-        if (!msg.payload.hasOwnProperty('valueList') &&
-          !msg.payload.hasOwnProperty('bacnetValue')) {
-          node.error(new Error('No bacnetValue Or valueList In Payload found!'))
-          return
-        }
-
         bacnetCore.internalDebugLog('Write')
 
-        let valueList = [
-          {type: msg.payload.bacnetValueType, value: msg.payload.bacnetValue}
-        ]
-
-        bacnetCore.internalDebugLog(valueList)
+        let objectId = {
+          type: node.objectType,
+          instance: node.objectInstance
+        }
 
         node.connector.client.writeProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
-          msg.payload.objectType || node.objectType,
-          msg.payload.objectInstance || node.objectInstance,
+          msg.payload.objectId || objectId,
           msg.payload.propertyId || node.propertyId,
-          msg.payload.priority || node.priority,
-          msg.payload.valueList || valueList,
+          msg.payload.values,
+          options,
           function (err, value) {
             if (err) {
               node.error(err, msg)
@@ -104,7 +107,7 @@ module.exports = function (RED) {
   RED.nodes.registerType('BACnet-Write', BACnetWrite)
 
   RED.httpAdmin.get('/bacnet/ApplicationTags', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.BacnetApplicationTags
+    let typeList = BACnet.enum.ApplicationTags
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 
@@ -117,7 +120,7 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/PropertyIds', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.BacnetPropertyIds
+    let typeList = BACnet.enum.PropertyIds
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 
@@ -130,7 +133,7 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/ObjectTypes', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.BacnetObjectTypes
+    let typeList = BACnet.enum.ObjectTypes
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 

@@ -9,6 +9,7 @@
 
 module.exports = function (RED) {
   let bacnetCore = require('./core/bacnet-core')
+  let BACnet = require('bacstack')
 
   // let BACnet = require('bacstack')
 
@@ -35,22 +36,24 @@ module.exports = function (RED) {
         return
       }
 
+      let options = msg.payload.options || null
+
+      if (!options) {
+        options = {
+          maxSegments: BACnet.enum.MaxSegments.MAX_SEG65,
+          maxAdpu: BACnet.enum.MaxAdpu.MAX_APDU1476,
+          invokeId: null,
+          arrayIndex: null
+        }
+      }
+
       if (node.multipleRead) {
         bacnetCore.internalDebugLog('Multiple Read')
 
-        let requestArray = [{
-          objectIdentifier: {
-            type: msg.payload.objectType || node.objectType,
-            instance: msg.payload.objectInstance || node.objectInstance
-          },
-          propertyReferences: [{
-            propertyIdentifier: msg.payload.propertyId || node.propertyId
-          }]
-        }]
-
         node.connector.client.readPropertyMultiple(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
-          msg.payload.requestArray || requestArray,
+          msg.payload.requestArray,
+          options,
           function (err, value) {
             if (err) {
               node.error(err, msg)
@@ -64,12 +67,16 @@ module.exports = function (RED) {
       } else {
         bacnetCore.internalDebugLog('Read')
 
+        let objectId = {
+          type: node.objectType,
+          instance: node.objectInstance
+        }
+
         node.connector.client.readProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
-          msg.payload.objectType || node.objectType,
-          msg.payload.objectInstance || node.objectInstance,
+          msg.payload.objectId || objectId,
           msg.payload.propertyId || node.propertyId,
-          null,
+          options,
           function (err, value) {
             if (err) {
               node.error(err, msg)

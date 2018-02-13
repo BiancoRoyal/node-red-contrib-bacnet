@@ -11,8 +11,10 @@
     category: 'config',
     defaults: {
       name: {value: ""},
+      adpuTimeout: {value: 0},
       port: {value: 0},
-      adpuTimeout: {value: 0}
+      interface: {value: ''},
+      broadcastAddress: {value: ''}
     },
     label: function () {
       return this.name || "BACnet Client";
@@ -26,18 +28,28 @@
         <input type="text" id="node-config-input-name" placeholder="">
     </div>
     <div class="form-row">
+        <label for="node-config-input-interface"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.interface"></span></label>
+        <input type="text" id="node-config-input-interface" placeholder="127.0.0.1">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-broadcastAddress"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.broadcastAddress"></span></label>
+        <input type="text" id="node-config-input-broadcastAddress" placeholder="127.0.0.255">
+    </div>
+    <div class="form-row">
         <label for="node-config-input-port"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.port"></span></label>
         <input type="text" id="node-config-input-port" placeholder="47808">
     </div>
     <div class="form-row">
         <label for="node-config-input-adpuTimeout"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.adpuTimeout"></span></label>
-        <input type="text" id="node-config-input-adpuTimeout" placeholder="6000">
+        <input type="text" id="node-config-input-adpuTimeout" placeholder="3000">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="BACnet-Client">
     <h2>BACnet Client node</h2>
-    <p>!!! NOT READY TO USE - UNDER DEVELOPMENT - BUT TEST IT PLEASE !!!</p>
 
     <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
+
+    The client sends the whoIs and holds devices listed from iAm event in node.devices.
+    It is the communication node for the BACnet read, write and command nodes.
 </script>

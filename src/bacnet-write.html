@@ -16,7 +16,7 @@
       objectType: {value: 0},
       objectInstance: {value: 0},
       propertyId: {value: 0},
-      priority: {value: 0},
+      arrayIndex: {value: 0},
       server: {type: "BACnet-Client", required:true},
       multipleWrite: {value: false}
     },
@@ -132,9 +132,17 @@
         <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="8">
         <a id="node-lookup-propertyId" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
-    <div class="form-row" id="priority-row">
+    <div class="form-row">
+        <label for="node-input-invokeId"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.invokeId"></span></label>
+        <input type="text" id="node-input-invokeId" placeholder="auto">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.arrayIndex"></span></label>
+        <input type="text" id="node-input-arrayIndex" placeholder="all">
+    </div>
+    <div class="form-row">
         <label for="node-input-priority"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.priority"></span></label>
-        <input type="text" id="node-input-priority" placeholder="12">
+        <input type="text" id="node-input-priority" placeholder="0">
     </div>
     <div class="form-row">
         <h4>Device</h4>
@@ -158,32 +166,94 @@
 
 <script type="text/x-red" data-help-name="BACnet-Write">
     <h2>BACnet Write node</h2>
-    <p>!!! NOT READY TO USE - UNDER DEVELOPMENT - BUT TEST IT PLEASE !!!</p>
 
     <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
 
     <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
 
-    <h3>Multiple Read</h3>
+    <h3>Multiple Write</h3>
     <h4>Input</h4>
     <p>msg.payload.deviceIPAddres</p>
-    <p>msg.payload.objectType</p>
-    <p>msg.payload.objectInstance</p>
-    <p>msg.payload.propertyId</p>
 
-    <p>msg.payload.requestArray (<a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>)</p>
+    <strong>msg.payload.values</strong>
 
+    <i>Array of objects with properties:</i>
+    <p>objectId.type</p>
+    <p>objectId.instance</p>
 
-    <h3>Simple Read</h3>
+    <p>values</p>
+    <i>Array of objects with properties:</i>
+    <p>property.id</p>
+    <p>property.index</p>
+
+    <p>value</p>
+    <i>Array of objects with properties:</i>
+    <p>tag</p>
+    <p>value</p>
+
+    <p>Example of msg.payload.values:</p>
+    <pre>
+        let values = [
+            {objectId:{type:number, instance:number},
+                values:[
+                { property: {id:number, index:number},
+                  value: [
+                    {tag:ApplicationTag, value:object},
+                    {tag:ApplicationTag, value:object} ...
+                  ],
+                  priority:number
+                },
+                { property: {id:number, index:number},
+                  value: [
+                    {tag:ApplicationTag, value:object},
+                    {tag:ApplicationTag, value:object} ...
+                  ],
+                  priority:number
+                } ...
+        ]
+    </pre>
+
+    <pre>
+    const values = [
+        {objectId: {type: 8, instance: 44301}, values: [
+        {property: {id: 28, index: 12}, value: [{type: 1, value: true}], priority: 8}
+      ]}
+    ];
+    </pre>
+    <p>priority</p>
+
+    <strong>msg.payload.options (all optional)</strong>
+    <p>msg.payload.options.maxSegments</p>
+    <p>msg.payload.options.maxAdpu</p>
+    <p>msg.payload.options.invokeId</p>
+
+    <h3>Simple Write</h3>
     <h4>Input</h4>
     <p>msg.payload.deviceIPAddres</p>
-    <p>msg.payload.objectType</p>
-    <p>msg.payload.objectInstance</p>
-    <p>msg.payload.propertyId</p>
-    <p>msg.payload.priority</p>
 
-    <p>msg.payload.bacnetValueType (<a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>)</p>
-    <p>msg.payload.bacnetValue</p>
+    <strong>msg.payload.objectId</strong>
+    <p>msg.payload.objectId.type</p>
+    <p>msg.payload.objectId.instance</p>
+
+    <p>msg.payload.propertyId</p>
+
+    <strong>msg.payload.values</strong>
+    <i>Array of objects with properties:</i>
+    <p>tag</p>
+    <p>value</p>
+
+    <strong>msg.payload.options (all optional)</strong>
+    <p>msg.payload.options.maxSegments</p>
+    <p>msg.payload.options.maxAdpu</p>
+    <p>msg.payload.options.invokeId</p>
+    <p>msg.payload.options.arrayIndex</p>
+    <p>msg.payload.options.priority</p>
+
+    <pre>
+        objectId: {type: 8, instance: 44301},
+        propertyId: 28,
+        values: [{tag: 1, value: true}, ...]
+    </pre>
 
     <h3>All Modes</h3>
     <h4>Output</h4>

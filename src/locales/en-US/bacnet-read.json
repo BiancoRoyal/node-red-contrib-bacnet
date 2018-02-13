@@ -1,7 +1,7 @@
 {
   "bacnet-contrib": {
     "label": {
-      "deviceIPAddress": "IP-Address",
+      "deviceIPAddress": "Device IP",
       "objectType": "Type",
       "objectInstance": "Instance",
       "propertyId": "Property Id",

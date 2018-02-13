@@ -23,6 +23,7 @@
       server: {type: "BACnet-Client", required:true}
     },
     credentials: {
+        username: {type:"text"},
         password: {type: "password"}
     },
     inputs: 1,
@@ -257,34 +258,41 @@
 
 <script type="text/x-red" data-help-name="BACnet-Command">
     <h2>BACnet Command node</h2>
-    <p>!!! NOT READY TO USE - UNDER DEVELOPMENT - BUT TEST IT PLEASE !!!</p>
 
     <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
+
     <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
 
     <h3>Command Types</h3>
     <p>msg.payload.commandType</p>
     <ul>
-        <li>deviceCommunicationControl
-        <li>reinitializeDevice
+        <li>deviceCommunicationControl (needs password)
+        <li>reinitializeDevice (needs password)
         <li>timeSync
-        <li>whoIsExplicit
+        <li>whoIsExplicit (needs optionals of whoIs)
         <li>whoIs
     </ul>
 
     <h3>Inputs</h3>
+
+    <strong>All</strong>
     <p>msg.payload.deviceIPAddress</p>
 
+    <strong>Optional</strong>
+    <p>msg.payload.options</p>
+
+    <strong>deviceCommunicationControl</strong>
     <p>msg.payload.timeDuration</p>
     <p>msg.payload.enableDisable</p>
 
+    <strong>reinitializeDevice</strong
     <p>msg.payload.deviceState</p>
 
-    <p>msg.paylaod.password</p>
-
+    <strong>timeSync</strong>
     <p>msg.payload.syncDateTime</p>
     <p>msg.payload.isUtc</p>
 
+    <strong>whoIsExplicit</strong>
     <p>msg.payload.lowLimit</p>
     <p>msg.payload.highLimit</p>
 

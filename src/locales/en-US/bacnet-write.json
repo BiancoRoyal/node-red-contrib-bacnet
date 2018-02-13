@@ -1,11 +1,13 @@
 {
   "bacnet-contrib": {
     "label": {
-      "deviceIPAddress": "IP-Address",
+      "deviceIPAddress": "Device IP",
       "objectType": "Type",
       "objectInstance": "Instance",
-      "propertyId": "Identifier",
+      "propertyId": "Property",
+      "invokeId": "Invoke Id",
       "priority": "Priority",
+      "arrayIndex": "Array Index",
       "multipleWrite": "Multiple Write",
       "server": "Client",
       "showActivities": "Show Activities",

@@ -14,18 +14,15 @@ module.exports = function (RED) {
   function BACnetClient (config) {
     RED.nodes.createNode(this, config)
     this.name = config.name
+    this.adpuTimeout = config.adpuTimeout || 3000
     this.port = config.port || 47808
-    /*
-    interface
-    transport
-    broadcastAddress
-    */
-    this.adpuTimeout = config.adpuTimeout || 6000
+    this.IPAddress = config.IPAddress || null
+    this.broadcastAddress = config.broadcastAddress || null
 
     let node = this
     node.devices = []
 
-    node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port})
+    node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress})
 
     if (node.client) {
       node.client.on('iAm', function (device) {
@@ -49,7 +46,7 @@ module.exports = function (RED) {
         node.client.close()
         node.client = null
         node.devices = []
-        node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port})
+        node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress})
       })
     }
 
@@ -68,7 +65,12 @@ module.exports = function (RED) {
 
     node.whoIsExplicit = function (lowLimit, highLimit, deviceIPAddress, cb) {
       node.devices = []
-      node.client.whoIs(lowLimit, highLimit, deviceIPAddress)
+      let options = {
+        lowLimit: lowLimit,
+        highLimit: highLimit,
+        deviceIPAddress: deviceIPAddress
+      }
+      node.client.whoIs(options)
       setTimeout(cb, 3000)
     }
 

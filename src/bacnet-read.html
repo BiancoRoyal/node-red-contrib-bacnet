@@ -160,26 +160,53 @@
 
 <script type="text/x-red" data-help-name="BACnet-Read">
     <h2>BACnet Read node</h2>
-    <p>!!! NOT READY TO USE - UNDER DEVELOPMENT - BUT TEST IT PLEASE !!!</p>
 
     <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
     <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
 
     <h3>Multiple Read</h3>
     <h4>Input</h4>
-    <p>msg.payload.objectType</p>
-    <p>msg.payload.objectInstance</p>
-    <p>msg.payload.propertyId</p>
     <p>msg.payload.deviceIPAddres</p>
 
-    <p>msg.payload.requestArray (<a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>)</p>
+    <strong>msg.payload.requestArray</strong>
+    <i>Array of objects with properties:</i>
+    <p>objectId.type</p>
+    <p>objectId.instance</p>
+    <p>properties</p>
+    <i>Array of objects with property:</i>
+    <p>id</p>
+
+    <p>Example of msg.payload.requestArray:</p>
+    <pre>
+        let requestArray = [
+            {objectId:{type:number, instance:number}, properties:[{id:number}, {id:number} ...]},
+            {objectId:{type:number, instance:number}, properties:[{id:number}, {id:number} ...]}
+        ]
+    </pre>
+
+    <p>msg.payload.propertyId</p>
+
+    <strong>msg.payload.options (all optional)</strong>
+    <p>msg.payload.options.maxSegments</p>
+    <p>msg.payload.options.maxAdpu</p>
+    <p>msg.payload.options.invokeId</p>
+    <p>msg.payload.options.arrayIndex</p>
 
     <h3>Simple Read</h3>
     <h4>Input</h4>
-    <p>msg.payload.objectType</p>
-    <p>msg.payload.objectInstance</p>
-    <p>msg.payload.propertyId</p>
     <p>msg.payload.deviceIPAddres</p>
+
+    <strong>msg.payload.objectId</strong>
+    <p>msg.payload.objectId.type</p>
+    <p>msg.payload.objectId.instance</p>
+
+    <p>msg.payload.propertyId</p>
+
+    <strong>msg.payload.options (all optional)</strong>
+    <p>msg.payload.options.maxSegments</p>
+    <p>msg.payload.options.maxAdpu</p>
+    <p>msg.payload.options.invokeId</p>
+    <p>msg.payload.options.arrayIndex</p>
 
     <h3>All Modes</h3>
     <h4>Output</h4>

@@ -2,7 +2,7 @@
   "bacnet-contrib": {
     "label": {
       "commandType": "Command",
-      "deviceIPAddress": "IP-Address",
+      "deviceIPAddress": "Device IP",
       "timeDuration": "Time Duration",
       "enableDisable": "Enable/Disable",
       "password": "Password",

@@ -18,8 +18,8 @@ module.exports = function (RED) {
     this.name = config.name
     this.commandType = config.commandType
     this.timeDuration = config.timeDuration || 0
-    this.enableDisable = config.enableDisable || BACnet.enum.BacnetEnableDisable.ENABLE
-    this.deviceState = config.deviceState || BACnet.enum.BacnetReinitializedStates.BACNET_REINIT_COLDSTART
+    this.enableDisable = config.enableDisable || BACnet.enum.EnableDisable.ENABLE
+    this.deviceState = config.deviceState || BACnet.enum.ReinitializedStates.BACNET_REINIT_COLDSTART
     this.isUtc = config.isUtc || true
     this.lowLimit = config.lowLimit || null
     this.highLimit = config.highLimit || null
@@ -29,10 +29,6 @@ module.exports = function (RED) {
     this.connector = RED.nodes.getNode(config.server)
 
     let node = this
-
-    if (node.credentials) {
-      node.password = node.credentials.password
-    }
 
     node.status({fill: 'green', shape: 'dot', text: 'active'})
 
@@ -44,6 +40,20 @@ module.exports = function (RED) {
       bacnetCore.internalDebugLog('Command')
 
       let commandType = msg.payload.commandType || node.commandType
+      let options = msg.payload.options || null
+
+      if (!options) {
+        options = {
+          maxSegments: BACnet.enum.MaxSegments.MAX_SEG65,
+          maxAdpu: BACnet.enum.MaxAdpu.MAX_APDU1476,
+          invokeId: null,
+          password: (node.credentials) ? node.credentials.password : null
+        }
+      } else {
+        if (!msg.payload.options.password) {
+          msg.payload.options.password = node.credentials.password
+        }
+      }
 
       switch (commandType) {
         case 'deviceCommunicationControl':
@@ -51,7 +61,7 @@ module.exports = function (RED) {
             msg.payload.deviceIPAddress || node.deviceIPAddress,
             msg.payload.timeDuration || node.timeDuration,
             msg.payload.enableDisable || node.enableDisable,
-            msg.payload.password || node.password,
+            options,
             function (err, value) {
               if (err) {
                 node.error(err, msg)
@@ -67,7 +77,7 @@ module.exports = function (RED) {
           node.connector.client.reinitializeDevice(
             msg.payload.deviceIPAddress || node.deviceIPAddress,
             msg.payload.deviceState || node.deviceState,
-            msg.payload.password || node.password,
+            options,
             function (err, value) {
               if (err) {
                 node.error(err, msg)
@@ -80,10 +90,15 @@ module.exports = function (RED) {
           break
 
         case 'timeSync':
-          node.connector.client.timeSync(
-            msg.payload.deviceIPAddress || node.deviceIPAddress,
-            msg.payload.syncDateTime || new Date(),
-            msg.payload.isUtc || node.isUtc)
+          if (msg.payload.isUtc || node.isUtc) {
+            node.connector.client.timeSyncUTC(
+              msg.payload.deviceIPAddress || node.deviceIPAddress,
+              msg.payload.syncDateTime || new Date())
+          } else {
+            node.connector.client.timeSync(
+              msg.payload.deviceIPAddress || node.deviceIPAddress,
+              msg.payload.syncDateTime || new Date())
+          }
           break
 
         case 'whoIsExplicit':
@@ -120,7 +135,7 @@ module.exports = function (RED) {
   RED.nodes.registerType('BACnet-Command', BACnetCommand)
 
   RED.httpAdmin.get('/bacnet/BacnetEnableDisable', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.BacnetEnableDisable
+    let typeList = BACnet.enum.EnableDisable
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 
@@ -133,7 +148,7 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/BacnetReinitializedStates', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.BacnetReinitializedStates
+    let typeList = BACnet.enum.ReinitializedStates
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 
