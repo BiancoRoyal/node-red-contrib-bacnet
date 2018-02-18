@@ -9,9 +9,6 @@
 
 module.exports = function (RED) {
   let bacnetCore = require('./core/bacnet-core')
-  let BACnet = require('bacstack')
-
-  // let BACnet = require('bacstack')
 
   function BACnetRead (config) {
     RED.nodes.createNode(this, config)
