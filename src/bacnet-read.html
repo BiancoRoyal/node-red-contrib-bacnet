@@ -11,12 +11,12 @@
     category: 'BACnet',
     color: "#16BAC4",
     defaults: {
-      name: {value: ""},
-      objectType: {value: 0},
-      objectInstance: {value: 0},
-      propertyId: {value: 0},
-      arrayIndex: {value: 0},
-      deviceIPAddress: {value: ""},
+      name: {value: ''},
+      objectType: {value: ''},
+      objectInstance: {value: ''},
+      propertyId: {value: ''},
+      arrayIndex: {value: ''},
+      deviceIPAddress: {value: ''},
       server: {type: "BACnet-Client", required:true},
       multipleRead: {value: false}
     },
@@ -123,7 +123,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-objectInstance"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.objectInstance"></span></label>
-        <input type="text" id="node-input-objectInstance" placeholder="4194303">
+        <input type="text" id="node-input-objectInstance" placeholder="400001">
     </div>
     <div class="form-row">
         <h4>Properties</h4>
@@ -131,12 +131,12 @@
     </div>
     <div class="form-row">
         <label for="node-input-propertyId"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.propertyId"></span></label>
-        <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="8">
+        <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="28">
         <a id="node-lookup-propertyId" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
         <label for="node-input-arrayIndex"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.arrayIndex"></span></label>
-        <input type="text" id="node-input-arrayIndex" placeholder="0">
+        <input type="text" id="node-input-arrayIndex" placeholder="null">
     </div>
     <div class="form-row">
         <h4>Device</h4>
@@ -161,6 +161,7 @@
 <script type="text/x-red" data-help-name="BACnet-Read">
     <h2>BACnet Read node</h2>
 
+    <h3>BETA</h3>
     <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
     <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
 

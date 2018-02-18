@@ -20,6 +20,8 @@ module.exports = function (RED) {
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
     this.objectType = config.objectType || 0
     this.objectInstance = config.objectInstance || 0
+    this.valueTag = config.valueTag || null
+    this.valueValue = config.valueValue || null
     this.propertyId = config.propertyId || 0
     this.priority = config.priority || 0
     this.invokeId = config.invokeId || null
@@ -47,24 +49,32 @@ module.exports = function (RED) {
         return
       }
 
-      let options = msg.payload.options || null
-
-      if (!options) {
-        options = {
-          maxSegments: BACnet.enum.MaxSegments.MAX_SEG65,
-          maxAdpu: BACnet.enum.MaxAdpu.MAX_APDU1476,
-          invokeId: node.invokeId,
-          arrayIndex: node.arrayIndex, /* all */
-          priority: node.priority
-        }
-      }
+      let options = msg.payload.options || {}
 
       if (node.multipleWrite) {
         bacnetCore.internalDebugLog('Multiple Write')
 
+        let defaultValues = [{
+          objectId: {
+            type: node.objectType,
+            instance: node.objectInstance
+          },
+          values: {
+            property: {
+              id: node.propertyId,
+              index: node.arrayIndex
+            },
+            value: { // TODO: needs maybe a JS editor to write objects value
+              tag: node.valueTag,
+              value: JSON.parse(node.valueValue)
+            },
+            priority: node.priority
+          }
+        }]
+
         node.connector.client.writePropertyMultiple(
           node.deviceIPAddress,
-          msg.payload.values,
+          msg.payload.values || defaultValues,
           options,
           function (err, value) {
             if (err) {
@@ -79,16 +89,26 @@ module.exports = function (RED) {
       } else {
         bacnetCore.internalDebugLog('Write')
 
+        if (options) {
+          options.arrayIndex = msg.payload.options.arrayIndex || node.arrayIndex
+          options.priority = msg.payload.options.priority || node.priority
+        }
+
         let objectId = {
           type: node.objectType,
           instance: node.objectInstance
         }
 
+        let defaultValues = [{ // TODO: needs maybe a JS editor to write objects value
+          tag: node.valueTag,
+          value: JSON.parse(node.valueValue)
+        }]
+
         node.connector.client.writeProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.objectId || objectId,
           msg.payload.propertyId || node.propertyId,
-          msg.payload.values,
+          msg.payload.values || defaultValues,
           options,
           function (err, value) {
             if (err) {

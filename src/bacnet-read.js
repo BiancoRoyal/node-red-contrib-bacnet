@@ -36,23 +36,22 @@ module.exports = function (RED) {
         return
       }
 
-      let options = msg.payload.options || null
-
-      if (!options) {
-        options = {
-          maxSegments: BACnet.enum.MaxSegments.MAX_SEG65,
-          maxAdpu: BACnet.enum.MaxAdpu.MAX_APDU1476,
-          invokeId: null,
-          arrayIndex: null
-        }
-      }
+      let options = msg.payload.options || {}
 
       if (node.multipleRead) {
         bacnetCore.internalDebugLog('Multiple Read')
 
+        let defaultRequestArray = [{
+          objectId: {
+            type: node.objectType,
+            instance: node.objectInstance
+          },
+          properties: [{id: node.propertyId}]
+        }]
+
         node.connector.client.readPropertyMultiple(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
-          msg.payload.requestArray,
+          msg.payload.requestArray || defaultRequestArray,
           options,
           function (err, value) {
             if (err) {

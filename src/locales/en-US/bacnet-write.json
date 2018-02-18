@@ -4,6 +4,8 @@
       "deviceIPAddress": "Device IP",
       "objectType": "Type",
       "objectInstance": "Instance",
+      "valueTag": "App-Tag",
+      "valueValue": "Value",
       "propertyId": "Property",
       "invokeId": "Invoke Id",
       "priority": "Priority",

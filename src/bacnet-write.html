@@ -11,12 +11,14 @@
     category: 'BACnet',
     color: "#16BAC4",
     defaults: {
-      name: {value: ""},
-      deviceIPAddress: {value: ""},
-      objectType: {value: 0},
-      objectInstance: {value: 0},
-      propertyId: {value: 0},
-      arrayIndex: {value: 0},
+      name: {value: ''},
+      deviceIPAddress: {value: ''},
+      objectType: {value: ''},
+      objectInstance: {value: ''},
+      valueTag: {value: ''},
+      valueValue: {value: ''},
+      propertyId: {value: ''},
+      arrayIndex: {value: ''},
       server: {type: "BACnet-Client", required:true},
       multipleWrite: {value: false}
     },
@@ -105,6 +107,37 @@
           }).autocomplete("search", "")
         })
       })
+
+      let tagTypeLookupField = $("#node-lookup-valueTag")
+      let tagTypeField = $("#node-input-valueTag")
+
+      tagTypeLookupField.click(function () {
+        tagTypeLookupField.addClass('disabled')
+        $.getJSON('/bacnet/ApplicationTags', function (data) {
+          tagTypeLookupField.removeClass('disabled')
+          node.lookupItems = []
+
+          $.each(data, function (i, entry) {
+            node.lookupItems.push({value: entry.typeValue, label: entry.label})
+          })
+
+          tagTypeField.autocomplete({
+            source: node.lookupItems,
+            minLength: 0,
+            focus: function (event, ui) {
+              tagTypeField.val(ui.item.value);
+              return false;
+            },
+            select: function (event, ui) {
+              tagTypeField.val(ui.item.value)
+              return false;
+            },
+            close: function (event, ui) {
+              tagTypeField.autocomplete("destroy")
+            }
+          }).autocomplete("search", "")
+        })
+      })
     }
   });
 </script>
@@ -122,6 +155,19 @@
     <div class="form-row">
         <label for="node-input-objectInstance"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.objectInstance"></span></label>
         <input type="text" id="node-input-objectInstance" placeholder="4194303">
+    </div>
+    <div class="form-row">
+        <h4>Value</h4>
+        <hr>
+    </div>
+    <div class="form-row">
+        <label for="node-input-valueTag"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.valueTag"></span></label>
+        <input type="text" id="node-input-valueTag" style="width:60%;" placeholder="8">
+        <a id="node-lookup-valueTag" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
+    </div>
+    <div class="form-row">
+        <label for="node-input-valueValue"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.valueValue"></span></label>
+        <input type="text" id="node-input-valueValue" placeholder="">
     </div>
     <div class="form-row">
         <h4>Properties</h4>
@@ -167,6 +213,7 @@
 <script type="text/x-red" data-help-name="BACnet-Write">
     <h2>BACnet Write node</h2>
 
+    <h3>BETA</h3>
     <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
 
     <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
