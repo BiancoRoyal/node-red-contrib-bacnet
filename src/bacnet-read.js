@@ -17,7 +17,7 @@ module.exports = function (RED) {
     this.objectType = config.objectType || 0
     this.objectInstance = config.objectInstance || 0
     this.propertyId = config.propertyId || 0
-    this.arrayIndex = config.arrayIndex || null
+    this.arrayIndex = config.arrayIndex || 0xFFFFFFFF
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
     this.multipleRead = config.multipleRead
 

@@ -20,12 +20,12 @@ module.exports = function (RED) {
     this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
     this.objectType = config.objectType || 0
     this.objectInstance = config.objectInstance || 0
-    this.valueTag = config.valueTag || 0
+    this.valueTag = config.valueTag || 9
     this.valueValue = config.valueValue || null
     this.propertyId = config.propertyId || 0
-    this.priority = config.priority || 8
+    this.priority = config.priority || 15
     this.invokeId = config.invokeId || null
-    this.arrayIndex = config.arrayIndex || null
+    this.arrayIndex = config.arrayIndex || 0xFFFFFFFF
     this.maxSegments = config.maxSegments
     this.maxAdpu = config.maxAdpu
     this.invokeId = config.invokeId
@@ -40,12 +40,7 @@ module.exports = function (RED) {
 
     node.on('input', function (msg) {
       if (!node.connector) {
-        node.error(new Error('Client Not Ready To Read'), msg)
-        return
-      }
-
-      if (!msg.payload.hasOwnProperty('values')) {
-        node.error(new Error('Property values in payload not found for write operation!'))
+        node.error(new Error('Client Not Ready To Write'), msg)
         return
       }
 
@@ -59,17 +54,17 @@ module.exports = function (RED) {
             type: node.objectType,
             instance: node.objectInstance
           },
-          values: {
+          values: [{
             property: {
               id: node.propertyId,
               index: node.arrayIndex
             },
-            value: { // TODO: needs maybe a JS editor to write objects value
+            value: [{
               tag: node.valueTag,
-              value: JSON.parse(node.valueValue)
-            },
+              value: node.valueValue
+            }],
             priority: node.priority
-          }
+          }]
         }]
 
         node.connector.client.writePropertyMultiple(
@@ -89,19 +84,14 @@ module.exports = function (RED) {
       } else {
         bacnetCore.internalDebugLog('Write')
 
-        if (options) {
-          options.arrayIndex = msg.payload.options.arrayIndex || node.arrayIndex
-          options.priority = msg.payload.options.priority || node.priority
-        }
-
         let objectId = {
           type: node.objectType,
           instance: node.objectInstance
         }
 
-        let defaultValues = [{ // TODO: needs maybe a JS editor to write objects value
+        let defaultValues = [{
           tag: node.valueTag,
-          value: JSON.parse(node.valueValue)
+          value: node.valueValue
         }]
 
         node.connector.client.writeProperty(

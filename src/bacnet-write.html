@@ -162,7 +162,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-valueTag"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.valueTag"></span></label>
-        <input type="text" id="node-input-valueTag" style="width:60%;" placeholder="0">
+        <input type="text" id="node-input-valueTag" style="width:60%;" placeholder="9">
         <a id="node-lookup-valueTag" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
@@ -188,7 +188,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-priority"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.priority"></span></label>
-        <input type="text" id="node-input-priority" placeholder="8">
+        <input type="text" id="node-input-priority" placeholder="15">
     </div>
     <div class="form-row">
         <h4>Device</h4>
@@ -240,32 +240,34 @@
 
     <p>Example of msg.payload.values:</p>
     <pre>
-        let values = [
-            {objectId:{type:number, instance:number},
-                values:[
-                { property: {id:number, index:number},
-                  value: [
-                    {tag:ApplicationTag, value:object},
-                    {tag:ApplicationTag, value:object} ...
-                  ],
-                  priority:number
-                },
-                { property: {id:number, index:number},
-                  value: [
-                    {tag:ApplicationTag, value:object},
-                    {tag:ApplicationTag, value:object} ...
-                  ],
-                  priority:number
-                } ...
-        ]
+        let values = [{
+          objectId: {
+            type: objectType,
+            instance: objectInstance
+          },
+          values: [{
+            property: {
+              id: propertyId,
+              index: index
+            },
+            value: [{
+              tag: valueTag,
+              value: valueValue
+            }],
+            priority: priority
+          }]
+        }]
     </pre>
 
     <pre>
-    const values = [
-        {objectId: {type: 8, instance: 44301}, values: [
-        {property: {id: 28, index: 12}, value: [{type: 1, value: true}], priority: 8}
-      ]}
-    ];
+    const values = [{
+        objectId: {type: 8, instance: 44301},
+        values: [{
+            property: {id: 28, index: 12},
+            value: [{type: 1, value: true}],
+            priority: 15
+        }]
+    }];
     </pre>
     <p>priority</p>
 
@@ -299,7 +301,10 @@
     <pre>
         objectId: {type: 8, instance: 44301},
         propertyId: 28,
-        values: [{tag: 1, value: true}, ...]
+        values: [{
+            type: 4,
+            value: 100
+        }]
     </pre>
 
     <h3>All Modes</h3>

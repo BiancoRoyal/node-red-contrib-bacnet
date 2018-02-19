@@ -179,10 +179,14 @@
 
     <p>Example of msg.payload.requestArray:</p>
     <pre>
-        let requestArray = [
-            {objectId:{type:number, instance:number}, properties:[{id:number}, {id:number} ...]},
-            {objectId:{type:number, instance:number}, properties:[{id:number}, {id:number} ...]}
-        ]
+        const requestArray = [{
+            objectId: {type: 8, instance: 4194303},
+            properties: [{id: 8}]
+        }]
+    </pre>
+
+    <pre>
+        {type: 8, instance: 44301}, 28
     </pre>
 
     <p>msg.payload.propertyId</p>
@@ -208,6 +212,11 @@
     <p>msg.payload.options.maxAdpu</p>
     <p>msg.payload.options.invokeId</p>
     <p>msg.payload.options.arrayIndex</p>
+
+    <pre>
+        objectId: {type: 8, instance: 44301}
+        propertyId: 28
+    </pre>
 
     <h3>All Modes</h3>
     <h4>Output</h4>
