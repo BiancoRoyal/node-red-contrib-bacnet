@@ -1,0 +1,365 @@
+[
+  {
+    "id": "8a176b4b.402e88",
+    "type": "tab",
+    "label": "BACnet Tests",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "1c78c2e6.4d23ad",
+    "type": "BACnet-Command",
+    "z": "8a176b4b.402e88",
+    "name": "Who is?",
+    "commandType": "whoIs",
+    "timeDuration": 0,
+    "enableDisable": 0,
+    "deviceState": 0,
+    "isUtc": true,
+    "lowLimit": "1",
+    "highLimit": "254",
+    "deviceIPAddress": "192.168.1.26",
+    "server": "47200328.f5789c",
+    "x": 480,
+    "y": 60,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "bf516d5.34c6c1",
+    "type": "debug",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 810,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "9318043d.cb1978",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 60,
+    "wires": [
+      [
+        "1c78c2e6.4d23ad"
+      ]
+    ]
+  },
+  {
+    "id": "8944e07.02e002",
+    "type": "BACnet-Read",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "objectType": "8",
+    "objectInstance": "4194303",
+    "propertyId": "28",
+    "arrayIndex": 0,
+    "deviceIPAddress": "192.168.1.22",
+    "server": "47200328.f5789c",
+    "multipleRead": true,
+    "x": 500,
+    "y": 300,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "1a12a3be.11853c",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 300,
+    "wires": [
+      [
+        "8944e07.02e002"
+      ]
+    ]
+  },
+  {
+    "id": "6218aa2d.84eb04",
+    "type": "BACnet-Write",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "deviceIPAddress": "192.168.1.26",
+    "objectType": "1",
+    "objectInstance": "0",
+    "valueTag": "4",
+    "valueValue": "6",
+    "propertyId": "85",
+    "arrayIndex": "",
+    "server": "47200328.f5789c",
+    "multipleWrite": true,
+    "x": 500,
+    "y": 440,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "9cbfb2f5.b43488",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 440,
+    "wires": [
+      [
+        "6218aa2d.84eb04"
+      ]
+    ]
+  },
+  {
+    "id": "cb342ab4.5fb71",
+    "type": "BACnet-Command",
+    "z": "8a176b4b.402e88",
+    "name": "Time sync",
+    "commandType": "timeSync",
+    "timeDuration": 0,
+    "enableDisable": 0,
+    "deviceState": 0,
+    "isUtc": false,
+    "lowLimit": "1",
+    "highLimit": "254",
+    "deviceIPAddress": "192.168.1.26",
+    "server": "47200328.f5789c",
+    "x": 490,
+    "y": 120,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "bbcae569.8c81",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 120,
+    "wires": [
+      [
+        "cb342ab4.5fb71"
+      ]
+    ]
+  },
+  {
+    "id": "2997cbd3.efd6c4",
+    "type": "BACnet-Command",
+    "z": "8a176b4b.402e88",
+    "name": "Device warm start",
+    "commandType": "reinitializeDevice",
+    "timeDuration": 0,
+    "enableDisable": 0,
+    "deviceState": "1",
+    "isUtc": true,
+    "lowLimit": "1",
+    "highLimit": "254",
+    "deviceIPAddress": "192.168.1.26",
+    "server": "47200328.f5789c",
+    "x": 510,
+    "y": 180,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "1c9fc2fd.83855d",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 180,
+    "wires": [
+      [
+        "2997cbd3.efd6c4"
+      ]
+    ]
+  },
+  {
+    "id": "5e41a853.f97408",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 360,
+    "wires": [
+      [
+        "cb3a967.69a9368"
+      ]
+    ]
+  },
+  {
+    "id": "aaa2920b.ee71a",
+    "type": "BACnet-Write",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "deviceIPAddress": "192.168.1.26",
+    "objectType": "8",
+    "objectInstance": "4194303",
+    "valueTag": "1",
+    "valueValue": "true",
+    "propertyId": "28",
+    "arrayIndex": "12",
+    "server": "47200328.f5789c",
+    "multipleWrite": false,
+    "x": 500,
+    "y": 500,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "5d256ea5.a871b",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 500,
+    "wires": [
+      [
+        "aaa2920b.ee71a"
+      ]
+    ]
+  },
+  {
+    "id": "cb3a967.69a9368",
+    "type": "BACnet-Read",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "objectType": "8",
+    "objectInstance": "4194303",
+    "propertyId": "28",
+    "arrayIndex": "",
+    "deviceIPAddress": "192.168.1.22",
+    "server": "47200328.f5789c",
+    "multipleRead": false,
+    "x": 500,
+    "y": 360,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "4db0b184.8825f",
+    "type": "BACnet-Command",
+    "z": "8a176b4b.402e88",
+    "name": "DCC disable 10 sec.",
+    "commandType": "deviceCommunicationControl",
+    "timeDuration": "10",
+    "enableDisable": "1",
+    "deviceState": "255",
+    "isUtc": true,
+    "lowLimit": "1",
+    "highLimit": "254",
+    "deviceIPAddress": "192.168.1.22",
+    "server": "47200328.f5789c",
+    "x": 520,
+    "y": 240,
+    "wires": [
+      [
+        "bf516d5.34c6c1"
+      ]
+    ]
+  },
+  {
+    "id": "574ac842.d5c1e8",
+    "type": "inject",
+    "z": "8a176b4b.402e88",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 220,
+    "y": 240,
+    "wires": [
+      [
+        "4db0b184.8825f"
+      ]
+    ]
+  },
+  {
+    "id": "47200328.f5789c",
+    "type": "BACnet-Client",
+    "z": "",
+    "name": "Local BACnet",
+    "adpuTimeout": "",
+    "port": "",
+    "interface": "",
+    "broadcastAddress": ""
+  }
+]
