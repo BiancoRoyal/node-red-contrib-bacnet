@@ -36,7 +36,7 @@ At a minimum, please include:
  - Version of node-red-contrib-bacnet?
  
  - What is your platform? (Linux, macOS, ...)
- - What does `DEBUG=dnpProtocol:* node-red -v` say? (log files are welcome)
+ - What does `DEBUG=bacnet:* node-red -v` say? (log files are welcome)
 
 ## Feature requests
 

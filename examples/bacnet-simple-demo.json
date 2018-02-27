@@ -1,15 +1,15 @@
 [
   {
-    "id": "8a176b4b.402e88",
+    "id": "bc7f5764.0ec088",
     "type": "tab",
     "label": "BACnet Tests",
     "disabled": false,
     "info": ""
   },
   {
-    "id": "1c78c2e6.4d23ad",
+    "id": "b311ba2b.8fb848",
     "type": "BACnet-Command",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "Who is?",
     "commandType": "whoIs",
     "timeDuration": 0,
@@ -19,19 +19,19 @@
     "lowLimit": "1",
     "highLimit": "254",
     "deviceIPAddress": "192.168.1.26",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "x": 480,
     "y": 60,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "bf516d5.34c6c1",
+    "id": "8d213e97.2efe7",
     "type": "debug",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "active": true,
     "tosidebar": true,
@@ -43,9 +43,9 @@
     "wires": []
   },
   {
-    "id": "9318043d.cb1978",
+    "id": "cf78b5fc.3bf8f8",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -58,34 +58,34 @@
     "y": 60,
     "wires": [
       [
-        "1c78c2e6.4d23ad"
+        "b311ba2b.8fb848"
       ]
     ]
   },
   {
-    "id": "8944e07.02e002",
+    "id": "8f3aee7b.31e19",
     "type": "BACnet-Read",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "objectType": "8",
     "objectInstance": "4194303",
     "propertyId": "28",
     "arrayIndex": 0,
     "deviceIPAddress": "192.168.1.22",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "multipleRead": true,
     "x": 500,
     "y": 300,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "1a12a3be.11853c",
+    "id": "1643c992.878616",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -98,14 +98,14 @@
     "y": 300,
     "wires": [
       [
-        "8944e07.02e002"
+        "8f3aee7b.31e19"
       ]
     ]
   },
   {
-    "id": "6218aa2d.84eb04",
+    "id": "566d2aa3.467b54",
     "type": "BACnet-Write",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "deviceIPAddress": "192.168.1.26",
     "objectType": "1",
@@ -114,20 +114,20 @@
     "valueValue": "6",
     "propertyId": "85",
     "arrayIndex": "",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "multipleWrite": true,
     "x": 500,
     "y": 440,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "9cbfb2f5.b43488",
+    "id": "8b5be293.f184b",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -140,14 +140,14 @@
     "y": 440,
     "wires": [
       [
-        "6218aa2d.84eb04"
+        "566d2aa3.467b54"
       ]
     ]
   },
   {
-    "id": "cb342ab4.5fb71",
+    "id": "24f6d61f.03d6da",
     "type": "BACnet-Command",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "Time sync",
     "commandType": "timeSync",
     "timeDuration": 0,
@@ -157,19 +157,19 @@
     "lowLimit": "1",
     "highLimit": "254",
     "deviceIPAddress": "192.168.1.26",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "x": 490,
     "y": 120,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "bbcae569.8c81",
+    "id": "4d6519a3.ff6ad8",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -182,14 +182,14 @@
     "y": 120,
     "wires": [
       [
-        "cb342ab4.5fb71"
+        "24f6d61f.03d6da"
       ]
     ]
   },
   {
-    "id": "2997cbd3.efd6c4",
+    "id": "42c8b031.f5f31",
     "type": "BACnet-Command",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "Device warm start",
     "commandType": "reinitializeDevice",
     "timeDuration": 0,
@@ -199,19 +199,19 @@
     "lowLimit": "1",
     "highLimit": "254",
     "deviceIPAddress": "192.168.1.26",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "x": 510,
     "y": 180,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "1c9fc2fd.83855d",
+    "id": "cc244265.c1a3b",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -224,14 +224,14 @@
     "y": 180,
     "wires": [
       [
-        "2997cbd3.efd6c4"
+        "42c8b031.f5f31"
       ]
     ]
   },
   {
-    "id": "5e41a853.f97408",
+    "id": "c895d081.9ca7a",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -244,14 +244,14 @@
     "y": 360,
     "wires": [
       [
-        "cb3a967.69a9368"
+        "a623e076.1ce11"
       ]
     ]
   },
   {
-    "id": "aaa2920b.ee71a",
+    "id": "ce3c4362.c5f3d",
     "type": "BACnet-Write",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "deviceIPAddress": "192.168.1.26",
     "objectType": "8",
@@ -260,20 +260,20 @@
     "valueValue": "true",
     "propertyId": "28",
     "arrayIndex": "12",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "multipleWrite": false,
     "x": 500,
     "y": 500,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "5d256ea5.a871b",
+    "id": "2d79e0ba.f4cf1",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -286,34 +286,34 @@
     "y": 500,
     "wires": [
       [
-        "aaa2920b.ee71a"
+        "ce3c4362.c5f3d"
       ]
     ]
   },
   {
-    "id": "cb3a967.69a9368",
+    "id": "a623e076.1ce11",
     "type": "BACnet-Read",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "objectType": "8",
     "objectInstance": "4194303",
     "propertyId": "28",
     "arrayIndex": "",
     "deviceIPAddress": "192.168.1.22",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "multipleRead": false,
     "x": 500,
     "y": 360,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "4db0b184.8825f",
+    "id": "7fc98e5.a89107",
     "type": "BACnet-Command",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "DCC disable 10 sec.",
     "commandType": "deviceCommunicationControl",
     "timeDuration": "10",
@@ -323,19 +323,19 @@
     "lowLimit": "1",
     "highLimit": "254",
     "deviceIPAddress": "192.168.1.22",
-    "server": "47200328.f5789c",
+    "server": "8131c29a.af8b4",
     "x": 520,
     "y": 240,
     "wires": [
       [
-        "bf516d5.34c6c1"
+        "8d213e97.2efe7"
       ]
     ]
   },
   {
-    "id": "574ac842.d5c1e8",
+    "id": "bff0ca2.b673b38",
     "type": "inject",
-    "z": "8a176b4b.402e88",
+    "z": "bc7f5764.0ec088",
     "name": "",
     "topic": "",
     "payload": "",
@@ -348,14 +348,14 @@
     "y": 240,
     "wires": [
       [
-        "4db0b184.8825f"
+        "7fc98e5.a89107"
       ]
     ]
   },
   {
-    "id": "47200328.f5789c",
+    "id": "8131c29a.af8b4",
     "type": "BACnet-Client",
-    "z": "",
+    "z": "bc7f5764.0ec088",
     "name": "Local BACnet",
     "adpuTimeout": "",
     "port": "",
