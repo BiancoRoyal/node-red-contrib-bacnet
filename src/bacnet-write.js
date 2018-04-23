@@ -68,7 +68,7 @@ module.exports = function (RED) {
         }]
 
         node.connector.client.writePropertyMultiple(
-          node.deviceIPAddress,
+          msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.values || defaultValues,
           options,
           function (err, value) {
