@@ -60,7 +60,7 @@ module.exports = function (RED) {
               index: node.arrayIndex
             },
             value: [{
-              tag: node.valueTag,
+              type: node.valueTag,
               value: node.valueValue
             }],
             priority: node.priority
@@ -90,7 +90,7 @@ module.exports = function (RED) {
         }
 
         let defaultValues = [{
-          tag: node.valueTag,
+          type: node.valueTag,
           value: node.valueValue
         }]
 
