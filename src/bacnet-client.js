@@ -22,7 +22,13 @@ module.exports = function (RED) {
     let node = this
     node.devices = []
 
-    node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress})
+    if (node.IPAddress) {
+      bacnetCore.internalDebugLog('client with IP settings')
+      node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress})
+    } else {
+      bacnetCore.internalDebugLog('client without IP settings')
+      node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port})
+    }
 
     if (node.client) {
       node.client.on('iAm', (device) => {
