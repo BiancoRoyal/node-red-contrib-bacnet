@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "private": false,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "debug": "3.1.0",
-    "bacstack": "0.0.1-beta.13",
+    "@biancoroyal/bacstack": "0.0.1-beta.14",
     "underscore": "1.8.3"
   },
   "keywords": [
