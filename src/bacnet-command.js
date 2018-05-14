@@ -9,7 +9,7 @@
 
 module.exports = function (RED) {
   let bacnetCore = require('./core/bacnet-core')
-  let BACnet = require('bacstack')
+  let BACnet = require('@biancoroyal/bacstack')
   let _ = require('underscore')
 
   function BACnetCommand (config) {
@@ -19,7 +19,7 @@ module.exports = function (RED) {
     this.commandType = config.commandType
     this.timeDuration = config.timeDuration || 0
     this.enableDisable = config.enableDisable || BACnet.enum.EnableDisable.ENABLE
-    this.deviceState = config.deviceState || BACnet.enum.ReinitializedStates.BACNET_REINIT_COLDSTART
+    this.deviceState = config.deviceState || BACnet.enum.ReinitializedState.COLDSTART
     this.isUtc = config.isUtc || true
     this.lowLimit = config.lowLimit || null
     this.highLimit = config.highLimit || null
@@ -44,8 +44,8 @@ module.exports = function (RED) {
 
       if (!options) {
         options = {
-          maxSegments: BACnet.enum.MaxSegments.MAX_SEG65,
-          maxAdpu: BACnet.enum.MaxAdpu.MAX_APDU1476,
+          maxSegments: BACnet.enum.MaxSegmentsAccepted.SEGMENTS_65,
+          maxAdpu: BACnet.enum.MaxApduLengthAccepted.OCTETS_1476,
           invokeId: null,
           password: (node.credentials) ? node.credentials.password : null
         }
