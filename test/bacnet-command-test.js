@@ -11,7 +11,15 @@
 'use strict'
 
 var commandNode = require('../src/bacnet-command.js')
-var helper = require('./helper.js')
+var deviceNode = require('../src/bacnet-device.js')
+var clientNode = require('../src/bacnet-client.js')
+var helper = require('node-red-contrib-test-helper')
+
+// https://www.dailycred.com/article/bcrypt-calculator
+var testCredentials = {
+  user: 'peter',
+  password: '$2a$04$Dj8UfDYcMLjttad0Qi67DeKtqJM6SZ8XR.Oy70.GUvle4MlrVWaYC'
+}
 
 describe('Command node Testing', function () {
   before(function (done) {
@@ -24,25 +32,46 @@ describe('Command node Testing', function () {
 
   describe('Node', function () {
     it('simple read node should be loaded', function (done) {
-      helper.load([commandNode], [
+      helper.load([deviceNode, clientNode, commandNode], [
         {
-          "id": "ed7e0d79.6afce",
+          "id": "8f8d8daf.248e",
           "type": "BACnet-Command",
-          "z": "a7ca7277.8f86b8",
+          "z": "ad26e8b.6b24498",
           "name": "bacnetCommand",
-          "commandType": "whoIs",
+          "commandType": "deviceCommunicationControl",
           "timeDuration": 0,
           "enableDisable": 0,
           "deviceState": 0,
           "isUtc": true,
-          "deviceIPAddress": "",
-          "server": "ed8f6d87.1bcfe",
-          "x": 660,
-          "y": 220,
-          "wires": []
+          "lowLimit": 0,
+          "highLimit": 0,
+          "device": "b289851b.dec6f8",
+          "server": "1528f96c.56d047",
+          "x": 300,
+          "y": 320,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "b289851b.dec6f8",
+          "type": "BACnet-Device",
+          "z": "",
+          "name": "Windows VM",
+          "deviceAddress": "192.168.1.94"
+        },
+        {
+          "id": "1528f96c.56d047",
+          "type": "BACnet-Client",
+          "z": "",
+          "name": "",
+          "adpuTimeout": "",
+          "port": "",
+          "interface": "",
+          "broadcastAddress": ""
         }
-      ], function () {
-        var bacnetCommand = helper.getNode('ed7e0d79.6afce')
+      ], testCredentials, function () {
+        var bacnetCommand = helper.getNode('8f8d8daf.248e')
         bacnetCommand.should.have.property('name', 'bacnetCommand')
 
         done()
