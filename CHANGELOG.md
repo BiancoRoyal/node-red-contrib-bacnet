@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/biancode/node-red-contrib-bacnet/compare/v0.0.19...v0.1.0) (2018-05-21)
+
+
+### Features
+
+* **device:** new device config ([5bad469](https://github.com/biancode/node-red-contrib-bacnet/commit/5bad469))
+
+
+
 <a name="0.0.19"></a>
 ## [0.0.19](https://github.com/biancode/node-red-contrib-bacnet/compare/v0.0.18...v0.0.19) (2018-05-14)
 
