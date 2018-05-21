@@ -13,10 +13,9 @@
     defaults: {
       name: {value: ''},
       objectType: {value: ''},
-      objectInstance: {value: ''},
+      instance: {type: "BACnet-Instance", required:true},
       propertyId: {value: ''},
-      arrayIndex: {value: ''},
-      deviceIPAddress: {value: ''},
+      device: {type: "BACnet-Device", required:true},
       server: {type: "BACnet-Client", required:true},
       multipleRead: {value: false}
     },
@@ -122,8 +121,8 @@
         <a id="node-lookup-objectType" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
-        <label for="node-input-objectInstance"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.objectInstance"></span></label>
-        <input type="text" id="node-input-objectInstance" placeholder="400001">
+        <label for="node-input-instance"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.instance"></span></label>
+        <input type="text" id="node-input-instance">
     </div>
     <div class="form-row">
         <h4>Properties</h4>
@@ -135,16 +134,13 @@
         <a id="node-lookup-propertyId" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
-        <label for="node-input-arrayIndex"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.arrayIndex"></span></label>
-        <input type="text" id="node-input-arrayIndex" placeholder="all">
-    </div>
-    <div class="form-row">
-        <h4>Device</h4>
+        <hr>
+        <h4>Device and Interface</h4>
         <hr>
     </div>
     <div class="form-row">
-        <label for="node-input-deviceIPAddress"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.deviceIPAddress"></span></label>
-        <input type="text" id="node-input-deviceIPAddress" placeholder="127.0.0.1">
+        <label for="node-input-device"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.device"></span></label>
+        <input type="text" id="node-input-device">
     </div>
     <div class="form-row">
         <label for="node-input-server"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.server"></span></label>

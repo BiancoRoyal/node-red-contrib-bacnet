@@ -16,21 +16,19 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config)
 
     this.name = config.name
-
-    this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
-    this.objectType = config.objectType || 0
-    this.objectInstance = config.objectInstance || 0
-    this.valueTag = config.valueTag || 9
-    this.valueValue = config.valueValue || null
-    this.propertyId = config.propertyId || 0
-    this.priority = config.priority || 15
-    this.invokeId = config.invokeId || null
-    this.arrayIndex = config.arrayIndex || 0xFFFFFFFF
-    this.maxSegments = config.maxSegments
-    this.maxAdpu = config.maxAdpu
-    this.invokeId = config.invokeId
+    this.objectType = parseInt(config.objectType)
+    this.valueTag = parseInt(config.valueTag)
+    this.valueValue = config.valueValue
+    this.propertyId = parseInt(config.propertyId)
+    this.priority = parseInt(config.priority) || 15
 
     this.multipleWrite = config.multipleWrite
+
+    this.instance = RED.nodes.getNode(config.instance)
+    this.objectInstance = this.instance.instanceAddress || 0
+
+    this.device = RED.nodes.getNode(config.device)
+    this.deviceIPAddress = this.device.deviceAddress || '127.0.0.1' // IPv6 it is :: - but configure Node-RED too
 
     this.connector = RED.nodes.getNode(config.server)
 
@@ -49,33 +47,36 @@ module.exports = function (RED) {
       if (node.multipleWrite) {
         bacnetCore.internalDebugLog('Multiple Write')
 
-        let defaultValues = [{
-          objectId: {
-            type: node.objectType,
-            instance: node.objectInstance
-          },
-          values: [{
-            property: {
-              id: node.propertyId,
-              index: node.arrayIndex
-            },
-            value: [{
-              type: node.valueTag,
-              value: node.valueValue
-            }],
-            priority: node.priority
-          }]
-        }]
+        if (!msg.payload.values || !msg.payload.values[0].values) {
+          node.error(new Error('msg.payload.values missing or invalid array for multiple write'), msg)
+          return
+        }
+
+        msg.payload.values.forEach(function (item) {
+          if (!item.objectId) {
+            item.objectId = {
+              type: node.objectType,
+              instance: parseInt(node.objectInstance)
+            }
+          }
+        })
+
+        try {
+          bacnetCore.internalDebugLog('writePropertyMultiple msg.payload.values: ' + JSON.stringify(msg.payload.values))
+        } catch (e) {
+          bacnetCore.internalDebugLog('writePropertyMultiple error: ' + e)
+        }
 
         node.connector.client.writePropertyMultiple(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
-          msg.payload.values || defaultValues,
+          msg.payload.values,
           options,
           function (err, value) {
             if (err) {
-              node.error(err, msg)
+              let translatedError = bacnetCore.translateErrorMessage(err)
+              bacnetCore.internalDebugLog(translatedError)
+              node.error(translatedError, msg)
             } else {
-              bacnetCore.internalDebugLog('value: ', value)
               msg.input = msg.payload
               msg.payload = value
               node.send(msg)
@@ -84,15 +85,29 @@ module.exports = function (RED) {
       } else {
         bacnetCore.internalDebugLog('Write')
 
+        if (msg.payload.values && !msg.payload.values[0]) {
+          node.error(new Error('invalid msg.payload.values array for write'), msg)
+          return
+        }
+
         let objectId = {
           type: node.objectType,
-          instance: node.objectInstance
+          instance: parseInt(node.objectInstance)
         }
 
         let defaultValues = [{
           type: node.valueTag,
           value: node.valueValue
         }]
+
+        try {
+          bacnetCore.internalDebugLog('readProperty default objectId: ' + JSON.stringify(objectId))
+          bacnetCore.internalDebugLog('writeProperty default values: ' + JSON.stringify(defaultValues))
+          bacnetCore.internalDebugLog('writeProperty msg.payload.values: ' + JSON.stringify(msg.payload.values))
+          bacnetCore.internalDebugLog('writeProperty node.propertyId: ' + node.propertyId)
+        } catch (e) {
+          bacnetCore.internalDebugLog('writeProperty error: ' + e)
+        }
 
         node.connector.client.writeProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
@@ -102,9 +117,10 @@ module.exports = function (RED) {
           options,
           function (err, value) {
             if (err) {
-              node.error(err, msg)
+              let translatedError = bacnetCore.translateErrorMessage(err)
+              bacnetCore.internalDebugLog(translatedError)
+              node.error(translatedError, msg)
             } else {
-              bacnetCore.internalDebugLog('value: ', value)
               msg.input = msg.payload
               msg.payload = value
               node.send(msg)
@@ -130,7 +146,7 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/PropertyIds', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.PropertyIds
+    let typeList = BACnet.enum.PropertyIdentifier
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 
@@ -143,7 +159,7 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/ObjectTypes', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.ObjectTypes
+    let typeList = BACnet.enum.ObjectType
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 

@@ -1,0 +1,40 @@
+<!--
+ The MIT License
+
+ Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ All rights reserved.
+ node-red-contrib-bacnet
+-->
+
+<script type="text/javascript">
+  RED.nodes.registerType('BACnet-Instance', {
+    category: 'config',
+    defaults: {
+      name: {value: ""},
+      instanceAddress: {value: 0}
+    },
+    label: function () {
+      return this.name || "BACnet Instance";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="BACnet-Instance">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-config-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-instanceAddress"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.instanceAddress"></span></label>
+        <input type="text" id="node-config-input-instanceAddress" placeholder="0">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="BACnet-Instance">
+    <h2>BACnet Instance node</h2>
+
+    <h3>BETA</h3>
+    <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
+
+    The Instance to address via BACnet.
+</script>

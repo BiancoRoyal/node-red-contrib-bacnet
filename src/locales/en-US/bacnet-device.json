@@ -1,0 +1,8 @@
+{
+  "bacnet-contrib": {
+    "label": {
+      "showErrors": "Show Errors",
+      "deviceAddress": "Address"
+    }
+  }
+}

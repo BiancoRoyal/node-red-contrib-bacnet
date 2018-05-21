@@ -14,12 +14,15 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config)
 
     this.name = config.name
-    this.objectType = config.objectType || 0
-    this.objectInstance = config.objectInstance || 0
-    this.propertyId = config.propertyId || 0
-    this.arrayIndex = config.arrayIndex || 0xFFFFFFFF
-    this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
+    this.objectType = parseInt(config.objectType)
+    this.propertyId = parseInt(config.propertyId)
     this.multipleRead = config.multipleRead
+
+    this.instance = RED.nodes.getNode(config.instance)
+    this.objectInstance = this.instance.instanceAddress || 0
+
+    this.device = RED.nodes.getNode(config.device)
+    this.deviceIPAddress = this.device.deviceAddress || '127.0.0.1'
 
     this.connector = RED.nodes.getNode(config.server)
 
@@ -41,22 +44,31 @@ module.exports = function (RED) {
         let defaultRequestArray = [{
           objectId: {
             type: node.objectType,
-            instance: node.objectInstance
+            instance: parseInt(node.objectInstance)
           },
-          properties: [{id: node.propertyId}]
+          properties: [{id: parseInt(node.propertyId)}]
         }]
+
+        try {
+          bacnetCore.internalDebugLog('readPropertyMultiple default requestArray: ' + JSON.stringify(defaultRequestArray))
+          bacnetCore.internalDebugLog('readPropertyMultiple msg.payload.requestArray: ' + JSON.stringify(msg.payload.requestArray))
+          bacnetCore.internalDebugLog('readProperty node.propertyId: ' + node.propertyId)
+        } catch (e) {
+          bacnetCore.internalDebugLog('writeProperty error: ' + e)
+        }
 
         node.connector.client.readPropertyMultiple(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.requestArray || defaultRequestArray,
           options,
-          function (err, value) {
+          function (err, result) {
             if (err) {
-              node.error(err, msg)
+              let translatedError = bacnetCore.translateErrorMessage(err)
+              bacnetCore.internalDebugLog(translatedError)
+              node.error(translatedError, msg)
             } else {
-              bacnetCore.internalDebugLog('value: ', value)
               msg.input = msg.payload
-              msg.payload = value
+              msg.payload = result
               node.send(msg)
             }
           })
@@ -65,7 +77,15 @@ module.exports = function (RED) {
 
         let objectId = {
           type: node.objectType,
-          instance: node.objectInstance
+          instance: parseInt(node.objectInstance)
+        }
+
+        try {
+          bacnetCore.internalDebugLog('readProperty default objectId: ' + JSON.stringify(objectId))
+          bacnetCore.internalDebugLog('readProperty msg.payload.objectId: ' + JSON.stringify(msg.payload.objectId))
+          bacnetCore.internalDebugLog('readProperty node.propertyId: ' + node.propertyId)
+        } catch (e) {
+          bacnetCore.internalDebugLog('writeProperty error: ' + e)
         }
 
         node.connector.client.readProperty(
@@ -73,13 +93,14 @@ module.exports = function (RED) {
           msg.payload.objectId || objectId,
           msg.payload.propertyId || node.propertyId,
           options,
-          function (err, value) {
+          function (err, result) {
             if (err) {
-              node.error(err, msg)
+              let translatedError = bacnetCore.translateErrorMessage(err)
+              bacnetCore.internalDebugLog(translatedError)
+              node.error(translatedError, msg)
             } else {
-              bacnetCore.internalDebugLog('value: ', value)
               msg.input = msg.payload
-              msg.payload = value
+              msg.payload = result
               node.send(msg)
             }
           })

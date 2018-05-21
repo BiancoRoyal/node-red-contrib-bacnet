@@ -23,8 +23,10 @@ module.exports = function (RED) {
     this.isUtc = config.isUtc || true
     this.lowLimit = config.lowLimit || null
     this.highLimit = config.highLimit || null
-    this.deviceIPAddress = config.deviceIPAddress || '127.0.0.1'
     this.credentials = config.credentials
+
+    this.device = RED.nodes.getNode(config.device)
+    this.deviceIPAddress = this.device.deviceAddress || '127.0.0.1'
 
     this.connector = RED.nodes.getNode(config.server)
 
@@ -64,7 +66,9 @@ module.exports = function (RED) {
             options,
             function (err, value) {
               if (err) {
-                node.error(err, msg)
+                let translatedError = bacnetCore.translateErrorMessage(err)
+                bacnetCore.internalDebugLog(translatedError)
+                node.error(translatedError, msg)
               } else {
                 bacnetCore.internalDebugLog('value: ', value)
                 msg.input = msg.payload
@@ -80,7 +84,9 @@ module.exports = function (RED) {
             options,
             function (err, value) {
               if (err) {
-                node.error(err, msg)
+                let translatedError = bacnetCore.translateErrorMessage(err)
+                bacnetCore.internalDebugLog(translatedError)
+                node.error(translatedError, msg)
               } else {
                 bacnetCore.internalDebugLog('value: ', value)
                 msg.input = msg.payload
@@ -148,7 +154,7 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/BacnetReinitializedStates', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.ReinitializedStates
+    let typeList = BACnet.enum.ReinitializedState
     let invertedTypeList = _.toArray(_.invert(typeList))
     let resultTypeList = []
 

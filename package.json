@@ -30,6 +30,8 @@
   "node-red": {
     "nodes": {
       "BACnet-Client": "bacnet/bacnet-client.js",
+      "BACnet-Device": "bacnet/bacnet-device.js",
+      "BACnet-Instance": "bacnet/bacnet-instance.js",
       "BACnet-Read": "bacnet/bacnet-read.js",
       "BACnet-Write": "bacnet/bacnet-write.js",
       "BACnet-Command": "bacnet/bacnet-command.js"
