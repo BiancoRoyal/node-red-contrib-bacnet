@@ -11,7 +11,10 @@
 'use strict'
 
 var writeNode = require('../src/bacnet-write.js')
-var helper = require('./helper.js')
+var deviceNode = require('../src/bacnet-device.js')
+var clientNode = require('../src/bacnet-client.js')
+var instanceNode = require('../src/bacnet-instance.js')
+var helper = require('node-red-contrib-test-helper')
 
 describe('Write node Testing', function () {
   before(function (done) {
@@ -24,21 +27,50 @@ describe('Write node Testing', function () {
 
   describe('Node', function () {
     it('simple write node should be loaded', function (done) {
-      helper.load([writeNode], [
+      helper.load([deviceNode, clientNode, instanceNode, writeNode], [
         {
-          "id": "5d5d0218.622fec",
+          "id": "bdc5fbd.9678608",
           "type": "BACnet-Write",
-          "z": "a7ca7277.8f86b8",
+          "z": "ad26e8b.6b24498",
           "name": "bacnetWrite",
-          "deviceIPAddress": "",
-          "server": "ed8f6d87.1bcfe",
+          "objectType": "8",
+          "instance": "cf0dca49.2a9ac",
+          "valueTag": "9",
+          "valueValue": "",
+          "propertyId": "8",
+          "device": "b289851b.dec6f8",
+          "server": "1528f96c.56d047",
           "multipleWrite": false,
-          "x": 640,
-          "y": 160,
-          "wires": []
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "cf0dca49.2a9ac",
+          "type": "BACnet-Instance",
+          "z": "",
+          "name": "Room Simulator YABE",
+          "instanceAddress": "3342490"
+        },
+        {
+          "id": "b289851b.dec6f8",
+          "type": "BACnet-Device",
+          "z": "",
+          "name": "Windows VM",
+          "deviceAddress": "192.168.1.94"
+        },
+        {
+          "id": "1528f96c.56d047",
+          "type": "BACnet-Client",
+          "z": "",
+          "name": "",
+          "adpuTimeout": "",
+          "port": "",
+          "interface": "",
+          "broadcastAddress": ""
         }
       ], function () {
-        var bacnetWrite = helper.getNode('5d5d0218.622fec')
+        var bacnetWrite = helper.getNode('bdc5fbd.9678608')
         bacnetWrite.should.have.property('name', 'bacnetWrite')
 
         done()
