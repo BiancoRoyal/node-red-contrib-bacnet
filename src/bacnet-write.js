@@ -34,7 +34,7 @@ module.exports = function (RED) {
 
     let node = this
 
-    node.status({fill: 'green', shape: 'dot', text: 'active'})
+    node.status({ fill: 'green', shape: 'dot', text: 'active' })
 
     node.on('input', function (msg) {
       if (!node.connector) {

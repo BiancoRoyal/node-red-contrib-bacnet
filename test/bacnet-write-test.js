@@ -14,15 +14,27 @@ var writeNode = require('../src/bacnet-write.js')
 var deviceNode = require('../src/bacnet-device.js')
 var clientNode = require('../src/bacnet-client.js')
 var instanceNode = require('../src/bacnet-instance.js')
-var helper = require('node-red-contrib-test-helper')
+
+var helper = require('node-red-node-test-helper')
+helper.init(require.resolve('node-red'))
 
 describe('Write node Testing', function () {
-  before(function (done) {
-    helper.startServer(done)
+  beforeEach(function (done) {
+    helper.startServer(function () {
+      done()
+    })
   })
 
-  afterEach(function () {
-    helper.unload()
+  afterEach(function (done) {
+    helper.unload().then(function () {
+      helper.stopServer(function () {
+        done()
+      })
+    }).catch(function () {
+      helper.stopServer(function () {
+        done()
+      })
+    })
   })
 
   describe('Node', function () {
