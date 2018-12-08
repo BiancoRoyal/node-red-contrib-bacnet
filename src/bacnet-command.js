@@ -32,7 +32,7 @@ module.exports = function (RED) {
 
     let node = this
 
-    node.status({fill: 'green', shape: 'dot', text: 'active'})
+    node.status({ fill: 'green', shape: 'dot', text: 'active' })
 
     node.on('input', function (msg) {
       if (!node.connector) {
@@ -121,11 +121,11 @@ module.exports = function (RED) {
 
         case 'whoIs':
           node.connector.whoIs(
-          function () {
-            msg.input = msg.payload
-            msg.payload = node.connector.devices
-            node.send(msg)
-          })
+            function () {
+              msg.input = msg.payload
+              msg.payload = node.connector.devices
+              node.send(msg)
+            })
           break
 
         default:

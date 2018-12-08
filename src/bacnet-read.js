@@ -28,7 +28,7 @@ module.exports = function (RED) {
 
     let node = this
 
-    node.status({fill: 'green', shape: 'dot', text: 'active'})
+    node.status({ fill: 'green', shape: 'dot', text: 'active' })
 
     node.on('input', function (msg) {
       if (!node.connector) {
@@ -46,7 +46,7 @@ module.exports = function (RED) {
             type: node.objectType,
             instance: parseInt(node.objectInstance)
           },
-          properties: [{id: parseInt(node.propertyId)}]
+          properties: [{ id: parseInt(node.propertyId) }]
         }]
 
         try {

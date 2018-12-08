@@ -24,10 +24,10 @@ module.exports = function (RED) {
 
     if (node.IPAddress) {
       bacnetCore.internalDebugLog('client with IP settings')
-      node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress})
+      node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress })
     } else {
       bacnetCore.internalDebugLog('client without IP settings')
-      node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port})
+      node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port })
     }
 
     if (node.client) {
@@ -48,11 +48,11 @@ module.exports = function (RED) {
       node.client.whoIs()
 
       node.client.on('error', function (err) {
-        node.error(err, {payload: 'BACnet Client Error'})
+        node.error(err, { payload: 'BACnet Client Error' })
         node.client.close()
         node.client = null
         node.devices = []
-        node.client = new BACnet({adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress})
+        node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress })
       })
     }
 
