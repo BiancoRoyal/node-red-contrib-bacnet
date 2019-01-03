@@ -10,9 +10,8 @@
 Building Automation and Control Networks Protocol toolbox for Node-RED.
 
 !!! NOT READY TO USE - UNDER DEVELOPMENT - START YOUR CONTRIBUTION !!!
-## [Support for the project straight away!][3]
 
-* based on [bacstack library][4] v0.0.x
+* based on [bacstack library][5] v0.0.x - the library needs more community work, please!
 
 ## Install
 
@@ -33,8 +32,7 @@ try these options on npm install to build, if you have problems to install
 ## Contributing
 
 Let's work together! 
-Please read and in best case accept [CONTRIBUTING](CONTRIBUTING.md) by your sign and send it via E-Mail.
-You could also send just a pull request.
+You should send your pull request, please.
 
 ### License
 
@@ -57,3 +55,5 @@ I'd like to give special thanks to [Fabio Huser][2] for the BACnet [node-bacstac
 [2]:https://github.com/fh1ch
 [3]:https://bianco-royal.cloud/supporter/
 [4]:https://www.npmjs.com/package/bacstack
+[5]:https://www.npmjs.com/package/@biancoroyal/bacstack
+
