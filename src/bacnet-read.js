@@ -52,9 +52,10 @@ module.exports = function (RED) {
         try {
           bacnetCore.internalDebugLog('readPropertyMultiple default requestArray: ' + JSON.stringify(defaultRequestArray))
           bacnetCore.internalDebugLog('readPropertyMultiple msg.payload.requestArray: ' + JSON.stringify(msg.payload.requestArray))
-          bacnetCore.internalDebugLog('readProperty node.propertyId: ' + node.propertyId)
+          bacnetCore.internalDebugLog('readPropertyMultiple node.propertyId: ' + node.propertyId)
+          bacnetCore.internalDebugLog('readPropertyMultiple msg.payload.propertyId: ' + msg.payload.propertyId)
         } catch (e) {
-          bacnetCore.internalDebugLog('writeProperty error: ' + e)
+          bacnetCore.internalDebugLog('readPropertyMultiple error: ' + e)
         }
 
         node.connector.client.readPropertyMultiple(
@@ -84,8 +85,9 @@ module.exports = function (RED) {
           bacnetCore.internalDebugLog('readProperty default objectId: ' + JSON.stringify(objectId))
           bacnetCore.internalDebugLog('readProperty msg.payload.objectId: ' + JSON.stringify(msg.payload.objectId))
           bacnetCore.internalDebugLog('readProperty node.propertyId: ' + node.propertyId)
+          bacnetCore.internalDebugLog('readProperty msg.payload.propertyId: ' + msg.payload.propertyId)
         } catch (e) {
-          bacnetCore.internalDebugLog('writeProperty error: ' + e)
+          bacnetCore.internalDebugLog('readProperty error: ' + e)
         }
 
         node.connector.client.readProperty(
