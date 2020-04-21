@@ -8,3 +8,5 @@ maps/
 docs/gen/
 code/
 *.log
+
+coverage/

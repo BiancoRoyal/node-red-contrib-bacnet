@@ -55,7 +55,8 @@
   "files": [
     "docs",
     "examples",
-    "bacnet"
+    "bacnet",
+    "supporter.js"
   ],
   "devDependencies": {
     "@babel/cli": "^7.7.0",

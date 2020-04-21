@@ -1,21 +1,4 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.1](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.0.16...v0.1.1) (2020-04-21)
-
-
-### Features
-
-* **device:** new device config ([5bad469](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/5bad469d04fea7d0da0a7686c84b515dbcb51553))
-
-
-### Bug Fixes
-
-* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
-* typos ([203523a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/203523a64dd4e3051e881ea63f3bdb04ee3400fe))
-
-# [0.1.0](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.0.16...v0.1.0) (2020-04-21)
+## [0.1.1](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.0.16...v0.1.1) (2020-04-21)
 
 
 ### Bug Fixes
@@ -44,3 +27,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 ## 0.0.14 (2018-02-19)
+
+
+
