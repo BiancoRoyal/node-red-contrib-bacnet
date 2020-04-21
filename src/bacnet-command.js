@@ -1,16 +1,16 @@
 /*
  The MIT License
 
- Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
 'use strict'
 
 module.exports = function (RED) {
-  let bacnetCore = require('./core/bacnet-core')
-  let BACnet = require('@biancoroyal/bacstack')
-  let _ = require('underscore')
+  const bacnetCore = require('./core/bacnet-core')
+  const BACnet = require('@biancoroyal/bacstack')
+  const _ = require('underscore')
 
   function BACnetCommand (config) {
     RED.nodes.createNode(this, config)
@@ -30,7 +30,7 @@ module.exports = function (RED) {
 
     this.connector = RED.nodes.getNode(config.server)
 
-    let node = this
+    const node = this
 
     node.status({ fill: 'green', shape: 'dot', text: 'active' })
 
@@ -41,7 +41,7 @@ module.exports = function (RED) {
 
       bacnetCore.internalDebugLog('Command')
 
-      let commandType = msg.payload.commandType || node.commandType
+      const commandType = msg.payload.commandType || node.commandType
       let options = msg.payload.options || null
 
       if (!options) {
@@ -66,7 +66,7 @@ module.exports = function (RED) {
             options,
             function (err, value) {
               if (err) {
-                let translatedError = bacnetCore.translateErrorMessage(err)
+                const translatedError = bacnetCore.translateErrorMessage(err)
                 bacnetCore.internalDebugLog(translatedError)
                 node.error(translatedError, msg)
               } else {
@@ -84,7 +84,7 @@ module.exports = function (RED) {
             options,
             function (err, value) {
               if (err) {
-                let translatedError = bacnetCore.translateErrorMessage(err)
+                const translatedError = bacnetCore.translateErrorMessage(err)
                 bacnetCore.internalDebugLog(translatedError)
                 node.error(translatedError, msg)
               } else {
@@ -141,9 +141,9 @@ module.exports = function (RED) {
   RED.nodes.registerType('BACnet-Command', BACnetCommand)
 
   RED.httpAdmin.get('/bacnet/BacnetEnableDisable', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.EnableDisable
-    let invertedTypeList = _.toArray(_.invert(typeList))
-    let resultTypeList = []
+    const typeList = BACnet.enum.EnableDisable
+    const invertedTypeList = _.toArray(_.invert(typeList))
+    const resultTypeList = []
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {
@@ -154,9 +154,9 @@ module.exports = function (RED) {
   })
 
   RED.httpAdmin.get('/bacnet/BacnetReinitializedStates', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.ReinitializedState
-    let invertedTypeList = _.toArray(_.invert(typeList))
-    let resultTypeList = []
+    const typeList = BACnet.enum.ReinitializedState
+    const invertedTypeList = _.toArray(_.invert(typeList))
+    const resultTypeList = []
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {

@@ -1,16 +1,16 @@
 /*
  The MIT License
 
- Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
 'use strict'
 
 module.exports = function (RED) {
-  let bacnetCore = require('./core/bacnet-core')
-  let BACnet = require('@biancoroyal/bacstack')
-  let _ = require('underscore')
+  const bacnetCore = require('./core/bacnet-core')
+  const BACnet = require('@biancoroyal/bacstack')
+  const _ = require('underscore')
 
   function BACnetWrite (config) {
     RED.nodes.createNode(this, config)
@@ -32,7 +32,7 @@ module.exports = function (RED) {
 
     this.connector = RED.nodes.getNode(config.server)
 
-    let node = this
+    const node = this
 
     node.status({ fill: 'green', shape: 'dot', text: 'active' })
 
@@ -42,7 +42,7 @@ module.exports = function (RED) {
         return
       }
 
-      let options = msg.payload.options || {}
+      const options = msg.payload.options || {}
 
       if (node.multipleWrite) {
         bacnetCore.internalDebugLog('Multiple Write')
@@ -73,7 +73,7 @@ module.exports = function (RED) {
           options,
           function (err, value) {
             if (err) {
-              let translatedError = bacnetCore.translateErrorMessage(err)
+              const translatedError = bacnetCore.translateErrorMessage(err)
               bacnetCore.internalDebugLog(translatedError)
               node.error(translatedError, msg)
             } else {
@@ -90,12 +90,12 @@ module.exports = function (RED) {
           return
         }
 
-        let objectId = {
+        const objectId = {
           type: node.objectType,
           instance: parseInt(node.objectInstance)
         }
 
-        let defaultValues = [{
+        const defaultValues = [{
           type: node.valueTag,
           value: node.valueValue
         }]
@@ -117,7 +117,7 @@ module.exports = function (RED) {
           options,
           function (err, value) {
             if (err) {
-              let translatedError = bacnetCore.translateErrorMessage(err)
+              const translatedError = bacnetCore.translateErrorMessage(err)
               bacnetCore.internalDebugLog(translatedError)
               node.error(translatedError, msg)
             } else {
@@ -132,10 +132,10 @@ module.exports = function (RED) {
 
   RED.nodes.registerType('BACnet-Write', BACnetWrite)
 
-  RED.httpAdmin.get('/bacnet/ApplicationTags', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.ApplicationTags
-    let invertedTypeList = _.toArray(_.invert(typeList))
-    let resultTypeList = []
+  RED.httpAdmin.get('/bacnet/ApplicationTags', RED.auth.needsPermission('bacnet.CMD.write'), function (req, res) {
+    const typeList = BACnet.enum.ApplicationTags
+    const invertedTypeList = _.toArray(_.invert(typeList))
+    const resultTypeList = []
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {
@@ -145,10 +145,10 @@ module.exports = function (RED) {
     res.json(resultTypeList)
   })
 
-  RED.httpAdmin.get('/bacnet/PropertyIds', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.PropertyIdentifier
-    let invertedTypeList = _.toArray(_.invert(typeList))
-    let resultTypeList = []
+  RED.httpAdmin.get('/bacnet/PropertyIds', RED.auth.needsPermission('bacnet.CMD.write'), function (req, res) {
+    const typeList = BACnet.enum.PropertyIdentifier
+    const invertedTypeList = _.toArray(_.invert(typeList))
+    const resultTypeList = []
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {
@@ -158,10 +158,10 @@ module.exports = function (RED) {
     res.json(resultTypeList)
   })
 
-  RED.httpAdmin.get('/bacnet/ObjectTypes', RED.auth.needsPermission('bacnet.CMD.read'), function (req, res) {
-    let typeList = BACnet.enum.ObjectType
-    let invertedTypeList = _.toArray(_.invert(typeList))
-    let resultTypeList = []
+  RED.httpAdmin.get('/bacnet/ObjectTypes', RED.auth.needsPermission('bacnet.CMD.write'), function (req, res) {
+    const typeList = BACnet.enum.ObjectType
+    const invertedTypeList = _.toArray(_.invert(typeList))
+    const resultTypeList = []
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {

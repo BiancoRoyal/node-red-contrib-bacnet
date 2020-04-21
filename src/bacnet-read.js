@@ -1,14 +1,14 @@
 /*
  The MIT License
 
- Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
 'use strict'
 
 module.exports = function (RED) {
-  let bacnetCore = require('./core/bacnet-core')
+  const bacnetCore = require('./core/bacnet-core')
 
   function BACnetRead (config) {
     RED.nodes.createNode(this, config)
@@ -26,7 +26,7 @@ module.exports = function (RED) {
 
     this.connector = RED.nodes.getNode(config.server)
 
-    let node = this
+    const node = this
 
     node.status({ fill: 'green', shape: 'dot', text: 'active' })
 
@@ -36,12 +36,12 @@ module.exports = function (RED) {
         return
       }
 
-      let options = msg.payload.options || {}
+      const options = msg.payload.options || {}
 
       if (node.multipleRead) {
         bacnetCore.internalDebugLog('Multiple Read')
 
-        let defaultRequestArray = [{
+        const defaultRequestArray = [{
           objectId: {
             type: node.objectType,
             instance: parseInt(node.objectInstance)
@@ -64,7 +64,7 @@ module.exports = function (RED) {
           options,
           function (err, result) {
             if (err) {
-              let translatedError = bacnetCore.translateErrorMessage(err)
+              const translatedError = bacnetCore.translateErrorMessage(err)
               bacnetCore.internalDebugLog(translatedError)
               node.error(translatedError, msg)
             } else {
@@ -76,7 +76,7 @@ module.exports = function (RED) {
       } else {
         bacnetCore.internalDebugLog('Read')
 
-        let objectId = {
+        const objectId = {
           type: node.objectType,
           instance: parseInt(node.objectInstance)
         }
@@ -97,7 +97,7 @@ module.exports = function (RED) {
           options,
           function (err, result) {
             if (err) {
-              let translatedError = bacnetCore.translateErrorMessage(err)
+              const translatedError = bacnetCore.translateErrorMessage(err)
               bacnetCore.internalDebugLog(translatedError)
               node.error(translatedError, msg)
             } else {

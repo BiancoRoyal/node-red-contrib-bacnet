@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -15,11 +15,11 @@ de.biancoroyal.bacnet.core.errorCodeList = de.biancoroyal.bacnet.core.errorCodeL
 de.biancoroyal.bacnet.core.errorClassList = de.biancoroyal.bacnet.core.errorClassList || [] // eslint-disable-line no-use-before-define
 
 de.biancoroyal.bacnet.core.initCodeLists = function () {
-  let BACnet = require('@biancoroyal/bacstack')
-  let _ = require('underscore')
+  const BACnet = require('@biancoroyal/bacstack')
+  const _ = require('underscore')
 
-  let errorCodeList = BACnet.enum.ErrorCode
-  let invertedErrorCodeList = _.toArray(_.invert(errorCodeList))
+  const errorCodeList = BACnet.enum.ErrorCode
+  const invertedErrorCodeList = _.toArray(_.invert(errorCodeList))
   de.biancoroyal.bacnet.core.errorCodeList = []
 
   let listCodeEntry
@@ -28,8 +28,8 @@ de.biancoroyal.bacnet.core.initCodeLists = function () {
   }
   _.sortBy(de.biancoroyal.bacnet.core.errorCodeList, 'typeValue')
 
-  let errorClassList = BACnet.enum.ErrorClass
-  let invertedErrorClassList = _.toArray(_.invert(errorClassList))
+  const errorClassList = BACnet.enum.ErrorClass
+  const invertedErrorClassList = _.toArray(_.invert(errorClassList))
   de.biancoroyal.bacnet.core.errorClassList = []
 
   let listClassEntry
@@ -44,11 +44,11 @@ de.biancoroyal.bacnet.core.initCodeLists = function () {
 }
 
 de.biancoroyal.bacnet.core.translateErrorMessage = function (err) {
-  let message = err.message
-  let messageParts = message.split('-')
+  const message = err.message
+  const messageParts = message.split('-')
   if (messageParts.length === 3) {
-    let errorClassMessage = messageParts[1].split(':')
-    let errorCodeMessage = messageParts[2].split(':')
+    const errorClassMessage = messageParts[1].split(':')
+    const errorCodeMessage = messageParts[2].split(':')
 
     de.biancoroyal.bacnet.core.internalDebugLog(errorClassMessage)
     de.biancoroyal.bacnet.core.internalDebugLog(errorCodeMessage)

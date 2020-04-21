@@ -2,7 +2,7 @@
 
 rm -rf node_modules/
 
-rm -rf modbus/
+rm -rf bacnet/
 
 rm -rf code/
 

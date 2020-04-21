@@ -1,8 +1,8 @@
 ![Platform Node-RED](http://b.repl.ca/v1/Platform-Node--RED-red.png)
-![Node-RED BACnet](http://b.repl.ca/v1/Node--RED-BACnet-blue.png)
+![Node-RED BACnet](http://b.repl.ca/v1/Contribution-BACnet-blue.png)
 [![Repository GitHub](http://b.repl.ca/v1/Repository-GitHub-orange.png)](https://github.com/biancode/node-red-contrib-bacnet)
 [![Quality Travis CI](http://b.repl.ca/v1/Quality-Travis_CI-green.png)](https://travis-ci.org/biancode/node-red-contrib-bacnet)
-[![Build Status](https://travis-ci.org/biancode/node-red-contrib-bacnet.svg?branch=master)](https://travis-ci.org/biancode/node-red-contrib-bacnet)
+[![Build Status](https://travis-ci.org/biancode/node-red-contrib-bacnet.svg?branch=master)](https://travis-ci.org/BiancoRoyal/node-red-contrib-bacnet)
 
 [![nodemodbus64](images/bacnet-icon-quad64.png)](http://www.bacnet.org/)
 
@@ -51,7 +51,7 @@ BACnet® is a registered trademark of American Society of Heating, Refrigerating
 I'd like to give special thanks to [Fabio Huser][2] for the BACnet [node-bacstack package][4]! 
 
 
-[1]:https://bianco-royal.cloud/
+[1]:https://bianco-royal.com/
 [2]:https://github.com/fh1ch
 [3]:https://bianco-royal.cloud/supporter/
 [4]:https://www.npmjs.com/package/bacstack

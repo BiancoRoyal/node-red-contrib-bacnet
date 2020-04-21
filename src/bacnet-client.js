@@ -1,15 +1,15 @@
 /*
  The MIT License
 
- Copyright (c) 2017 - Klaus Landsdorf (http://bianco-royal.de/)
+ Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
 'use strict'
 
 module.exports = function (RED) {
-  let bacnetCore = require('./core/bacnet-core')
-  let BACnet = require('@biancoroyal/bacstack')
+  const bacnetCore = require('./core/bacnet-core')
+  const BACnet = require('@biancoroyal/bacstack')
 
   function BACnetClient (config) {
     RED.nodes.createNode(this, config)
@@ -19,7 +19,7 @@ module.exports = function (RED) {
     this.IPAddress = config.IPAddress || null
     this.broadcastAddress = config.broadcastAddress || null
 
-    let node = this
+    const node = this
     node.devices = []
 
     if (node.IPAddress) {
@@ -71,7 +71,7 @@ module.exports = function (RED) {
 
     node.whoIsExplicit = function (lowLimit, highLimit, deviceIPAddress, cb) {
       node.devices = []
-      let options = {
+      const options = {
         lowLimit: lowLimit,
         highLimit: highLimit,
         deviceIPAddress: deviceIPAddress
