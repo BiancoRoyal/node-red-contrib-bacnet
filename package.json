@@ -1,31 +1,28 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.1.0",
-  "private": false,
+  "version": "0.1.1",
+  "private": true,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biancode/node-red-contrib-bacnet.git"
+    "url": "git+https://github.com/BiancoRoyal/node-red-contrib-bacnet.git"
   },
   "dependencies": {
-    "debug": "4.1.0",
-    "@biancoroyal/bacstack": "0.0.1-beta.15",
-    "underscore": "1.9.1"
+    "debug": "~4.1.1",
+    "@biancoroyal/bacstack": "~0.0.1-beta.22",
+    "underscore": "~1.10.2"
   },
   "keywords": [
     "node-red",
-    "BACnet",
     "bacnet",
-    "nodered",
+    "fieldbus",
     "iiot",
-    "IIoT",
-    "biancode",
-    "modbus"
+    "biancoroyal"
   ],
-  "author": "Klaus Landsdorf <klaus.landsdorf@bianco-royal.de>",
+  "author": "Bianco Royal <developers@bianco-royal.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/biancode/node-red-contrib-bacnet/issues"
+    "url": "https://github.com/BiancoRoyal/node-red-contrib-bacnet/issues"
   },
   "node-red": {
     "nodes": {
@@ -38,16 +35,22 @@
     }
   },
   "engines": {
-    "node": ">=6.10"
+    "node": ">=10"
   },
-  "homepage": "https://github.com/biancode/node-red-contrib-bacnet#readme",
+  "homepage": "https://github.com/BiancoRoyal/node-red-contrib-bacnet#readme",
   "scripts": {
-    "test": "standard --fix && mocha test/* --reporter dot",
-    "build": "standard --fix && gulp publish",
-    "prepublishOnly": "standard --fix && npm run build && npm test",
+    "test": "standard --fix && mocha test --recursive --reporter dot --timeout 5000",
+    "test-with-coverage": "istanbul cover _mocha --report lcovonly -- --recursive --timeout 5000 -R spec && cat ./coverage/lcov.info | codacy-coverage --token a047b284d2124df78f999c27ae874e9c && rm -rf ./coverage",
+    "coverage": "standard --fix && gulp build && npm test && istanbul cover _mocha -- --recursive --timeout 5000",
+    "build": "standard --fix && gulp",
+    "prepublishOnly": "standard --fix && npm run build && npm run rewrite-changelog && npm test && mocha test --recursive --timeout 5000 --reporter dot && istanbul cover _mocha -- --recursive --timeout 5000",
     "ci-publish": "ci-publish",
     "release": "standard-version -a",
-    "rewrite-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "release:beta": "standard-version --prerelease beta",
+    "release:alpha": "standard-version --prerelease alpha",
+    "rewrite-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "postinstall": "node ./supporter.js",
+    "dev-link": "npm i && npm run build && npm link && cd ~/.node-red && npm link node-red-contrib-bacnet"
   },
   "files": [
     "docs",
@@ -55,40 +58,37 @@
     "bacnet"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@node-red/nodes": "^1.0.2",
     "chai": "^4.2.0",
-    "ci-publish": "^1.3.1",
-    "eslint": "^5.10.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-config-standard-jsx": "^6.0.2",
-    "eslint-plugin-mocha": "^5.2.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "gulp": "^3.9.1",
+    "codacy-coverage": "^3.4.0",
+    "conventional-changelog-cli": "^2.0.27",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-jsdoc3": "^2.0.0",
-    "gulp-obfuscate": "^0.2.9",
+    "gulp-replace": "^1.0.0",
     "gulp-sequence": "^1.0.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.1",
-    "jsdoc": "^3.5.5",
-    "mocha": "^5.2.0",
-    "nock": "^10.0.4",
-    "node-red": "^0.19.5",
-    "node-red-node-test-helper": "^0.1.8",
-    "npm-check-updates": "^2.15.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "istanbul": "0.4.5",
+    "jasmine-node": "^3.0.0",
+    "js-beautify": "^1.10.2",
+    "mocha": "^6.2.2",
+    "nock": "^12.0.3",
+    "node-red": "^1.0.4",
+    "node-red-node-test-helper": "^0.2.3",
     "pump": "^3.0.0",
+    "path-type": "^3.0.0",
     "should": "^13.2.3",
-    "sinon": "^7.1.1",
-    "standard": "^12.0.1",
-    "standard-version": "^4.4.0",
-    "supertest": "^3.3.0",
-    "uglify-js": "^3.4.9",
+    "sinon": "^7.5.0",
+    "standard": "^14.3.1",
+    "standard-version": "^7.0.0",
+    "supertest": "^4.0.2",
+    "uglify-js": "^3.6.9",
     "uglify-js-harmony": "^2.7.7",
     "when": "^3.7.8"
   },
