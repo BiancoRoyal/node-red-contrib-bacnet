@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "debug": "~4.1.1",
-    "@biancoroyal/bacstack": "~0.0.1-beta.22",
+    "@biancoroyal/bacstack": "beta",
     "underscore": "~1.10.2"
   },
   "keywords": [

@@ -46,41 +46,41 @@ describe('Command node Testing', function () {
     it('simple read node should be loaded', function (done) {
       helper.load([deviceNode, clientNode, commandNode], [
         {
-          "id": "8f8d8daf.248e",
-          "type": "BACnet-Command",
-          "z": "ad26e8b.6b24498",
-          "name": "bacnetCommand",
-          "commandType": "deviceCommunicationControl",
-          "timeDuration": 0,
-          "enableDisable": 0,
-          "deviceState": 0,
-          "isUtc": true,
-          "lowLimit": 0,
-          "highLimit": 0,
-          "device": "b289851b.dec6f8",
-          "server": "1528f96c.56d047",
-          "x": 300,
-          "y": 320,
-          "wires": [
+          id: '8f8d8daf.248e',
+          type: 'BACnet-Command',
+          z: 'ad26e8b.6b24498',
+          name: 'bacnetCommand',
+          commandType: 'deviceCommunicationControl',
+          timeDuration: 0,
+          enableDisable: 0,
+          deviceState: 0,
+          isUtc: true,
+          lowLimit: 0,
+          highLimit: 0,
+          device: 'b289851b.dec6f8',
+          server: '1528f96c.56d047',
+          x: 300,
+          y: 320,
+          wires: [
             []
           ]
         },
         {
-          "id": "b289851b.dec6f8",
-          "type": "BACnet-Device",
-          "z": "",
-          "name": "Windows VM",
-          "deviceAddress": "192.168.1.94"
+          id: 'b289851b.dec6f8',
+          type: 'BACnet-Device',
+          z: '',
+          name: 'Windows VM',
+          deviceAddress: '192.168.1.94'
         },
         {
-          "id": "1528f96c.56d047",
-          "type": "BACnet-Client",
-          "z": "",
-          "name": "",
-          "adpuTimeout": "",
-          "port": "",
-          "interface": "",
-          "broadcastAddress": ""
+          id: '1528f96c.56d047',
+          type: 'BACnet-Client',
+          z: '',
+          name: '',
+          adpuTimeout: '',
+          port: '',
+          interface: '',
+          broadcastAddress: ''
         }
       ], testCredentials, function () {
         var bacnetCommand = helper.getNode('8f8d8daf.248e')

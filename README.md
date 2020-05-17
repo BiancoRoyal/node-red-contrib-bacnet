@@ -31,8 +31,24 @@ try these options on npm install to build, if you have problems to install
 
 ## Contributing
 
-Let's work together! 
-You should send your pull request, please.
+Let's work together!
+You could send just a pull request to develop branch or issues while testing, please!
+
+## For Developers
+
+See the scripts of the package and the additional Shell scripts to clean, update, or upgrade this NPM package.
+
+* dev-link (local testing with Node-RED)
+* testing (unit, integration)
+* coverage
+* docs generation
+* standard-version alpha, beta, release
+* git-flow
+
+## For Testers
+
+Report issues, share your experiences, record tutorials,
+write Wiki articles and Blogs to share more about this package, please!
 
 ### License
 

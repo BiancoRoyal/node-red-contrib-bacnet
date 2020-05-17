@@ -41,45 +41,45 @@ describe('Write node Testing', function () {
     it('simple write node should be loaded', function (done) {
       helper.load([deviceNode, clientNode, instanceNode, writeNode], [
         {
-          "id": "bdc5fbd.9678608",
-          "type": "BACnet-Write",
-          "z": "ad26e8b.6b24498",
-          "name": "bacnetWrite",
-          "objectType": "8",
-          "instance": "cf0dca49.2a9ac",
-          "valueTag": "9",
-          "valueValue": "",
-          "propertyId": "8",
-          "device": "b289851b.dec6f8",
-          "server": "1528f96c.56d047",
-          "multipleWrite": false,
-          "wires": [
+          id: 'bdc5fbd.9678608',
+          type: 'BACnet-Write',
+          z: 'ad26e8b.6b24498',
+          name: 'bacnetWrite',
+          objectType: '8',
+          instance: 'cf0dca49.2a9ac',
+          valueTag: '9',
+          valueValue: '',
+          propertyId: '8',
+          device: 'b289851b.dec6f8',
+          server: '1528f96c.56d047',
+          multipleWrite: false,
+          wires: [
             []
           ]
         },
         {
-          "id": "cf0dca49.2a9ac",
-          "type": "BACnet-Instance",
-          "z": "",
-          "name": "Room Simulator YABE",
-          "instanceAddress": "3342490"
+          id: 'cf0dca49.2a9ac',
+          type: 'BACnet-Instance',
+          z: '',
+          name: 'Room Simulator YABE',
+          instanceAddress: '3342490'
         },
         {
-          "id": "b289851b.dec6f8",
-          "type": "BACnet-Device",
-          "z": "",
-          "name": "Windows VM",
-          "deviceAddress": "192.168.1.94"
+          id: 'b289851b.dec6f8',
+          type: 'BACnet-Device',
+          z: '',
+          name: 'Windows VM',
+          deviceAddress: '192.168.1.94'
         },
         {
-          "id": "1528f96c.56d047",
-          "type": "BACnet-Client",
-          "z": "",
-          "name": "",
-          "adpuTimeout": "",
-          "port": "",
-          "interface": "",
-          "broadcastAddress": ""
+          id: '1528f96c.56d047',
+          type: 'BACnet-Client',
+          z: '',
+          name: '',
+          adpuTimeout: '',
+          port: '',
+          interface: '',
+          broadcastAddress: ''
         }
       ], function () {
         var bacnetWrite = helper.getNode('bdc5fbd.9678608')

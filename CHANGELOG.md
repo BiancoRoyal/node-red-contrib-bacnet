@@ -3,9 +3,9 @@
 
 ### Bug Fixes
 
-* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
 * install error ([79af02a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/79af02a145d3819d0b1b6bb6240f80553e524953))
 * typos ([203523a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/203523a64dd4e3051e881ea63f3bdb04ee3400fe))
+* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
 
 
 ### Features
