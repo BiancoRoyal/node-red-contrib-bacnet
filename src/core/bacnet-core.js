@@ -15,7 +15,7 @@ de.biancoroyal.bacnet.core.errorCodeList = de.biancoroyal.bacnet.core.errorCodeL
 de.biancoroyal.bacnet.core.errorClassList = de.biancoroyal.bacnet.core.errorClassList || [] // eslint-disable-line no-use-before-define
 
 de.biancoroyal.bacnet.core.initCodeLists = function () {
-  const BACnet = require('@biancoroyal/bacstack')
+  const BACnet = require('node-bacnet')
   const _ = require('underscore')
 
   const errorCodeList = BACnet.enum.ErrorCode

@@ -9,7 +9,7 @@
 
 module.exports = function (RED) {
   const bacnetCore = require('./core/bacnet-core')
-  const BACnet = require('@biancoroyal/bacstack')
+  const BACnet = require('node-bacnet')
   const _ = require('underscore')
 
   function BACnetWrite (config) {
