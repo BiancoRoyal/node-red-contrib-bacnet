@@ -7,11 +7,8 @@
 [![nodemodbus64](images/bacnet-icon-quad64.png)](http://www.bacnet.org/)
 
 # node-red-contrib-bacnet
+
 Building Automation and Control Networks Protocol toolbox for Node-RED.
-
-!!! NOT READY TO USE - UNDER DEVELOPMENT - START YOUR CONTRIBUTION !!!
-
-* based on [bacstack library][5] v0.0.x - the library needs more community work, please!
 
 ## Install
 
@@ -29,30 +26,9 @@ try these options on npm install to build, if you have problems to install
     
 ![Flow Example](images/BACnetFlowExamples.png)
 
-## Contributing
-
-Let's work together!
-You could send just a pull request to develop branch or issues while testing, please!
-
-## For Developers
-
-See the scripts of the package and the additional Shell scripts to clean, update, or upgrade this NPM package.
-
-* dev-link (local testing with Node-RED)
-* testing (unit, integration)
-* coverage
-* docs generation
-* standard-version alpha, beta, release
-* git-flow
-
-## For Testers
-
-Report issues, share your experiences, record tutorials,
-write Wiki articles and Blogs to share more about this package, please!
-
 ### License
 
-The MIT License
+The MIT License with [Subscription bundle][3] or GitHub Sponsoring
 
 [Klaus Landsdorf][1]
 
@@ -64,12 +40,9 @@ BACnet® is a registered trademark of American Society of Heating, Refrigerating
 
 ### Contribution BACnet
 
-I'd like to give special thanks to [Fabio Huser][2] for the BACnet [node-bacstack package][4]! 
+I'd like to give special thanks to [Fabio Huser][2]. 
 
 
 [1]:https://bianco-royal.com/
 [2]:https://github.com/fh1ch
-[3]:https://bianco-royal.cloud/supporter/
-[4]:https://www.npmjs.com/package/bacstack
-[5]:https://www.npmjs.com/package/@biancoroyal/bacstack
-
+[3]:https://osi.bianco-royal.com/
