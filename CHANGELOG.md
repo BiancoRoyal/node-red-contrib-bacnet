@@ -1,7 +1,3 @@
-# [0.2.0-beta.1](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.1.2...v0.2.0-beta.1) (2020-05-23)
-
-
-
 ## [0.1.2](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.0.16...v0.1.2) (2020-04-21)
 
 

@@ -13,7 +13,7 @@ install:
 script:
   - npm test
   - npm run coverage
-  - gulp publish
+  - npm run build
 cache:
   directories:
     - "node_modules"
