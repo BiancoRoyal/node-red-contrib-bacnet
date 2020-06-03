@@ -1,15 +1,4 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.2.2](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.0-beta.1...v0.2.2) (2020-06-03)
-
-
-### Bug Fixes
-
-* **write:** enum typo ([79d9979](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/79d99793271ba0e36cc02f9e96dab0f6116762b0))
-
-## [0.2.1](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.0-beta.1...v0.2.1) (2020-06-03)
+## [0.2.2](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.0-beta.1...v0.2.2) (2020-06-03)
 
 
 ### Bug Fixes
@@ -50,3 +39,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 ## 0.0.14 (2018-02-19)
+
+
+
