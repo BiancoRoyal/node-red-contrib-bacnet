@@ -31,9 +31,8 @@ try these options on npm install to build, if you have problems to install
 
 ### License
 
-The MIT License with [Subscription bundle][3] or GitHub Sponsoring
-
-[Klaus Landsdorf][1]
+The MIT License with support via [Subscription bundle][3] or GitHub Sponsoring
+[Klaus Landsdorf][1] and Community driven work
 
 ### Important
 
@@ -41,11 +40,12 @@ This is **not** an official product of the BACnet Advocacy Group.
 It is just to provide BACnet to Node-RED based on node-bacstack package.
 BACnet® is a registered trademark of American Society of Heating, Refrigerating and Air-Conditioning Engineers (ASHRAE). 
 
-### Contribution BACnet
+### Contribution NodeJS BACnet® Library
 
-I'd like to give special thanks to [Fabio Huser][2]. 
+I'd like to give special thanks to [Fabio Huser][2] and [Apollon77][4]. 
 
 
-[1]:https://bianco-royal.com/
+[1]:https://github.com/sponsors/biancode
 [2]:https://github.com/fh1ch
 [3]:https://osi.bianco-royal.com/
+[4]:https://github.com/Apollon77

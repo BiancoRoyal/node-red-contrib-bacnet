@@ -8,9 +8,9 @@
 'use strict'
 
 var de = de || { biancoroyal: { bacnet: { core: {} } } } // eslint-disable-line no-use-before-define
-de.biancoroyal.bacnet.core.internalDebugLog = de.biancoroyal.bacnet.core.internalDebugLog || require('debug')('bacnet:core') // eslint-disable-line no-use-before-define
-de.biancoroyal.bacnet.core.detailDebugLog = de.biancoroyal.bacnet.core.detailDebugLog || require('debug')('bacnet:core:details') // eslint-disable-line no-use-before-define
-de.biancoroyal.bacnet.core.specialDebugLog = de.biancoroyal.bacnet.core.specialDebugLog || require('debug')('bacnet:core:special') // eslint-disable-line no-use-before-define
+de.biancoroyal.bacnet.core.internalDebugLog = de.biancoroyal.bacnet.core.internalDebugLog || require('debug')('bacnet:nodered:core') // eslint-disable-line no-use-before-define
+de.biancoroyal.bacnet.core.detailDebugLog = de.biancoroyal.bacnet.core.detailDebugLog || require('debug')('bacnet:nodered:core:details') // eslint-disable-line no-use-before-define
+de.biancoroyal.bacnet.core.specialDebugLog = de.biancoroyal.bacnet.core.specialDebugLog || require('debug')('bacnet:nodered:core:special') // eslint-disable-line no-use-before-define
 de.biancoroyal.bacnet.core.errorCodeList = de.biancoroyal.bacnet.core.errorCodeList || [] // eslint-disable-line no-use-before-define
 de.biancoroyal.bacnet.core.errorClassList = de.biancoroyal.bacnet.core.errorClassList || [] // eslint-disable-line no-use-before-define
 

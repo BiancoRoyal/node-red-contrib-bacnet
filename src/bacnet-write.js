@@ -133,7 +133,7 @@ module.exports = function (RED) {
   RED.nodes.registerType('BACnet-Write', BACnetWrite)
 
   RED.httpAdmin.get('/bacnet/ApplicationTags', RED.auth.needsPermission('bacnet.CMD.write'), function (req, res) {
-    const typeList = BACnet.enum.ApplicationTags
+    const typeList = BACnet.enum.ApplicationTag
     const invertedTypeList = _.toArray(_.invert(typeList))
     const resultTypeList = []
 
