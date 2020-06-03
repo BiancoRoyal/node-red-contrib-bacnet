@@ -1,8 +1,11 @@
 ![Platform Node-RED](http://b.repl.ca/v1/Platform-Node--RED-red.png)
 ![Node-RED BACnet](http://b.repl.ca/v1/Contribution-BACnet-blue.png)
-[![Repository GitHub](http://b.repl.ca/v1/Repository-GitHub-orange.png)](https://github.com/biancode/node-red-contrib-bacnet)
-[![Quality Travis CI](http://b.repl.ca/v1/Quality-Travis_CI-green.png)](https://travis-ci.org/biancode/node-red-contrib-bacnet)
-[![Build Status](https://travis-ci.org/biancode/node-red-contrib-bacnet.svg?branch=master)](https://travis-ci.org/BiancoRoyal/node-red-contrib-bacnet)
+[![Repository GitHub](http://b.repl.ca/v1/Repository-GitHub-orange.png)](https://github.com/BiancoRoyal/node-red-contrib-bacnet)
+[![NPM download](https://img.shields.io/npm/dm/node-red-contrib-bacnet.svg)](http://www.npm-stats.com/~packages/node-red-contrib-bacnet)
+[![Quality Travis CI](http://b.repl.ca/v1/Quality-Travis_CI-green.png)](https://travis-ci.org/BiancoRoyal/node-red-contrib-bacnet)
+[![Build Status](https://travis-ci.org/BiancoRoyal/node-red-contrib-bacnet.svg?branch=master)](https://travis-ci.org/BiancoRoyal/node-red-contrib-bacnet)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cbeb40ab5604b3ab99e6badc9469e8a)](https://www.codacy.com/gh/BiancoRoyal/node-red-contrib-bacnet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BiancoRoyal/node-red-contrib-bacnet&amp;utm_campaign=Badge_Grade)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/BiancoRoyal/node-red-contrib-bacnet)
 
 [![nodemodbus64](images/bacnet-icon-quad64.png)](http://www.bacnet.org/)
 
