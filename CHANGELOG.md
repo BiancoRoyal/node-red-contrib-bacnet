@@ -1,11 +1,17 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [0.2.0](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.0-beta.1...v0.2.0) (2020-06-03)
+
 ## [0.1.2](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.0.16...v0.1.2) (2020-04-21)
 
 
 ### Bug Fixes
 
+* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
 * install error ([79af02a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/79af02a145d3819d0b1b6bb6240f80553e524953))
 * typos ([203523a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/203523a64dd4e3051e881ea63f3bdb04ee3400fe))
-* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
 
 
 ### Features
@@ -28,6 +34,3 @@
 
 
 ## 0.0.14 (2018-02-19)
-
-
-
