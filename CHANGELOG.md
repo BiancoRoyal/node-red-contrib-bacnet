@@ -1,17 +1,23 @@
-# Changelog
+## [0.2.3](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.3) (2020-06-08)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.2.3](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.3) (2020-06-08)
 
-## [0.2.2](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.0-beta.1...v0.2.2) (2020-06-03)
+## [0.2.2](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.1...v0.2.2) (2020-06-03)
+
+
+### Bug Fixes
+
+* **write:** enum typo ([79d9979](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/79d99793271ba0e36cc02f9e96dab0f6116762b0))
+
+
+
+## [0.2.1](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.0-beta.1...v0.2.1) (2020-06-03)
 
 
 ### Bug Fixes
 
 * **lib:** update to node-bacnet ([484fd52](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/484fd5209826571f1a5d5abc1c0dbde572b0c4f6))
 * **lib:** update to node-bacnet ([d1e07e1](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/d1e07e16decf3069d8a9823324a68ed3651e69b1))
-* **write:** enum typo ([79d9979](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/79d99793271ba0e36cc02f9e96dab0f6116762b0))
 
 
 
@@ -20,9 +26,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
 * install error ([79af02a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/79af02a145d3819d0b1b6bb6240f80553e524953))
 * typos ([203523a](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/203523a64dd4e3051e881ea63f3bdb04ee3400fe))
+* **write:** type instead of tag for values ([dc92ad9](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/dc92ad92d6828880fe17cb0f9eb7f0375a34af3c))
 
 
 ### Features
