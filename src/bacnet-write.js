@@ -42,7 +42,7 @@ module.exports = function (RED) {
         return
       }
 
-      const options = msg.payload.options || {priority:node.priority}
+      const options = msg.payload.options || { priority: node.priority }
 
       if (node.multipleWrite) {
         bacnetCore.internalDebugLog('Multiple Write')
