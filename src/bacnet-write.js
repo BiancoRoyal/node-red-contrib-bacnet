@@ -20,7 +20,7 @@ module.exports = function (RED) {
     this.valueTag = parseInt(config.valueTag)
     this.valueValue = config.valueValue
     this.propertyId = parseInt(config.propertyId)
-    this.priority = parseInt(config.priority) || 15
+    this.priority = Math.min(Math.max((parseInt(config.priority) || 15), 1), 16)
 
     this.multipleWrite = config.multipleWrite
 
@@ -42,7 +42,7 @@ module.exports = function (RED) {
         return
       }
 
-      const options = msg.payload.options || {}
+      const options = msg.payload.options || {priority:node.priority}
 
       if (node.multipleWrite) {
         bacnetCore.internalDebugLog('Multiple Write')
