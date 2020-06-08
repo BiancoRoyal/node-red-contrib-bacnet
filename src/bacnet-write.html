@@ -17,6 +17,7 @@
       valueTag: {value: ''},
       valueValue: {value: ''},
       propertyId: {value: ''},
+      priority: {value: ''},
       device: {type: "BACnet-Device", required:true},
       server: {type: "BACnet-Client", required:true},
       multipleWrite: {value: false}
@@ -176,6 +177,10 @@
         <label for="node-input-propertyId"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.propertyId"></span></label>
         <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="8">
         <a id="node-lookup-propertyId" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
+    </div>
+    <div class="form-row">
+        <label for="node-input-priority"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.priority"></span></label>
+        <input type="text" id="node-input-priority" placeholder="">
     </div>
     <div class="form-row">
         <hr>
