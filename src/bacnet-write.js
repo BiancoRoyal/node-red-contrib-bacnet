@@ -41,9 +41,9 @@ module.exports = function (RED) {
         node.error(new Error("Client Not Ready To Write"), msg);
         return;
       }
-	  
-	  node.priority = (node.priority < 1 ? 16 : node.priority);
-	  node.priority = (node.priority > 16 ? 16 : node.priority);
+
+      node.priority = (node.priority < 1 ? 16 : node.priority);
+      node.priority = (node.priority > 16 ? 16 : node.priority);
 
       const options = msg.payload.options || { priority: node.priority };
 
