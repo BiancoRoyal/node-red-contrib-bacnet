@@ -20,7 +20,7 @@ module.exports = function (RED) {
     this.valueTag = parseInt(config.valueTag)
     this.valueValue = config.valueValue
     this.propertyId = parseInt(config.propertyId)
-    this.priority = Math.min(Math.max((parseInt(config.priority) || 15), 1), 16)
+    this.priority = parseInt(config.priority)
 
     this.multipleWrite = config.multipleWrite
 
@@ -41,6 +41,9 @@ module.exports = function (RED) {
         node.error(new Error('Client Not Ready To Write'), msg)
         return
       }
+
+      node.priority = (node.priority < 1 ? 16 : node.priority)
+      node.priority = (node.priority > 16 ? 16 : node.priority)
 
       const options = msg.payload.options || { priority: node.priority }
 
