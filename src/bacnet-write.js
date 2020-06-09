@@ -5,7 +5,7 @@
  All rights reserved.
  node-red-contrib-bacnet
  */
-"use strict"
+"use strict";
 
 module.exports = function (RED) {
   const bacnetCore = require("./core/bacnet-core");
