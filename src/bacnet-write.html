@@ -12,11 +12,11 @@
     color: "#16BAC4",
     defaults: {
       name: {value: ''},
-      objectType: {value: ''},
+      objectType: {value: '', required:true, validate: RED.validators.number()},
       instance: {type: "BACnet-Instance", required:true},
-      valueTag: {value: ''},
+      valueTag: {value: '', required:true, validate: RED.validators.number()},
       valueValue: {value: ''},
-      propertyId: {value: ''},
+      propertyId: {value: '', required:true, validate: RED.validators.number()},
       priority: {value: ''},
       device: {type: "BACnet-Device", required:true},
       server: {type: "BACnet-Client", required:true},
@@ -175,12 +175,12 @@
     </div>
     <div class="form-row">
         <label for="node-input-propertyId"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.propertyId"></span></label>
-        <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="8">
+        <input type="text" id="node-input-propertyId" style="width:60%;" placeholder="85">
         <a id="node-lookup-propertyId" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
     </div>
     <div class="form-row">
         <label for="node-input-priority"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.priority"></span></label>
-        <input type="text" id="node-input-priority" placeholder="">
+        <input type="text" id="node-input-priority" placeholder="16">
     </div>
     <div class="form-row">
         <hr>
