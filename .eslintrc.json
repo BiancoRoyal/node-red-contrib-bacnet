@@ -1,0 +1,24 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "rules": {
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "max-len": [
+      2,
+      480
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
+    "curly": 0,
+    "valid-jsdoc": 0
+  },
+  "env": {
+    "mocha": true,
+    "node": true,
+    "es2017": true
+  }
+}

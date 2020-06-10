@@ -41,9 +41,9 @@
   "scripts": {
     "test": "standard --fix && mocha test --recursive --reporter dot --timeout 5000",
     "test-with-coverage": "istanbul cover _mocha --report lcovonly -- --recursive --timeout 5000 -R spec && cat ./coverage/lcov.info | codacy-coverage --token $CODACY_COVERAGE_TOKEN && rm -rf ./coverage",
-    "coverage": "standard --fix && gulp build && npm test && istanbul cover _mocha -- --recursive --timeout 5000",
+    "coverage": "npm run build && npm test && istanbul cover _mocha -- --recursive --timeout 5000",
     "build": "standard --fix && gulp",
-    "prepublishOnly": "standard --fix && npm run build && npm run rewrite-changelog && npm test && mocha test --recursive --timeout 5000 --reporter dot && istanbul cover _mocha -- --recursive --timeout 5000",
+    "prepublishOnly": "npm run build && npm run rewrite-changelog && npm test",
     "ci-publish": "ci-publish",
     "release": "standard-version -a",
     "release:beta": "standard-version --prerelease beta",
