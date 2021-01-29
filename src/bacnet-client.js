@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
+ Copyright (c) 2017,2018,2019,2020,2021 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -14,10 +14,10 @@ module.exports = function (RED) {
   function BACnetClient (config) {
     RED.nodes.createNode(this, config)
     this.name = config.name
-    this.adpuTimeout = config.adpuTimeout || 6000
-    this.port = config.port || 47808
-    this.IPAddress = config.IPAddress || null
-    this.broadcastAddress = config.broadcastAddress || null
+    this.adpuTimeout = parseInt(config.adpuTimeout) || 6000
+    this.port = parseInt(config.port) || 47808
+    this.IPAddress = config.IPAddress || '0.0.0.0'
+    this.broadcastAddress = config.broadcastAddress || '0.0.0.255'
 
     const node = this
     node.devices = []

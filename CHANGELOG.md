@@ -1,4 +1,9 @@
-## [0.2.3](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.3) (2020-06-08)
+## [0.2.4](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.4) (2021-01-29)
+
+
+### Features
+
+* **write:** priority handling and number checks ([289a386](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/289a386c48c722655138e19d185c272b5872ad5e))
 
 
 

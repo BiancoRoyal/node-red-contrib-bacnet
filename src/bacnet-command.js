@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
+ Copyright (c) 2017,2018,2019,2020,2021 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -17,7 +17,7 @@ module.exports = function (RED) {
 
     this.name = config.name
     this.commandType = config.commandType
-    this.timeDuration = config.timeDuration || 0
+    this.timeDuration = parseInt(config.timeDuration) || 0
     this.enableDisable = config.enableDisable || BACnet.enum.EnableDisable.ENABLE
     this.deviceState = config.deviceState || BACnet.enum.ReinitializedState.COLDSTART
     this.isUtc = config.isUtc || true

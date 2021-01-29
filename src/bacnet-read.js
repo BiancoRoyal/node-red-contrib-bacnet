@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
+ Copyright (c) 2017,2018,2019,2020,2021 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -19,7 +19,7 @@ module.exports = function (RED) {
     this.multipleRead = config.multipleRead
 
     this.instance = RED.nodes.getNode(config.instance)
-    this.objectInstance = this.instance.instanceAddress || 0
+    this.objectInstance = parseInt(this.instance.instanceAddress) || 0
 
     this.device = RED.nodes.getNode(config.device)
     this.deviceIPAddress = this.device.deviceAddress || '127.0.0.1'
@@ -50,6 +50,8 @@ module.exports = function (RED) {
         }]
 
         try {
+          bacnetCore.internalDebugLog('readProperty node.deviceIPAddress: ' + node.deviceIPAddress)
+          bacnetCore.internalDebugLog('readProperty msg.payload.deviceIPAddress: ' + msg.payload.deviceIPAddress)
           bacnetCore.internalDebugLog('readPropertyMultiple default requestArray: ' + JSON.stringify(defaultRequestArray))
           bacnetCore.internalDebugLog('readPropertyMultiple msg.payload.requestArray: ' + JSON.stringify(msg.payload.requestArray))
           bacnetCore.internalDebugLog('readPropertyMultiple node.propertyId: ' + node.propertyId)
@@ -77,11 +79,13 @@ module.exports = function (RED) {
         bacnetCore.internalDebugLog('Read')
 
         const objectId = {
-          type: node.objectType,
+          type: parseInt(node.objectType),
           instance: parseInt(node.objectInstance)
         }
 
         try {
+          bacnetCore.internalDebugLog('readProperty node.deviceIPAddress: ' + node.deviceIPAddress)
+          bacnetCore.internalDebugLog('readProperty msg.payload.deviceIPAddress: ' + msg.payload.deviceIPAddress)
           bacnetCore.internalDebugLog('readProperty default objectId: ' + JSON.stringify(objectId))
           bacnetCore.internalDebugLog('readProperty msg.payload.objectId: ' + JSON.stringify(msg.payload.objectId))
           bacnetCore.internalDebugLog('readProperty node.propertyId: ' + node.propertyId)
@@ -93,7 +97,7 @@ module.exports = function (RED) {
         node.connector.client.readProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.objectId || objectId,
-          msg.payload.propertyId || node.propertyId,
+          parseInt(msg.payload.propertyId) || parseInt(node.propertyId),
           options,
           function (err, result) {
             if (err) {

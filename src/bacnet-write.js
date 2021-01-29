@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020 Klaus Landsdorf (https://osi.bianco-royal.com/)
+ Copyright (c) 2017,2018,2019,2020,2021 Klaus Landsdorf (https://osi.bianco-royal.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -25,7 +25,7 @@ module.exports = function (RED) {
     this.multipleWrite = config.multipleWrite
 
     this.instance = RED.nodes.getNode(config.instance)
-    this.objectInstance = this.instance.instanceAddress || 0
+    this.objectInstance = parseInt(this.instance.instanceAddress) || 0
 
     this.device = RED.nodes.getNode(config.device)
     this.deviceIPAddress = this.device.deviceAddress || '127.0.0.1' // IPv6 it is :: - but configure Node-RED too
@@ -65,6 +65,8 @@ module.exports = function (RED) {
         })
 
         try {
+          bacnetCore.internalDebugLog('writeProperty node.deviceIPAddress: ' + node.deviceIPAddress)
+          bacnetCore.internalDebugLog('writeProperty msg.payload.deviceIPAddress: ' + msg.payload.deviceIPAddress)
           bacnetCore.internalDebugLog('writePropertyMultiple msg.payload.values: ' + JSON.stringify(msg.payload.values))
         } catch (e) {
           bacnetCore.internalDebugLog('writePropertyMultiple error: ' + e)
@@ -94,17 +96,19 @@ module.exports = function (RED) {
         }
 
         const objectId = {
-          type: node.objectType,
+          type: parseInt(node.objectType),
           instance: parseInt(node.objectInstance)
         }
 
         const defaultValues = [{
-          type: node.valueTag,
+          type: parseInt(node.valueTag),
           value: node.valueValue
         }]
 
         try {
-          bacnetCore.internalDebugLog('readProperty default objectId: ' + JSON.stringify(objectId))
+          bacnetCore.internalDebugLog('writeProperty node.deviceIPAddress: ' + node.deviceIPAddress)
+          bacnetCore.internalDebugLog('writeProperty msg.payload.deviceIPAddress: ' + msg.payload.deviceIPAddress)
+          bacnetCore.internalDebugLog('writeProperty default objectId: ' + JSON.stringify(objectId))
           bacnetCore.internalDebugLog('writeProperty default values: ' + JSON.stringify(defaultValues))
           bacnetCore.internalDebugLog('writeProperty msg.payload.values: ' + JSON.stringify(msg.payload.values))
           bacnetCore.internalDebugLog('writeProperty node.propertyId: ' + node.propertyId)
@@ -115,7 +119,7 @@ module.exports = function (RED) {
         node.connector.client.writeProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.objectId || objectId,
-          msg.payload.propertyId || node.propertyId,
+          parseInt(msg.payload.propertyId) || parseInt(node.propertyId),
           msg.payload.values || defaultValues,
           options,
           function (err, value) {
