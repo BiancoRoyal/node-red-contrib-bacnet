@@ -1,0 +1,248 @@
+[
+  {
+    "id": "b387cb.56722838",
+    "type": "tab",
+    "label": "BACnet Room",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "a8baa94.6a35458",
+    "type": "BACnet-Read",
+    "z": "b387cb.56722838",
+    "name": "Room Simulator",
+    "objectType": "8",
+    "instance": "cf0dca49.2a9ac",
+    "propertyId": "28",
+    "device": "7adbdd83.bce224",
+    "server": "e0bf099a.ee8468",
+    "multipleRead": false,
+    "x": 440,
+    "y": 220,
+    "wires": [
+      [
+        "863b5c82.8792c"
+      ]
+    ]
+  },
+  {
+    "id": "5be7ac40.2603fc",
+    "type": "inject",
+    "z": "b387cb.56722838",
+    "name": "",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 240,
+    "y": 220,
+    "wires": [
+      [
+        "a8baa94.6a35458"
+      ]
+    ]
+  },
+  {
+    "id": "863b5c82.8792c",
+    "type": "debug",
+    "z": "b387cb.56722838",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "targetType": "full",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 830,
+    "y": 440,
+    "wires": []
+  },
+  {
+    "id": "a795559.a54daa8",
+    "type": "BACnet-Command",
+    "z": "b387cb.56722838",
+    "name": "Who is?",
+    "commandType": "whoIs",
+    "timeDuration": 0,
+    "enableDisable": 0,
+    "deviceState": 0,
+    "isUtc": true,
+    "lowLimit": 0,
+    "highLimit": 0,
+    "device": "7adbdd83.bce224",
+    "server": "e0bf099a.ee8468",
+    "x": 500,
+    "y": 440,
+    "wires": [
+      [
+        "863b5c82.8792c"
+      ]
+    ]
+  },
+  {
+    "id": "492b7237.75fb5c",
+    "type": "inject",
+    "z": "b387cb.56722838",
+    "name": "",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 320,
+    "y": 440,
+    "wires": [
+      [
+        "a795559.a54daa8"
+      ]
+    ]
+  },
+  {
+    "id": "be42b68d.9c2ed",
+    "type": "BACnet-Read",
+    "z": "b387cb.56722838",
+    "name": "Read Temperature Indoor",
+    "objectType": "0",
+    "instance": "ef226397.1987f",
+    "propertyId": "85",
+    "device": "7adbdd83.bce224",
+    "server": "e0bf099a.ee8468",
+    "multipleRead": false,
+    "x": 460,
+    "y": 280,
+    "wires": [
+      [
+        "863b5c82.8792c"
+      ]
+    ]
+  },
+  {
+    "id": "ada8e128.2f4ae8",
+    "type": "inject",
+    "z": "b387cb.56722838",
+    "name": "",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 230,
+    "y": 280,
+    "wires": [
+      [
+        "be42b68d.9c2ed"
+      ]
+    ]
+  },
+  {
+    "id": "e9ea2327.8e1048",
+    "type": "BACnet-Read",
+    "z": "b387cb.56722838",
+    "name": "Read Temperature Water",
+    "objectType": "2",
+    "instance": "ef226397.1987f",
+    "propertyId": "85",
+    "device": "7adbdd83.bce224",
+    "server": "e0bf099a.ee8468",
+    "multipleRead": false,
+    "x": 450,
+    "y": 340,
+    "wires": [
+      [
+        "863b5c82.8792c"
+      ]
+    ]
+  },
+  {
+    "id": "dbed4100.eece28",
+    "type": "inject",
+    "z": "b387cb.56722838",
+    "name": "",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 220,
+    "y": 340,
+    "wires": [
+      [
+        "e9ea2327.8e1048"
+      ]
+    ]
+  },
+  {
+    "id": "cf0dca49.2a9ac",
+    "type": "BACnet-Instance",
+    "name": "Room Simulator",
+    "instanceAddress": "1753211"
+  },
+  {
+    "id": "7adbdd83.bce224",
+    "type": "BACnet-Device",
+    "name": "Windows VM",
+    "deviceAddress": "192.168.8.162"
+  },
+  {
+    "id": "e0bf099a.ee8468",
+    "type": "BACnet-Client",
+    "name": "",
+    "adpuTimeout": "3000",
+    "port": "47808",
+    "interface": "192.168.8.133",
+    "broadcastAddress": "192.168.8.255"
+  },
+  {
+    "id": "ef226397.1987f",
+    "type": "BACnet-Instance",
+    "name": "Temperature Water",
+    "instanceAddress": "1"
+  }
+]

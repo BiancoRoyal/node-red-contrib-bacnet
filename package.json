@@ -8,9 +8,9 @@
     "url": "git+https://github.com/BiancoRoyal/node-red-contrib-bacnet.git"
   },
   "dependencies": {
-    "debug": "~4.1.1",
+    "debug": "4.3.1",
     "node-bacnet": "~0.2.4",
-    "underscore": "~1.10.2"
+    "underscore": "~1.11.0"
   },
   "keywords": [
     "node-red",
@@ -62,7 +62,6 @@
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
-    "@node-red/nodes": "^1.0.2",
     "chai": "^4.2.0",
     "codacy-coverage": "^3.4.0",
     "conventional-changelog-cli": "^2.0.27",
