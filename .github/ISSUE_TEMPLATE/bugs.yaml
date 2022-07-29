@@ -6,7 +6,7 @@ body:
   - type: "input"
     id: "version"
     attributes:
-      label: Which node-red-contrib-iiot-opcua version are you using?
+      label: Which node-red-contrib-bacnet version are you using?
       description: |
         Please check the `package.json` file in your Node-RED data directory (default: `$HOME/.node-red/`).
     validations:
@@ -17,20 +17,6 @@ body:
       label: What happened?
       description: |
         Please provide a clear and thorough description of what happened.
-    validations:
-      required: true
-  - type: dropdown
-    id: server
-    attributes:
-      label: Server
-      description: |
-        Which type of OPC UA Server are you connected to?
-      multiple: false
-      options:
-        - OPCUA-IIoT-Server Node
-        - OPCUA-IIoT-Flex-Server Node (Please attach AddressSpaceScript to the next section)
-        - Other/External server
-        - None/This is related to a node that doesn't connect to a server
     validations:
       required: true
   - type: textarea
