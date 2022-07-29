@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": false,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git+https://github.com/BiancoRoyal/node-red-contrib-bacnet.git"
   },
   "dependencies": {
-    "debug": "4.3.4",
+    "debug": "~4.3.4",
     "node-bacnet": "~0.2.4",
     "underscore": "~1.13.4"
   },
@@ -19,7 +19,21 @@
     "iiot",
     "biancoroyal"
   ],
-  "author": "Bianco Royal <developers@bianco-royal.com>",
+  "author": "Klaus Landsdorf <developers@bianco-royal.de> (https://bianco-royal.space/)",
+  "contributors": [
+    {
+      "name": "Node-RED PLUS <github@noderedplus.de> (https://noderedplus.de/)"
+    },
+    {
+      "name": "Iniationware GmbH <github@iniationware.com> (https://iniationware.com/)"
+    },
+    {
+      "name": "Ingo Fischer (Gameforge)"
+    },
+    {
+      "name": "Fabio Huser (node-bacstack)"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/BiancoRoyal/node-red-contrib-bacnet/issues"

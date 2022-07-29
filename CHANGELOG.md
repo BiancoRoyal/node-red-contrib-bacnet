@@ -1,4 +1,4 @@
-## [0.2.4](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.4) (2021-01-29)
+## [0.2.5](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.5) (2022-07-29)
 
 
 ### Features
