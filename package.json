@@ -8,7 +8,7 @@
     "url": "git+https://github.com/BiancoRoyal/node-red-contrib-bacnet.git"
   },
   "dependencies": {
-    "debug": "4.3.1",
+    "debug": "4.3.4",
     "node-bacnet": "~0.2.4",
     "underscore": "~1.11.0"
   },
