@@ -1,4 +1,10 @@
-## [0.2.5](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.2...v0.2.5) (2022-07-29)
+## [0.2.5](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.4...v0.2.5) (2022-07-29)
+
+
+### Bug Fixes
+
+* upgrade debug from 4.3.1 to 4.3.4 ([8b510c5](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/8b510c5b7b3cf53add8d4c11c7228b6cc03b0de5))
+* upgrade underscore from 1.11.0 to 1.13.4 ([74a057d](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/74a057d0e5f77dbd046c3b0ba228ca6cff2a0010))
 
 
 ### Features

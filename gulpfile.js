@@ -1,9 +1,10 @@
-/**
- Copyright (c) 2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
- All rights reserved.
- node-red-contrib-bacnet - The BSD 3-Clause License
+/*
+ The MIT License
 
- **/
+ Copyright (c) 2017-2022 Klaus Landsdorf (http://node-red.plus/)
+ All rights reserved.
+ node-red-contrib-bacnet
+ */
 
 'use strict'
 
@@ -16,6 +17,7 @@ const babel = require('gulp-babel')
 const sourcemaps = require('gulp-sourcemaps')
 const pump = require('pump')
 const replace = require('gulp-replace')
+const changelog = require('gulp-conventional-changelog')
 
 function releaseIcons () {
   return src('src/icons/**/*').pipe(dest('bacnet/icons'))
@@ -40,6 +42,24 @@ function releasePublicData () {
 function cleanProject () {
   return src(['bacnet', 'docs/gen', 'jcoverage'], { allowEmpty: true })
     .pipe(clean({ force: true }))
+}
+
+function changelogUpdate () {
+  return src('CHANGELOG.md')
+    .pipe(changelog({
+      // conventional-changelog options go here
+      preset: 'angular',
+      releaseCount: 0
+    }, {
+      // context goes here
+    }, {
+      // git-raw-commits options go here
+    }, {
+      // conventional-commits-parser options go here
+    }, {
+      // conventional-changelog-writer options go here
+    }))
+    .pipe(dest('./'))
 }
 
 function releaseWebContent () {
@@ -89,8 +109,9 @@ function doc (cb) {
     .pipe(jsdoc(cb))
 }
 
-exports.default = series(cleanProject, releaseWebContent, releaseJSContent, codeJSContent, releaseLocal, releasePublicData, releaseIcons, doc, docIcons, docImages)
+exports.default = series(cleanProject, releaseWebContent, releaseJSContent, codeJSContent, releaseLocal, releasePublicData, releaseIcons, doc, docIcons, docImages, changelogUpdate)
 exports.clean = cleanProject
 exports.build = series(cleanProject, releaseWebContent, releaseJSContent, releaseLocal, codeJSContent)
 exports.buildDocs = series(doc, docIcons, docImages)
-exports.publish = series(cleanProject, releaseWebContent, releaseJSContent, releaseLocal, codeJSContent, releasePublicData, releaseIcons, doc, docIcons, docImages)
+exports.changelog = changelogUpdate
+exports.publish = series(cleanProject, releaseWebContent, releaseJSContent, releaseLocal, codeJSContent, releasePublicData, releaseIcons, doc, docIcons, docImages, changelogUpdate)

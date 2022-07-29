@@ -51,7 +51,7 @@
   "engines": {
     "node": ">=10"
   },
-  "homepage": "https://github.com/BiancoRoyal/node-red-contrib-bacnet#readme",
+  "homepage": "https://noderedplus.de/",
   "scripts": {
     "test": "standard --fix && mocha test --recursive --reporter dot --timeout 5000",
     "test-with-coverage": "istanbul cover _mocha --report lcovonly -- --recursive --timeout 5000 -R spec && cat ./coverage/lcov.info | codacy-coverage --token $CODACY_COVERAGE_TOKEN && rm -rf ./coverage",
@@ -62,9 +62,11 @@
     "release": "standard-version -a",
     "release:beta": "standard-version --prerelease beta",
     "release:alpha": "standard-version --prerelease alpha",
-    "rewrite-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "rewrite-changelog": "gulp changelog",
     "postinstall": "node ./supporter.js",
-    "dev-link": "npm i && npm run build && npm link && cd ~/.node-red && npm link node-red-contrib-bacnet"
+    "clean": "gulp clean",
+    "dev-link": "npm i && npm run build && npm link",
+    "dev-unlink": "npm unlink node-red-contrib-bacnet -g"
   },
   "files": [
     "docs",
@@ -82,6 +84,7 @@
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
+    "gulp-conventional-changelog": "^2.0.35",
     "gulp-htmlmin": "^5.0.1",
     "gulp-jsdoc3": "^3.0.0",
     "gulp-replace": "^1.0.0",
