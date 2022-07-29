@@ -31,9 +31,9 @@ relevant nodes, press Ctrl-E and copy the flow data from the Export dialog.
 
 At a minimum, please include:
 
- - Version of node.js? (should be >=v8.8.1)
- - Version of Node-RED? (should be >=v0.17.5)
- - Version of node-red-contrib-bacnet?
+ - Version of node.js? (should be >= 16)
+ - Version of Node-RED? (should be >= 3)
+ - Version of node-red-contrib-bacnet? (should be >= 0.2)
  
  - What is your platform? (Linux, macOS, ...)
  - What does `DEBUG=bacnet:* node-red -v` say? (log files are welcome)
