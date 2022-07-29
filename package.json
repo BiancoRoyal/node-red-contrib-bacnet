@@ -10,7 +10,7 @@
   "dependencies": {
     "debug": "4.3.4",
     "node-bacnet": "~0.2.4",
-    "underscore": "~1.11.0"
+    "underscore": "~1.13.4"
   },
   "keywords": [
     "node-red",
