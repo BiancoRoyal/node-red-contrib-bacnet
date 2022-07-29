@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": false,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
@@ -39,6 +39,7 @@
     "url": "https://github.com/BiancoRoyal/node-red-contrib-bacnet/issues"
   },
   "node-red": {
+    "version": ">=2",
     "nodes": {
       "BACnet-Client": "bacnet/bacnet-client.js",
       "BACnet-Device": "bacnet/bacnet-device.js",
@@ -49,7 +50,7 @@
     }
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "homepage": "https://noderedplus.de/",
   "scripts": {
