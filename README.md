@@ -15,11 +15,11 @@ Building Automation and Control Networks Protocol toolbox for Node-RED.
 
 ### International Node-RED IIoT Website
 
-For an international area, [Iniationware][6] has provided the [Node-RED PLUS International][8] website.
+For an international area, [Iniationware][6] has provided the [PLUS for Node-RED International][8] website.
 
 ### Node-RED IIoT Webseite Deutschland
 
-Für einen deutschsprachigen Bereich hat [Iniationware][6] die Webseite [Node-RED PLUS Germany][7] bereitgestellt.
+Für einen deutschsprachigen Bereich hat [Iniationware][6] die Webseite [PLUS for Node-RED Germany][7] bereitgestellt.
 
 
 ## Install
