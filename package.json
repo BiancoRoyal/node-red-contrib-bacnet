@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": false,
   "description": "The BACnet toolbox package for Node-RED.",
   "repository": {
@@ -10,13 +10,13 @@
   "dependencies": {
     "debug": "~4.3.4",
     "node-bacnet": "~0.2.4",
-    "underscore": "~1.13.4"
+    "underscore": "~1.13.6"
   },
   "keywords": [
     "node-red",
+    "plusfornodered",
     "bacnet",
     "fieldbus",
-    "iiot",
     "biancoroyal"
   ],
   "author": "Klaus Landsdorf <developers@bianco-royal.de> (https://bianco-royal.space/)",
