@@ -1,7 +1,7 @@
 <!--
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
+ Copyright (c) 2017,2018,2019,2020,2021,2022,2023,2024 Klaus Landsdorf (http://plus4nodered.com/)
  All rights reserved.
  node-red-contrib-bacnet
 -->
@@ -62,11 +62,11 @@
             source: node.lookupItems,
             minLength: 0,
             focus: function (event, ui) {
-              objectTypeField.val(ui.item.value);
+              objectTypeField.val(parseInt(ui.item.value) || 0);
               return false;
             },
             select: function (event, ui) {
-              objectTypeField.val(ui.item.value)
+              objectTypeField.val(parseInt(ui.item.value) || 0)
               return false;
             },
             close: function (event, ui) {
@@ -93,11 +93,11 @@
             source: node.lookupItems,
             minLength: 0,
             focus: function (event, ui) {
-              datatypeField.val(ui.item.value);
+              datatypeField.val(parseInt(ui.item.value) || 0);
               return false;
             },
             select: function (event, ui) {
-              datatypeField.val(ui.item.value)
+              datatypeField.val(parseInt(ui.item.value) || 0)
               return false;
             },
             close: function (event, ui) {
@@ -175,10 +175,21 @@
 
     <p>Example of msg.payload.requestArray:</p>
     <pre>
-        const requestArray = [{
-            objectId: {type: 8, instance: 4194303},
-            properties: [{id: 8}]
-        }]
+        {
+            "requestArray": [
+                {
+                    "objectId": {
+                        "type": 8,
+                        "instance": 3457166
+                    },
+                    "properties": [
+                        {
+                            "id": 8
+                        }
+                    ]
+                }
+            ]
+        }
     </pre>
 
     <pre>

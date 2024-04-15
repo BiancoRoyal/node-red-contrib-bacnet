@@ -1,8 +1,8 @@
 {
   "name": "node-red-contrib-bacnet",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "private": false,
-  "description": "The BACnet toolbox package for Node-RED.",
+  "description": "The BACnet toolbox package for Node-RED from the P4NR B2B Community.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BiancoRoyal/node-red-contrib-bacnet.git"
@@ -19,13 +19,13 @@
     "fieldbus",
     "biancoroyal"
   ],
-  "author": "Klaus Landsdorf <developers@bianco-royal.de> (https://bianco-royal.space/)",
+  "author": "P4NR Support <support@plus4nodered.com> (https://plus4nodered.com/)",
   "contributors": [
     {
-      "name": "Node-RED PLUS <github@noderedplus.de> (https://noderedplus.de/)"
+      "name": "P4NR B2B Community <team@plus4nodered.com> (https://p4nr.com/)"
     },
     {
-      "name": "Iniationware GmbH <github@iniationware.com> (https://iniationware.com/)"
+      "name": "Iniationware GmbH <team@iniationware.com> (https://iniationware.com/)"
     },
     {
       "name": "Ingo Fischer (Gameforge)"
@@ -52,7 +52,7 @@
   "engines": {
     "node": ">=14"
   },
-  "homepage": "https://noderedplus.de/",
+  "homepage": "https://p4nr.com/",
   "scripts": {
     "test": "standard --fix && mocha test --recursive --reporter dot --timeout 5000",
     "test-with-coverage": "istanbul cover _mocha --report lcovonly -- --recursive --timeout 5000 -R spec && cat ./coverage/lcov.info | codacy-coverage --token $CODACY_COVERAGE_TOKEN && rm -rf ./coverage",

@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
+ Copyright (c) 2017,2018,2019,2020,2021,2022,2023,2024 Klaus Landsdorf (http://plus4nodered.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -72,9 +72,9 @@ module.exports = function (RED) {
     node.whoIsExplicit = function (lowLimit, highLimit, deviceIPAddress, cb) {
       node.devices = []
       const options = {
-        lowLimit: lowLimit,
-        highLimit: highLimit,
-        deviceIPAddress: deviceIPAddress
+        lowLimit,
+        highLimit,
+        deviceIPAddress
       }
       node.client.whoIs(options)
       setTimeout(cb, 3000)
