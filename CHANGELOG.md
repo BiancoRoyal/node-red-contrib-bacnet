@@ -1,3 +1,16 @@
+# [0.3.0](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.7...v0.3.0) (2024-04-15)
+
+
+
+## [0.2.7](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.6...v0.2.7) (2022-09-25)
+
+
+### Bug Fixes
+
+* Node-RED PLUS changed to PLUS for Node-RED ([bf86f55](https://github.com/BiancoRoyal/node-red-contrib-bacnet/commit/bf86f55dc3521915ec16b8969618fe20ef8ec31d))
+
+
+
 ## [0.2.6](https://github.com/BiancoRoyal/node-red-contrib-bacnet/compare/v0.2.5...v0.2.6) (2022-07-29)
 
 

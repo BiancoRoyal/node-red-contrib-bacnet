@@ -1,7 +1,7 @@
 <!--
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
+ Copyright (c) 2017,2018,2019,2020,2021,2022,2023,2024 Klaus Landsdorf (http://plus4nodered.com/)
  All rights reserved.
  node-red-contrib-bacnet
 -->
@@ -23,7 +23,6 @@
       server: {type: "BACnet-Client", required:true}
     },
     credentials: {
-        username: {type: "text"},
         password: {type: "password"}
     },
     inputs: 1,
@@ -59,8 +58,6 @@
       let commandCredentials = $('#commandCredentials')
       let commandTimeSync = $('#commandTimeSync')
       let commandWhoIsExplicit = $('#commandWhoIsExplicit')
-
-
 
       let enableDisableLookupField = $("#node-lookup-enableDisable")
       let enableDisableField = $("#node-input-enableDisable")
@@ -135,11 +132,11 @@
             source: node.lookupItems,
             minLength: 0,
             focus: function (event, ui) {
-              enableDisableField.val(ui.item.value);
+              enableDisableField.val(parseInt(ui.item.value) || 0);
               return false;
             },
             select: function (event, ui) {
-              enableDisableField.val(ui.item.value)
+              enableDisableField.val(parseInt(ui.item.value) || 0)
               return false;
             },
             close: function (event, ui) {
@@ -163,11 +160,11 @@
             source: node.lookupItems,
             minLength: 0,
             focus: function (event, ui) {
-              deviceSateField.val(ui.item.value);
+              deviceSateField.val(parseInt(ui.item.value) || 0);
               return false;
             },
             select: function (event, ui) {
-              deviceSateField.val(ui.item.value)
+              deviceSateField.val(parseInt(ui.item.value) || 0)
               return false;
             },
             close: function (event, ui) {

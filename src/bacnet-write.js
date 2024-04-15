@@ -1,7 +1,7 @@
 /*
  The MIT License
 
- Copyright (c) 2017,2018,2019,2020,2021,2022 Klaus Landsdorf (http://node-red.plus/)
+ Copyright (c) 2017,2018,2019,2020,2021,2022,2023,2024 Klaus Landsdorf (http://plus4nodered.com/)
  All rights reserved.
  node-red-contrib-bacnet
  */
@@ -112,6 +112,7 @@ module.exports = function (RED) {
           bacnetCore.internalDebugLog('writeProperty default values: ' + JSON.stringify(defaultValues))
           bacnetCore.internalDebugLog('writeProperty msg.payload.values: ' + JSON.stringify(msg.payload.values))
           bacnetCore.internalDebugLog('writeProperty node.propertyId: ' + node.propertyId)
+          bacnetCore.internalDebugLog('writeProperty msg.payload.propertyId: ' + msg.payload.propertyId)
         } catch (e) {
           bacnetCore.internalDebugLog('writeProperty error: ' + e)
         }
@@ -119,7 +120,7 @@ module.exports = function (RED) {
         node.connector.client.writeProperty(
           msg.payload.deviceIPAddress || node.deviceIPAddress,
           msg.payload.objectId || objectId,
-          parseInt(msg.payload.propertyId) || parseInt(node.propertyId),
+          parseInt(msg.payload.propertyId) || parseInt(node.propertyId) || 85,
           msg.payload.values || defaultValues,
           options,
           function (err, value) {
@@ -129,7 +130,7 @@ module.exports = function (RED) {
               node.error(translatedError, msg)
             } else {
               msg.input = msg.payload
-              msg.payload = value
+              msg.payload = value || 'write done'
               node.send(msg)
             }
           })
@@ -146,7 +147,7 @@ module.exports = function (RED) {
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {
-      resultTypeList.push({ typeValue: typeList[typelistEntry], label: typelistEntry })
+      resultTypeList.push({ typeValue: parseInt(typeList[typelistEntry]) || 0, label: typelistEntry })
     }
 
     res.json(resultTypeList)
@@ -159,7 +160,7 @@ module.exports = function (RED) {
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {
-      resultTypeList.push({ typeValue: typeList[typelistEntry], label: typelistEntry })
+      resultTypeList.push({ typeValue: parseInt(typeList[typelistEntry]) || 0, label: typelistEntry })
     }
 
     res.json(resultTypeList)
@@ -172,7 +173,7 @@ module.exports = function (RED) {
 
     let typelistEntry
     for (typelistEntry of invertedTypeList) {
-      resultTypeList.push({ typeValue: typeList[typelistEntry], label: typelistEntry })
+      resultTypeList.push({ typeValue: parseInt(typeList[typelistEntry]) || 0, label: typelistEntry })
     }
 
     res.json(resultTypeList)
