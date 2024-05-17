@@ -16,19 +16,13 @@ module.exports = function (RED) {
     this.name = config.name
     this.adpuTimeout = parseInt(config.adpuTimeout) || 6000
     this.port = parseInt(config.port) || 47808
-    this.IPAddress = config.IPAddress || '0.0.0.0'
+    this.interface = config.interface || '0.0.0.0'
     this.broadcastAddress = config.broadcastAddress || '0.0.0.255'
 
     const node = this
     node.devices = []
 
-    if (node.IPAddress) {
-      bacnetCore.internalDebugLog('client with IP settings')
-      node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress })
-    } else {
-      bacnetCore.internalDebugLog('client without IP settings')
-      node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port })
-    }
+    node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.interface, broadcastAddress: node.broadcastAddress })
 
     if (node.client) {
       node.client.on('iAm', (device) => {
@@ -52,7 +46,7 @@ module.exports = function (RED) {
         node.client.close()
         node.client = null
         node.devices = []
-        node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.IPAddress, broadcastAddress: node.broadcastAddress })
+        node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.interface, broadcastAddress: node.broadcastAddress })
       })
     }
 
