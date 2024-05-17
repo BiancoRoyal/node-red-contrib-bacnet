@@ -22,9 +22,9 @@ module.exports = function (RED) {
     const node = this
     node.devices = []
 
-    node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.interface, broadcastAddress: node.broadcastAddress })
+    function setupClient () {
+      node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.interface, broadcastAddress: node.broadcastAddress })
 
-    if (node.client) {
       node.client.on('iAm', (device) => {
         node.devices.push(device)
         bacnetCore.internalDebugLog('iAm Event')
@@ -46,9 +46,11 @@ module.exports = function (RED) {
         node.client.close()
         node.client = null
         node.devices = []
-        node.client = new BACnet({ adpuTimeout: node.adpuTimeout, port: node.port, interface: node.interface, broadcastAddress: node.broadcastAddress })
+        setupClient()
       })
     }
+
+    setupClient()
 
     node.on('input', function (msg) {
       msg.devices = node.devices
