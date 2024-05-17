@@ -13,12 +13,12 @@
     defaults: {
       name: {value: ''},
       objectType: {value: '', required:true, validate: RED.validators.number()},
-      instance: {type: "BACnet-Instance", required:true},
-      valueTag: {value: '', required:true, validate: RED.validators.number()},
+      instance: {type: "BACnet-Instance"},
+      valueTag: {value: '', validate: RED.validators.number()},
       valueValue: {value: ''},
-      propertyId: {value: '', required:true, validate: RED.validators.number()},
+      propertyId: {value: '', validate: RED.validators.number()},
       priority: {value: ''},
-      device: {type: "BACnet-Device", required:true},
+      device: {type: "BACnet-Device"},
       server: {type: "BACnet-Client", required:true},
       multipleWrite: {value: false}
     },
