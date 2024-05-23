@@ -18,11 +18,19 @@ module.exports = function (RED) {
     this.propertyId = parseInt(config.propertyId)
     this.multipleRead = config.multipleRead
 
-    this.instance = RED.nodes.getNode(config.instance)
-    this.objectInstance = parseInt(this.instance.instanceAddress) || 0
+    if (config.instance) {
+      this.instance = RED.nodes.getNode(config.instance)
+      this.objectInstance = this.instance.instanceAddress
+    } else {
+      this.objectInstance = 0
+    }
 
-    this.device = RED.nodes.getNode(config.device)
-    this.deviceIPAddress = this.device.deviceAddress || '127.0.0.1'
+    if (config.device) {
+      this.device = RED.nodes.getNode(config.device)
+      this.deviceIPAddress = this.device.deviceAddress
+    } else {
+      this.deviceIPAddress = '127.0.0.1'
+    }
 
     this.connector = RED.nodes.getNode(config.server)
 
