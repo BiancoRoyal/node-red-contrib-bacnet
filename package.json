@@ -8,9 +8,9 @@
     "url": "git+https://github.com/BiancoRoyal/node-red-contrib-bacnet.git"
   },
   "dependencies": {
-    "debug": "~4.3.4",
+    "debug": "~4.3.7",
     "node-bacnet": "~0.2.4",
-    "underscore": "~1.13.6"
+    "underscore": "~1.13.8"
   },
   "keywords": [
     "node-red",
@@ -46,7 +46,8 @@
       "BACnet-Instance": "bacnet/bacnet-instance.js",
       "BACnet-Read": "bacnet/bacnet-read.js",
       "BACnet-Write": "bacnet/bacnet-write.js",
-      "BACnet-Command": "bacnet/bacnet-command.js"
+      "BACnet-Command": "bacnet/bacnet-command.js",
+      "BACnet-COV": "bacnet/bacnet-cov.js"
     }
   },
   "engines": {
@@ -76,10 +77,10 @@
     "supporter.js"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
-    "chai": "^4.2.0",
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
+    "chai": "^4.5.0",
     "codacy-coverage": "^3.4.0",
     "conventional-changelog-cli": "^2.0.27",
     "gulp": "^4.0.2",
@@ -88,25 +89,23 @@
     "gulp-conventional-changelog": "^2.0.35",
     "gulp-htmlmin": "^5.0.1",
     "gulp-jsdoc3": "^3.0.0",
-    "gulp-replace": "^1.0.0",
-    "gulp-sequence": "^1.0.0",
+    "gulp-replace": "^1.1.4",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "istanbul": "0.4.5",
     "jasmine-node": "^3.0.0",
-    "js-beautify": "^1.10.2",
+    "js-beautify": "^1.15.4",
     "mocha": "^7.2.0",
     "nock": "^12.0.3",
     "node-red": "^1.0.6",
     "node-red-node-test-helper": "^0.2.4",
-    "pump": "^3.0.0",
+    "pump": "^3.0.4",
     "should": "^13.2.3",
     "sinon": "^9.0.2",
     "standard": "^14.3.1",
     "standard-version": "^8.0.0",
     "supertest": "^4.0.2",
-    "uglify-js": "^3.6.9",
-    "uglify-js-harmony": "^2.7.7",
+    "uglify-js": "^3.19.3",
     "when": "^3.7.8"
   },
   "directories": {

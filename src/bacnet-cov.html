@@ -1,0 +1,139 @@
+<!--
+ node-red-contrib-bacnet
+-->
+
+<script type="text/javascript">
+  RED.nodes.registerType('BACnet-COV', {
+    category: 'BACnet',
+    color: "#16BAC4",
+    defaults: {
+      name: {value: ''},
+      objectType: {value: '', required:true, validate: RED.validators.number()},
+      instance: {type: "BACnet-Instance", required:true},
+      subscriberProcessId: {value: 0},
+      covType: {value: 'unconfirmed'},
+      lifetime: {value: 0},
+      device: {type: "BACnet-Device", required:true},
+      server: {type: "BACnet-Client", required:true}
+    },
+    inputs: 1,
+    outputs: 1,
+    align: "right",
+    icon: "bacnet-icon.png",
+    label: function () {
+      return this.name || "BACnet COV";
+    },
+    labelStyle: function () {
+      return this.name ? "node_label_italic" : "";
+    },
+    oneditprepare: function () {
+      let node = this
+
+      let objectTypeLookupField = $("#node-lookup-objectType")
+      let objectTypeField = $("#node-input-objectType")
+
+      objectTypeLookupField.click(function () {
+        objectTypeLookupField.addClass('disabled')
+        $.getJSON('/bacnet/ObjectTypes', function (data) {
+          objectTypeLookupField.removeClass('disabled')
+          node.lookupItems = []
+
+          $.each(data, function (i, entry) {
+            node.lookupItems.push({value: entry.typeValue, label: entry.label})
+          })
+
+          objectTypeField.autocomplete({
+            source: node.lookupItems,
+            minLength: 0,
+            focus: function (event, ui) {
+              objectTypeField.val(parseInt(ui.item.value) || 0);
+              return false;
+            },
+            select: function (event, ui) {
+              objectTypeField.val(parseInt(ui.item.value) || 0)
+              return false;
+            },
+            close: function (event, ui) {
+              objectTypeField.autocomplete("destroy")
+            }
+          }).autocomplete("search", "")
+        })
+      })
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="BACnet-COV">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-objectType"><i class="icon-search"></i> <span data-i18n="bacnet-contrib.label.objectType"></span></label>
+        <input type="text" id="node-input-objectType" style="width:60%;" placeholder="8">
+        <a id="node-lookup-objectType" class="btn"><i id="node-lookup-topic-icon" class="fa fa-search"></i></a>
+    </div>
+    <div class="form-row">
+        <label for="node-input-instance"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.instance"></span></label>
+        <input type="text" id="node-input-instance">
+    </div>
+    <div class="form-row">
+        <h4>Subscription</h4>
+        <hr>
+    </div>
+    <div class="form-row">
+        <label for="node-input-covType" style="min-width:140px"><i class="fa fa-list"></i>
+        <span data-i18n="bacnet-contrib.label.covType"></span></label>
+        <select type="text" id="node-input-covType" style="min-width:55%">
+            <option value="confirmed">Confirmed</option>
+            <option value="unconfirmed">Unconfirmed</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-lifetime"><i class="icon-tag"></i> <span data-i18n="bacnet-contrib.label.lifetime"></span></label>
+        <input type="text" id="node-input-lifetime" placeholder="0">
+    </div>
+    <div class="form-row">
+        <hr>
+        <h4>Device and Interface</h4>
+        <hr>
+    </div>
+    <div class="form-row">
+        <label for="node-input-device"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.device"></span></label>
+        <input type="text" id="node-input-device">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-globe"></i> <span data-i18n="bacnet-contrib.label.server"></span></label>
+        <input type="text" id="node-input-server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="BACnet-COV">
+    <h2>BACnet COV node</h2>
+
+    <h3>BETA</h3>
+    <a href="https://fh1ch.github.io/node-bacstack/" target="_blank">API Docs</a>
+    <p>The msg object properties are used if they filled up with some, otherwise it uses the node settings</p>
+
+    <h3>Subscribe</h3>
+    <h4>Input</h4>
+    <p>msg.payload.deviceIPAddress</p>
+
+    <strong>msg.payload.objectId</strong>
+    <p>msg.payload.objectId.type</p>
+    <p>msg.payload.objectId.instance</p>
+
+    <p>msg.payload.subscribe (true to subscribe)</p>
+    <p>msg.payload.cancel (true to cancel subscription)</p>
+
+    <pre>
+        objectId: {type: 8, instance: 44301}
+        subscribe: true
+    </pre>
+
+    <h3>All Modes</h3>
+    <h4>Output</h4>
+    <p>msg.payload (COV notification data)</p>
+    <p>msg.topic (node name or "BACnet COV")</p>
+
+</script>

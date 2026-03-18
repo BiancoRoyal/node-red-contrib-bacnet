@@ -1,0 +1,13 @@
+{
+  "bacnet-contrib": {
+    "label": {
+      "device": "Device",
+      "objectType": "Type",
+      "instance": "Instance",
+      "subscriberProcessId": "Process Id",
+      "covType": "COV Type",
+      "lifetime": "Lifetime (s)",
+      "server": "Client"
+    }
+  }
+}
